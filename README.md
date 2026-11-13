@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Koordine — Tanıtım Sitesi
 
-## Getting Started
+`https://koordine.com.tr` adresinde yayınlanan kurumsal tanıtım sitesi.
+Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · TypeScript. Tüm sayfalar statik üretilir.
 
-First, run the development server:
+- Plan ve bilgi mimarisi: [docs/PLAN.md](docs/PLAN.md)
+- Tasarım ve içerik kuralları: [docs/CONVENTIONS.md](docs/CONVENTIONS.md)
+
+## Geliştirme
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # gerekli değerleri doldurun
+npm run dev                  # http://localhost:3000
+npm run lint && npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Ortam değişkenleri
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Değişken | Açıklama |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Varsayılan `https://koordine.com.tr` (canonical, sitemap, OG) |
+| `NEXT_PUBLIC_APP_URL` | Uygulama adresi, varsayılan `https://app.koordine.com.tr` ("Giriş yap") |
+| `RESEND_API_KEY` | Demo formunun e-posta göndermesi için. Yoksa form mailto yedeğine düşer |
+| `CONTACT_TO` / `CONTACT_FROM` | Formun alıcısı (varsayılan destek@koordine.com.tr) ve göndereni (Resend'de doğrulanmış alan adı) |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` / `NEXT_PUBLIC_YANDEX_VERIFICATION` | Search Console / Yandex Webmaster doğrulama kodları |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## İçerik nerede?
 
-## Learn More
+| Ne | Dosya |
+| --- | --- |
+| Firma bilgileri (unvan, adres, MERSİS, telefon, sosyal medya) | `src/lib/site.ts` |
+| Modüller (menü, footer, sitemap) / detaylar | `src/content/features.ts`, `src/content/feature-details.ts` |
+| Çözümler / detaylar | `src/content/solutions.ts`, `src/content/solution-details.ts` |
+| Ana sayfa metinleri | `src/content/home.ts` |
+| SSS | `src/content/faq.ts` |
+| Ürün görselleri (HTML/CSS mockup) | `src/components/mockups/` |
 
-To learn more about Next.js, take a look at the following resources:
+Yeni modül/çözüm eklendiğinde menü, footer, sitemap ve statik sayfalar otomatik güncellenir.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## SEO
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`sitemap.xml`, `robots.txt` (Vercel preview ortamlarında indekslemeyi kapatır), `manifest.webmanifest`,
+sayfa bazlı canonical/OpenGraph/Twitter, dinamik OG görselleri (`src/lib/og.tsx`) ve JSON-LD
+(Organization, WebSite, SoftwareApplication, WebPage, BreadcrumbList, FAQPage).
+İçerik güncellendiğinde `src/app/sitemap.ts` içindeki `CONTENT_UPDATED` tarihini değiştirin.
 
-## Deploy on Vercel
+## Yayına alma (Vercel)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Projeyi Vercel'e bağlayın, ortam değişkenlerini girin.
+2. `koordine.com.tr` alan adını ekleyin; `www.koordine.com.tr` → apex yönlendirmesini Vercel'de tanımlayın.
+3. Yayından sonra Google Search Console ve Yandex Webmaster'a `https://koordine.com.tr/sitemap.xml` gönderin.

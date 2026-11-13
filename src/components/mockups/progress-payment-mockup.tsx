@@ -1,0 +1,234 @@
+import { cn } from "@/lib/utils";
+import { AppFrame } from "./app-frame";
+import { Badge, Progress, td, th, type Tone } from "./primitives";
+
+/**
+ * ProgressPaymentMockup — Hakediş / sözleşme / fatura tablosu.
+ * Sözleşme kodları (SZ-0012), saha, dönem, tutar (₺ ve € birlikte; kur çevrimi yapılmadığı için
+ * toplamlar para birimi başına ayrı), durum rozetleri ve altta toplam satırı.
+ *
+ * Proplar:
+ * - `view`: "payments" (hakedişler, varsayılan) | "contracts" (sözleşmeler) | "invoices" (faturalar).
+ * - `showSummary`: hakediş görünümünde üstteki sözleşme ilerleme özeti (varsayılan true).
+ * - `rows`: gösterilecek satır sayısı (varsayılan tümü, en fazla 5).
+ * - `frame`, `label`, `className`.
+ * Dar pencerede saha/dönem sütunları gizlenir.
+ */
+export function ProgressPaymentMockup({
+  view = "payments",
+  showSummary = true,
+  rows,
+  frame = true,
+  label,
+  className,
+}: {
+  view?: "payments" | "contracts" | "invoices";
+  showSummary?: boolean;
+  rows?: number;
+  frame?: boolean;
+  label?: string;
+  className?: string;
+}) {
+  const meta = VIEWS[view];
+  const visible = meta.rows.slice(0, rows ?? meta.rows.length);
+  // Toplamlar görünen satırlardan, para birimi başına ayrı hesaplanır (kur çevrimi yok)
+  const totals = rows === undefined ? meta.totals : sumByCurrency(visible.map((r) => r.amount));
+  return (
+    <AppFrame
+      label={label ?? meta.label}
+      crumbs={["Finans", meta.title]}
+      code="HKD"
+      bare={!frame}
+      className={className}
+    >
+      <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
+        <div className="min-w-0">
+          <div className="text-[13px] font-semibold text-ink-950">{meta.title}</div>
+          <div className="truncate text-[11px] text-ink-500">{meta.description}</div>
+        </div>
+        <div className="flex shrink-0 items-center gap-1.5">
+          <span className="hidden h-7 w-40 items-center rounded-sm border border-line px-2 text-[11px] text-ink-400 @xl:flex">
+            {meta.search}
+          </span>
+          <span className="flex h-7 items-center rounded-sm bg-brand-600 px-2.5 text-[11px] font-medium text-white">+ Yeni</span>
+        </div>
+      </div>
+
+      {view === "payments" && showSummary && (
+        <div className="grid gap-3 border-b border-line bg-paper/60 px-4 py-3 @xl:grid-cols-[1.3fr_1fr] @xl:items-center">
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-[10.5px] text-brand-700">SZ-0012</span>
+              <span className="truncate text-[11.5px] font-medium text-ink-900">Kadıköy Bahariye Mağaza Sözleşmesi</span>
+            </div>
+            <div className="mt-0.5 text-[10.5px] text-ink-500">Taraf: Yalın Yapı İnşaat Taahhüt · Sözleşme bedeli ₺4.850.000,00</div>
+          </div>
+          <div>
+            <div className="mb-1 flex items-baseline justify-between text-[10.5px]">
+              <span className="text-ink-500">Sözleşme ilerlemesi</span>
+              <span className="font-mono tabular-nums text-ink-900">%67</span>
+            </div>
+            <Progress value={67} />
+            <div className="mt-1 font-mono text-[9.5px] tabular-nums text-ink-500">Toplam hakediş ₺3.272.200,00 · Ödenen ₺986.400,00</div>
+          </div>
+        </div>
+      )}
+
+      <table className="w-full border-collapse">
+        <thead className="border-b border-line bg-paper/40">
+          <tr>
+            {meta.columns.map((c) => (
+              <th key={c.key} className={cn(th, c.hide, c.right && "text-right")}>
+                {c.label}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-line">
+          {visible.map((r, i) => (
+            <tr key={i} className={i === meta.highlight ? "bg-brand-50/50" : undefined}>
+              {meta.columns.map((c) => {
+                const v = r[c.key];
+                return (
+                  <td key={c.key} className={cn(td, c.hide, c.right && "text-right", c.mono && "font-mono tabular-nums text-[11px]", c.code && "font-mono text-[10.5px] text-brand-700")}>
+                    {c.key === "status" ? <Badge tone={STATUS_TONE[v] ?? "neutral"}>{v}</Badge> : v}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className="divide-y divide-line border-t border-line-strong bg-paper/60">
+        {totals.map((t) => (
+          <div key={t.label} className="flex items-center justify-end gap-3 px-3 py-1.5">
+            <span className="text-[10.5px] font-medium text-ink-500">{t.label}</span>
+            <span className="min-w-[6.5rem] text-right font-mono text-[11px] font-semibold tabular-nums text-ink-950">{t.value}</span>
+          </div>
+        ))}
+      </div>
+    </AppFrame>
+  );
+}
+
+const STATUS_TONE: Record<string, Tone> = {
+  Taslak: "muted",
+  Gönderildi: "warn",
+  Onaylandı: "brand",
+  Ödendi: "ok",
+  Aktif: "ok",
+  Tamamlandı: "neutral",
+  "Süresi doldu": "risk",
+  Kesildi: "brand",
+  İptal: "risk",
+};
+
+type Col = { key: string; label: string; hide?: string; right?: boolean; mono?: boolean; code?: boolean };
+
+const hideSm = "hidden @md:table-cell";
+const hideMd = "hidden @2xl:table-cell";
+
+const VIEWS: Record<
+  "payments" | "contracts" | "invoices",
+  {
+    title: string;
+    description: string;
+    search: string;
+    label: string;
+    columns: Col[];
+    rows: Record<string, string>[];
+    totals: { label: string; value: string }[];
+    highlight?: number;
+  }
+> = {
+  payments: {
+    title: "Hakedişler",
+    description: "Sözleşmeye bağlı hakediş dönemleri.",
+    search: "Hakediş, sözleşme…",
+    label: "Koordine hakediş tablosu örneği: sözleşme kodu, saha, dönem, tutar ve durum sütunları.",
+    highlight: 1,
+    columns: [
+      { key: "title", label: "Hakediş" },
+      { key: "contract", label: "Sözleşme", hide: hideSm, code: true },
+      { key: "site", label: "Saha", hide: hideMd },
+      { key: "period", label: "Dönem", hide: hideMd },
+      { key: "amount", label: "Tutar", right: true, mono: true },
+      { key: "status", label: "Durum" },
+    ],
+    rows: [
+      { title: "4. Hakediş", contract: "SZ-0012", site: "Kadıköy Bahariye Mağaza", period: "Kasım 2026", amount: "₺1.040.000,00", status: "Taslak" },
+      { title: "3. Hakediş", contract: "SZ-0012", site: "Kadıköy Bahariye Mağaza", period: "Ekim 2026", amount: "₺1.245.800,00", status: "Gönderildi" },
+      { title: "2. Hakediş", contract: "SZ-0012", site: "Kadıköy Bahariye Mağaza", period: "Eylül 2026", amount: "₺986.400,00", status: "Ödendi" },
+      { title: "1. Hakediş", contract: "SZ-0015", site: "Levent Ofis Katı", period: "Ekim 2026", amount: "€84.250,00", status: "Ödendi" },
+      { title: "2. Hakediş", contract: "SZ-0009", site: "Üsküdar Sahil Kafe", period: "Eylül 2026", amount: "₺642.300,00", status: "Onaylandı" },
+    ],
+    totals: [
+      { label: "Toplam (TRY)", value: "₺3.914.500,00" },
+      { label: "Toplam (EUR)", value: "€84.250,00" },
+    ],
+  },
+  contracts: {
+    title: "Sözleşmeler",
+    description: "Saha projelerine bağlı sözleşmeler.",
+    search: "Kod, taraf, saha…",
+    label: "Koordine sözleşme listesi örneği: kod, taraf, saha, tutar ve durum.",
+    columns: [
+      { key: "code", label: "Kod", code: true },
+      { key: "party", label: "Taraf", hide: hideSm },
+      { key: "site", label: "Saha", hide: hideMd },
+      { key: "end", label: "Bitiş", hide: hideMd, mono: true },
+      { key: "amount", label: "Tutar", right: true, mono: true },
+      { key: "status", label: "Durum" },
+    ],
+    rows: [
+      { code: "SZ-0016", party: "Öz Mekanik Tesisat", site: "Ataşehir AVM Mağaza", end: "30.03.2027", amount: "₺2.180.000,00", status: "Taslak" },
+      { code: "SZ-0015", party: "Kuzey Yapı Ltd.", site: "Levent Ofis Katı", end: "15.01.2027", amount: "€312.000,00", status: "Aktif" },
+      { code: "SZ-0012", party: "Yalın Yapı İnşaat Taahhüt", site: "Kadıköy Bahariye Mağaza", end: "30.11.2026", amount: "₺4.850.000,00", status: "Aktif" },
+      { code: "SZ-0009", party: "Ege Dekorasyon", site: "Üsküdar Sahil Kafe", end: "30.09.2026", amount: "₺1.420.000,00", status: "Tamamlandı" },
+      { code: "SZ-0007", party: "Marmara Elektrik", site: "Ümraniye Lojistik Depo", end: "31.07.2026", amount: "$96.400,00", status: "Süresi doldu" },
+    ],
+    totals: [
+      { label: "Toplam (TRY)", value: "₺8.450.000,00" },
+      { label: "Toplam (EUR)", value: "€312.000,00" },
+      { label: "Toplam (USD)", value: "$96.400,00" },
+    ],
+  },
+  invoices: {
+    title: "Faturalar",
+    description: "Hakedişe bağlı faturalar.",
+    search: "Fatura no, saha…",
+    label: "Koordine fatura listesi örneği: fatura no, saha, KDV hariç tutar, KDV ve durum.",
+    columns: [
+      { key: "no", label: "Fatura No", code: true },
+      { key: "site", label: "Saha", hide: hideSm },
+      { key: "vat", label: "KDV", hide: hideMd, right: true, mono: true },
+      { key: "amount", label: "Tutar (KDV hariç)", right: true, mono: true },
+      { key: "status", label: "Durum" },
+    ],
+    rows: [
+      { no: "KDA2026000000418", site: "Kadıköy Bahariye Mağaza", vat: "₺197.280,00", amount: "₺986.400,00", status: "Kesildi" },
+      { no: "KDA2026000000402", site: "Üsküdar Sahil Kafe", vat: "₺128.460,00", amount: "₺642.300,00", status: "Ödendi" },
+      { no: "KDA2026000000397", site: "Levent Ofis Katı", vat: "€16.850,00", amount: "€84.250,00", status: "Ödendi" },
+      { no: "KDA2026000000421", site: "Ümraniye Lojistik Depo", vat: "₺84.000,00", amount: "₺420.000,00", status: "Taslak" },
+    ],
+    totals: [
+      { label: "Toplam (TRY)", value: "₺2.048.700,00" },
+      { label: "Toplam (EUR)", value: "€84.250,00" },
+    ],
+  },
+};
+
+const CURRENCY: Record<string, string> = { "₺": "TRY", "€": "EUR", $: "USD", "£": "GBP" };
+
+function sumByCurrency(amounts: string[]) {
+  const sums = new Map<string, number>();
+  for (const a of amounts) {
+    const sym = a[0];
+    const n = Number(a.slice(1).replace(/\./g, "").replace(",", "."));
+    sums.set(sym, (sums.get(sym) ?? 0) + n);
+  }
+  return [...sums].map(([sym, n]) => ({
+    label: `Toplam (${CURRENCY[sym] ?? sym})`,
+    value: `${sym}${n.toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+  }));
+}
