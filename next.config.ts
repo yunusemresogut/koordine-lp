@@ -45,11 +45,11 @@ const nextConfig: NextConfig = {
   // Yerel ağdaki cihazlardan dev sunucusuna erişim
   allowedDevOrigins: ["192.168.1.5"],
   async redirects() {
-    return appPaths.map((p) => ({
-      source: `/${p}/:path*`,
-      destination: `${appUrl}/${p}/:path*`,
-      permanent: false,
-    }));
+    // Yolun kendisi ve alt yollar ayrı kural: ":path*" boş eşleşince hedefin sonuna "/" eklenip fazladan yönlendirme oluyordu
+    return appPaths.flatMap((p) => [
+      { source: `/${p}`, destination: `${appUrl}/${p}`, permanent: false },
+      { source: `/${p}/:path+`, destination: `${appUrl}/${p}/:path+`, permanent: false },
+    ]);
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
