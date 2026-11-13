@@ -33,30 +33,29 @@ export type ReportKind =
 
 export type SolutionDetail = {
   slug: SolutionSlug;
-  /** Pafta kodu (antet kutusu, OG görseli) */
-  code: string;
   hero: {
     /** Sayfanın tek h1'i; seoTitle'dan farklı, insan diliyle */
     title: string;
     lede: string;
   };
-  /** PageHero yanındaki antet kutusu: gerçek ürün verileri */
+  /** PageHero yanındaki özet kutusu: gerçek ürün verileri */
   sheet: {
     /** Sahalar için tipik kayıt türleri / durumlar */
     scope: string;
     reports: ReportKind[];
     roles: AppRole[];
   };
-  /** "Sahadaki gerçek": sektörün tipik operasyon sorunları */
+  /** "Sahadaki durum": sektörün tipik operasyon sorunları (3–4) */
   realities: { title: string; body: string }[];
-  /** "Koordine ile": her sorunun hangi modülle nasıl karşılandığı */
-  approach: { feature: FeatureSlug; title: string; body: string; detail: string }[];
+  /** "Koordine ile": sorunların hangi modülle nasıl karşılandığı (3–4) */
+  approach: { feature: FeatureSlug; title: string; body: string }[];
   /** Tipik iş akışı (4–6 adım) */
   workflow: { step: string; detail: string; feature: FeatureSlug; record: string }[];
   /** "Kim ne görür" */
   roles: { role: AppRole; label?: string; sees: string; does: string }[];
   /** İlgili modüller (3–5) */
   modules: FeatureSlug[];
+  /** 3–4 soru */
   faqs: { question: string; answer: string }[];
   cta: { title: string; lede: string };
 };
@@ -65,91 +64,86 @@ export const solutionDetails: Record<SolutionSlug, SolutionDetail> = {
   /* ------------------------------------------------------------------ İnşaat ve taahhüt */
   "insaat-ve-taahhut": {
     slug: "insaat-ve-taahhut",
-    code: "INS",
     hero: {
-      title: "Her şantiyeden, her gün, aynı formatta haber alın.",
+      title: "Her şantiyeden her gün aynı formatta rapor alın.",
       lede:
-        "Aynı anda birkaç şantiye yürüten taahhüt firmaları için: iş programı, günlük şantiye raporu, puantaj, sözleşme ve hakediş aynı saha kaydına bağlı. Şantiye şefi sahada doldurur, merkez aynı gün görür.",
+        "Birden fazla şantiye yürüten taahhüt firmaları için. Şantiye şefi günlük raporu sahada doldurur, merkez aynı gün görür. İş programı, puantaj, sözleşme ve hakediş de aynı şantiyenin altında tutulur.",
     },
     sheet: {
-      scope: "Proje · İhale · Şantiye · Hakediş · Fatura",
+      scope: "Proje, ihale, şantiye, hakediş ve fatura",
       reports: ["Günlük şantiye raporu", "İSG raporu", "NCR", "Kontrol listesi"],
       roles: ["Kurucu", "Yönetici", "İnşaat Mühendisi", "Saha Sorumlusu", "Muhasebe"],
     },
     realities: [
       {
-        title: "Günlük raporlar farklı kanallardan, farklı biçimlerde gelir.",
+        title: "Günlük raporlar her şantiyeden farklı biçimde gelir.",
         body:
-          "Bir şantiye mesajla fotoğraf atar, diğeri akşam Excel gönderir, üçüncüsü hiç göndermez. Hangi şantiyenin hangi gün rapor vermediğini ancak bir sorun çıktığında fark edersiniz.",
+          "Bir şantiye fotoğraf gönderir, diğeri akşam Excel yollar, bir diğeri hiç rapor vermez. Eksik raporu çoğu zaman bir sorun çıkınca fark edersiniz.",
       },
       {
-        title: "Puantaj, rapordan ayrı bir defterde tutulur.",
+        title: "Puantaj ayrı bir tabloda tutulur.",
         body:
-          "Sahadaki yoklama bir kez günlük raporda, bir kez de ay sonu puantaj tablosunda yazılır. Taşeron ekiplerinin kişi sayısı çoğu zaman hiçbir yerde kayda geçmez.",
+          "Yoklama günlük rapora bir kez, ay sonunda puantaj tablosuna bir kez daha yazılır. Taşeron ekiplerinin kişi sayısı çoğu zaman hiçbir yere kaydedilmez.",
       },
       {
-        title: "Sözleşme, hakediş ve fatura ayrı dosyalarda yaşar.",
+        title: "Sözleşme, hakediş ve faturalar genelde ayrı dosyalarda tutulur.",
         body:
-          "Taşeron sözleşmesi bir klasörde, hakediş dönemleri bir tabloda, faturalar muhasebede. Bir sözleşmenin ne kadarının hakedişe ve faturaya döndüğünü görmek için üç kaynağı birleştirmek gerekir.",
+          "Bir sözleşmenin ne kadarının hakedişe ve faturaya dönüştüğünü görmek için birkaç ayrı dosyayı karşılaştırmanız gerekir.",
       },
       {
-        title: "İş programı ile sahadaki ilerleme birbirinden kopar.",
+        title: "İş programı sahadaki ilerlemeyle güncellenmez.",
         body:
-          "Primavera ya da Excel'de hazırlanan iş programı ihale dosyasında kalır; şantiyede neyin plan gerisinde olduğu haftalık toplantıda sözlü olarak konuşulur.",
+          "Primavera ya da Excel'de hazırlanan program ihale dosyasında kalır. Neyin plan gerisinde olduğu haftalık toplantıda konuşulur.",
       },
     ],
     approach: [
       {
         feature: "saha-raporlari",
-        title: "Günlük şantiye raporu tek formatta, şantiye bazında.",
+        title: "Günlük rapor her şantiyede aynı formda.",
         body:
-          "Şantiye şefi personeli, yapılan işleri, gelen malzemeyi, sorunları, iş güvenliğini ve fotoğrafları aynı formda girer; rapor A4 belge olarak çıkar. Panodaki rapor kapsamı tablosu hangi şantiyenin hangi gün rapor girmediğini gösterir.",
-        detail: "Rapor kapsamı · A4 PDF",
+          "Şantiye şefi personeli, yapılan işleri, gelen malzemeyi ve fotoğrafları girer; rapor A4 olarak alınır. Panoda hangi şantiyenin hangi gün rapor girmediği görünür.",
       },
       {
         feature: "insan-kaynaklari",
-        title: "Yoklama, kaydederken puantaja işlenir.",
+        title: "Yoklama puantaja aktarılır.",
         body:
-          "Günlük rapordaki isimli yoklama, kaydederken puantaja aktarılabilir; izinli personel atlanır. İsim girilmeyen taşeron ekipleri için meslek ve kişi sayısı ayrıca yazılır.",
-        detail: "Yoklama → puantaj",
+          "Günlük rapordaki isimli yoklama, kaydederken puantaja işlenebilir. İsim girilmeyen taşeron ekipleri için meslek ve kişi sayısı ayrıca yazılır.",
       },
       {
         feature: "hakedis-ve-finans",
         title: "Sözleşme, hakediş ve fatura birbirine bağlı.",
         body:
-          "Her sözleşme bir sahaya, her hakediş dönemi bir sözleşmeye, her fatura bir hakedişe bağlanır. Sözleşme ilerlemesi ve ödenen tutar aynı ekranda görünür; TRY, USD, EUR, GBP ve CHF desteklenir.",
-        detail: "SZ-0012 → Hakediş → Fatura",
+          "Hakediş dönemi sözleşmeye, fatura hakedişe bağlanır. Sözleşmenin ilerlemesini ve ödenen tutarı aynı ekranda görürsünüz.",
       },
       {
         feature: "kesif-ve-is-programi",
-        title: "İş programı sahaya bağlı, rapora akar.",
+        title: "İş programını Excel ya da P6'dan aktarın.",
         body:
-          "İş programını Excel şablonundan ya da Primavera P6 .xer dosyasından içe aktarın; öncül görevler ve Gantt görünümü korunur. Günlük raporda “İş planından getir” ile o güne denk gelen kalemler rapora eklenir.",
-        detail: "Excel · P6 .xer · Gantt",
+          "Excel şablonu ya da Primavera P6 .xer dosyası içe aktarılır, program Gantt görünümünde izlenir. Günlük raporda o güne denk gelen kalemler programdan getirilebilir.",
       },
     ],
     workflow: [
-      { step: "İhale", detail: "Saha haritaya eklenir, durum “İhale”. Sözleşme yoksa uyarı verilir.", feature: "saha-ve-harita", record: "DURUM: İHALE" },
+      { step: "İhale", detail: "Saha haritaya “İhale” durumuyla eklenir.", feature: "saha-ve-harita", record: "DURUM: İHALE" },
       { step: "Sözleşme", detail: "Sahaya bağlı sözleşme açılır, taraf ve tutar girilir.", feature: "hakedis-ve-finans", record: "SZ-0012" },
       { step: "Keşif ve iş programı", detail: "Poz no'lu keşif ve iş programı Excel ya da P6'dan aktarılır.", feature: "kesif-ve-is-programi", record: "15.150.1005" },
-      { step: "Günlük rapor", detail: "Şantiye şefi her gün raporu girer, yoklama puantaja işlenir.", feature: "saha-raporlari", record: "GÜNLÜK · A4" },
-      { step: "Hakediş", detail: "Dönem başlangıç ve bitişiyle hakediş hazırlanır, onaylanır.", feature: "hakedis-ve-finans", record: "DÖNEM 03" },
-      { step: "Fatura", detail: "Hakedişe bağlı fatura KDV oranıyla kesilir, ödeme izlenir.", feature: "hakedis-ve-finans", record: "KDV %20" },
+      { step: "Günlük rapor", detail: "Şantiye şefi raporu her gün girer, yoklama puantaja işlenir.", feature: "saha-raporlari", record: "GÜNLÜK RAPOR" },
+      { step: "Hakediş", detail: "Dönem tarihleriyle hakediş hazırlanır ve onaylanır.", feature: "hakedis-ve-finans", record: "DÖNEM 03" },
+      { step: "Fatura", detail: "Hakedişe bağlı fatura kesilir, ödeme izlenir.", feature: "hakedis-ve-finans", record: "KDV %20" },
     ],
     roles: [
       {
         role: "Kurucu",
         sees: "Tüm şantiyeler, finans ve insan kaynakları.",
-        does: "Kullanıcıları ve rol yetkilerini belirler, bölgeleri tanımlar.",
+        does: "Kullanıcıları, rol yetkilerini ve bölgeleri belirler.",
       },
       {
         role: "Yönetici",
-        sees: "Şantiye portföyü, iş programı eğrisi, sözleşme ve hakedişler.",
-        does: "Sözleşme ve hakediş açar, proje onaylarını verir, gecikmeleri izler.",
+        sees: "Şantiye portföyü, iş programı, sözleşme ve hakedişler.",
+        does: "Sözleşme ve hakediş açar, proje onaylarını verir.",
       },
       {
         role: "İnşaat Mühendisi",
-        sees: "Sahalar, keşif ve iş programı, projeler ve talepler.",
+        sees: "Sahalar, keşif, iş programı, projeler ve talepler.",
         does: "Keşif ve iş programını günceller, NCR ve kontrol listesi doldurur.",
       },
       {
@@ -169,110 +163,89 @@ export const solutionDetails: Record<SolutionSlug, SolutionDetail> = {
       {
         question: "Primavera P6'da hazırladığımız iş programını kullanabilir miyiz?",
         answer:
-          "Evet. İş programını Excel şablonundan ya da Primavera P6 .xer dosyasından içe aktarabilirsiniz. Başlangıç ve bitiş tarihleri, sorumlu ve öncül görevler aktarılır; program tablo ve Gantt görünümünde izlenir.",
+          "Evet. Programı Primavera P6 .xer dosyasından ya da Excel şablonundan içe aktarabilirsiniz. Tarihler, sorumlular ve öncül görevler aktarılır; program tablo ve Gantt görünümünde izlenir.",
       },
       {
-        question: "Günlük şantiye raporundaki yoklama puantaja nasıl geçer?",
+        question: "Günlük rapordaki yoklama puantaja nasıl geçer?",
         answer:
-          "Raporda isimli yoklama tutulur. Kaydederken “yoklamayı puantaja işle” seçeneği açıksa çalışan, yarım gün ve gelmedi bilgileri puantaja yazılır; o gün izinli olan personelin kaydı değiştirilmez.",
-      },
-      {
-        question: "Taşeron personelini ve ekiplerini ayrı takip edebilir miyiz?",
-        answer:
-          "Personel kartında çalışma türü olarak taşeron personeli seçilebilir. İsim girilmeyen taşeron ekipleri için günlük raporda meslek ve kişi sayısı ayrı satırlarda yazılır.",
+          "Raporu kaydederken “yoklamayı puantaja işle” seçeneği açıksa çalıştı, yarım gün ve gelmedi bilgileri puantaja yazılır. O gün izinli olan personelin kaydı değişmez.",
       },
       {
         question: "Farklı para birimindeki sözleşmeler nasıl görünür?",
         answer:
-          "Sözleşme, hakediş ve fatura TRY, USD, EUR, GBP ve CHF ile kaydedilebilir. Kur çevrimi yapılmaz; toplamlar para birimi bazında ayrı gösterilir.",
+          "Sözleşme, hakediş ve fatura TRY, USD, EUR, GBP ve CHF ile kaydedilebilir. Kur çevrimi yapılmaz, toplamlar para birimine göre ayrı gösterilir.",
       },
     ],
     cta: {
       title: "Şantiyelerinizin günlük akışını birlikte kuralım.",
       lede:
-        "Mevcut iş programınızı ve keşif dosyanızı getirin; 30 dakikalık görüşmede kendi şantiyeniz üzerinden günlük rapordan hakedişe akışı gösterelim.",
+        "İş programınızı ve keşif dosyanızı getirin. 30 dakikalık görüşmede Koordine'yi kendi şantiyeniz üzerinden gösterelim.",
     },
   },
 
   /* ------------------------------------------------------------------ Mimarlık ofisleri */
   "mimarlik-ofisleri": {
     slug: "mimarlik-ofisleri",
-    code: "MIM",
     hero: {
-      title: "Çizimden sahaya geçen her kararın izini sürün.",
+      title: "Uygulamadaki projelerinizi sahada takip edin.",
       lede:
-        "Uygulama aşamasına geçen mimarlık ofisleri için: malzeme sunumu, yapım yöntemi, uygulama denetimi ve teslim öncesi kontroller aynı projenin altında, revizyon ve onay durumuyla birlikte.",
+        "Uygulama aşamasına geçen mimarlık ofisleri için. Malzeme sunumu, yapım yöntemi, uygulama denetimi ve teslim öncesi kontroller projenin altında, revizyon ve onay durumuyla tutulur.",
     },
     sheet: {
-      scope: "Mağaza · Ofis · Kafe · Konut · Otel",
+      scope: "Mağaza, ofis, kafe, konut ve otel",
       reports: ["Malzeme sunumu", "Yapım yöntemi", "Kontrol listesi", "NCR"],
       roles: ["Mimar", "Yönetici", "Saha Sorumlusu", "Özel rol"],
     },
     realities: [
       {
-        title: "Malzeme onayları e-posta zincirlerinde kaybolur.",
+        title: "Malzeme onayları e-postalara dağılır.",
         body:
-          "Yüklenici numune gönderir, işveren yorum yazar, ürün değişir, yeni katalog gelir. Hangi seramiğin hangi revizyonla onaylandığını bulmak için eski yazışmaları taramak gerekir.",
+          "Numune, yorum ve revize katalog ayrı e-postalarla gelir. Hangi ürünün hangi revizyonla onaylandığını bulmak için eski yazışmalara dönmeniz gerekir.",
       },
       {
-        title: "Uygulama denetimi notları defterde kalır.",
+        title: "Denetim notları telefonda ve defterde kalır.",
         body:
-          "Saha ziyaretinde tespit edilen derz farkı, kot hatası ya da projeye aykırı imalat fotoğrafla telefonda, notla defterde durur. Düzeltilip düzeltilmediği bir sonraki ziyarete kadar belirsizdir.",
+          "Saha ziyaretinde görülen kot hatası ya da projeye aykırı imalat telefondaki bir fotoğrafta durur. Düzeltilip düzeltilmediği bir sonraki ziyarette anlaşılır.",
       },
       {
-        title: "Revizyonlar ve şartname karşılaştırması elle yapılır.",
+        title: "Teslim öncesi eksikler son haftaya kalır.",
         body:
-          "Önerilen ürünün şartname değerlerini karşılayıp karşılamadığı her sunumda yeniden tablolanır. Eşdeğer ürün gerekçesi ve ekli belgeler dağınık kalır.",
-      },
-      {
-        title: "Teslim öncesi eksik listesi son haftaya sıkışır.",
-        body:
-          "Punch list, as-built projeler, kullanım kılavuzları ve garanti belgeleri teslim gününe yakın toplanmaya çalışılır; neyin eksik olduğu tek bir listede görünmez.",
+          "Eksik listesi, as-built projeler ve garanti belgeleri teslim gününe yakın toplanır. Neyin eksik olduğunu tek bir listede göremezsiniz.",
       },
     ],
     approach: [
       {
         feature: "saha-raporlari",
-        title: "Malzeme sunum formu, onay koduyla birlikte.",
+        title: "Malzeme sunumu onay durumuyla kaydedilir.",
         body:
-          "Ürünü, üreticiyi ve kullanım yerini girin; şartname değerini önerilen ürünle satır satır karşılaştırın (uygun, eşdeğer, sapma var). Teknik föy, test raporu ve sertifika ekleri işaretlenir; işveren ya da müşavir görüşü A, B, C, D durumlarıyla kayda geçer.",
-        detail: "MS-ARC-012 · Rev.",
+          "Önerilen ürünü şartname değeriyle satır satır karşılaştırırsınız. İşveren ya da müşavir görüşü A, B, C veya D durumuyla forma işlenir, belge revizyon numarasıyla saklanır.",
       },
       {
         feature: "saha-raporlari",
-        title: "Uygulama denetimi kontrol listesi ve NCR ile.",
+        title: "Denetim kontrol listesi ve NCR ile yapılır.",
         body:
-          "Sıva, şap, ıslak hacim yalıtımı, asma tavan, alçıpan, boya gibi hazır mimari maddelerden kontrol listesi oluşturun. Uygun olmayan imalat için NCR açın; kök neden, düzeltici faaliyet, sorumlu firma ve kapanış doğrulaması aynı belgede.",
-        detail: "Kontrol listesi · NCR",
+          "Sıva, şap, yalıtım, asma tavan gibi hazır mimari maddelerden liste oluşturursunuz. Uygun olmayan imalat için NCR açılır ve kapanışı aynı belgede doğrulanır. Teslim öncesi kontroller de aynı yöntemle yapılır.",
       },
       {
         feature: "talepler-ve-onaylar",
-        title: "Mimari onay sahanın üzerinde durur.",
+        title: "Mimari onay her saha için ayrı izlenir.",
         body:
-          "Her sahanın mimari, mekanik ve elektrik onayı ayrı izlenir. Mimar kendi disiplininin onayını verir; onay bekleyen sahalar açılış tarihine göre sıralanır.",
-        detail: "Mimari · Mekanik · Elektrik",
-      },
-      {
-        feature: "ekip-ve-iletisim",
-        title: "Dosyalar ve notlar proje kaydında.",
-        body:
-          "Uygulama projeleri, detay çizimleri ve fotoğraflar sahanın dosyalarına yüklenir; ekip notları ve yalnızca sizin göreceğiniz özel notlar aynı sayfadadır. Ofis içi yazışma firma sohbetinde dosyayla birlikte yürür.",
-        detail: "Dosya · not · sohbet",
+          "Mimari, mekanik ve elektrik onayları ayrı tutulur. Mimar kendi disiplininin onayını verir; bekleyen sahalar açılış tarihine göre sıralanır.",
       },
     ],
     workflow: [
       { step: "Uygulama projesi", detail: "Saha açılır, onaylı projeler ve detaylar dosyalara yüklenir.", feature: "saha-ve-harita", record: "A-201" },
-      { step: "Malzeme sunumu", detail: "Ürün şartnameyle karşılaştırılır, ekleriyle işverene sunulur.", feature: "saha-raporlari", record: "MS-ARC-012" },
-      { step: "Yapım yöntemi", detail: "İmalatın adımları, riskleri ve kabul kriterleri onaya sunulur.", feature: "saha-raporlari", record: "YY-ARC-003" },
+      { step: "Malzeme sunumu", detail: "Ürün şartnameyle karşılaştırılır ve işverene sunulur.", feature: "saha-raporlari", record: "MS-ARC-012" },
+      { step: "Yapım yöntemi", detail: "İmalatın adımları ve kabul kriterleri onaya sunulur.", feature: "saha-raporlari", record: "YY-ARC-003" },
       { step: "Uygulama denetimi", detail: "Kontrol listesi sahada işaretlenir, aykırılıklar NCR olur.", feature: "saha-raporlari", record: "NCR-2026-007" },
-      { step: "Mimari onay", detail: "Mimar kendi disiplin onayını verir, durum panoda görünür.", feature: "talepler-ve-onaylar", record: "ONAY: MİMARİ" },
-      { step: "Teslim öncesi kontrol", detail: "Punch list, as-built ve kılavuzlar teslim listesinde kapanır.", feature: "saha-raporlari", record: "TESLİM ÖNCESİ" },
+      { step: "Mimari onay", detail: "Mimar kendi disiplin onayını verir.", feature: "talepler-ve-onaylar", record: "ONAY: MİMARİ" },
+      { step: "Teslim öncesi kontrol", detail: "Eksik listesi, as-built ve kılavuzlar kontrol edilir.", feature: "saha-raporlari", record: "TESLİM ÖNCESİ" },
     ],
     roles: [
       {
         role: "Mimar",
         sees: "Sahalar, projeler, onay kuyruğu ve tadilat talepleri.",
-        does: "Malzeme sunumunu değerlendirir, uygulama denetimi yapar, mimari onayı verir.",
+        does: "Malzeme sunumunu değerlendirir, uygulamayı denetler, mimari onayı verir.",
       },
       {
         role: "Yönetici",
@@ -288,8 +261,8 @@ export const solutionDetails: Record<SolutionSlug, SolutionDetail> = {
       {
         role: "Özel rol",
         label: "Özel rol (ör. iç mimar, kontrol mühendisi)",
-        sees: "Firmanın bu rol için belirlediği modüller.",
-        does: "Yetki matrisinde tanımlanan işlemleri yapar.",
+        sees: "Firmanın bu rol için açtığı modüller.",
+        does: "Yetki ayarlarında tanımlanan işlemleri yapar.",
       },
     ],
     modules: ["saha-raporlari", "talepler-ve-onaylar", "kesif-ve-is-programi", "ekip-ve-iletisim"],
@@ -297,104 +270,94 @@ export const solutionDetails: Record<SolutionSlug, SolutionDetail> = {
       {
         question: "Malzeme sunum formunda onay durumları nasıl tutuluyor?",
         answer:
-          "Form taslak ya da onaya sunuldu olarak başlar; işveren veya müşavir görüşü Onaylandı (A), Notlu onay (B), Revize edip yeniden sunun (C) ve Reddedildi (D) olarak işlenir. Doküman no ve revizyon alanı belgenin üstünde görünür.",
+          "İşveren ya da müşavir görüşü dört durumdan biriyle işlenir: Onaylandı (A), Notlu onay (B), Revize edip yeniden sunun (C) ve Reddedildi (D). Doküman no ve revizyon belgenin üstünde görünür.",
       },
       {
         question: "Kontrol listesi maddelerini kendimiz yazabilir miyiz?",
         answer:
-          "Evet. Hazır maddeler kütüphanesinden genel, kaba yapı, mimari, mekanik, elektrik, peyzaj, İSG ve teslim gruplarındaki maddeleri seçebilir ya da kendi maddelerinizi yazabilirsiniz. Her madde uygun, uygun değil ya da kapsam dışı olarak işaretlenir.",
+          "Evet. Hazır madde kütüphanesinden seçebilir ya da kendi maddelerinizi yazabilirsiniz. Her madde uygun, uygun değil ya da kapsam dışı olarak işaretlenir.",
       },
       {
-        question: "İşverene gönderilecek belgeyi nasıl paylaşırız?",
+        question: "Belgeleri işverene nasıl göndeririz?",
         answer:
-          "Malzeme sunumu, yapım yöntemi, kontrol listesi ve NCR A4 belge olarak hazırlanır ve PDF olarak alınır. Belgeyi işverene ya da müşavire kendi kanalınızdan iletirsiniz; görüşü forma işlenir.",
-      },
-      {
-        question: "Ofisimizdeki unvanlar uygulamadaki rollerle aynı değil. Ne yapabiliriz?",
-        answer:
-          "Hazır rollerin adlarını firmanıza göre değiştirebilir, ayrıca özel rol tanımlayabilirsiniz. Her rolün hangi modülde görüntüleme, ekleme, düzenleme ve silme yetkisi olacağını yetki matrisinden belirlersiniz.",
+          "Malzeme sunumu, yapım yöntemi, kontrol listesi ve NCR PDF olarak alınır. Belgeyi kendi kanalınızdan iletirsiniz, gelen görüşü forma işlersiniz.",
       },
     ],
     cta: {
-      title: "Malzeme onayından teslime, projelerinizi tek yerde izleyin.",
+      title: "Onay ve denetim düzeninizi birlikte kuralım.",
       lede:
-        "Uygulama aşamasındaki bir projeniz üzerinden malzeme sunumu, denetim ve onay düzenini birlikte kuralım.",
+        "Uygulama aşamasındaki bir projenizi seçin, görüşmede malzeme sunumu ve denetim akışını bu proje üzerinden gösterelim.",
     },
   },
 
   /* ------------------------------------------------------------------ Mühendislik ve MEP */
   "muhendislik-ve-mep": {
     slug: "muhendislik-ve-mep",
-    code: "MEP",
     hero: {
-      title: "Yöntem onayından test kaydına, kalite dosyanız sahada oluşsun.",
+      title: "Yapım yöntemi, NCR ve test kayıtlarınız sahada hazır olsun.",
       lede:
-        "Mekanik, elektrik ve inşaat mühendisliği ekipleri için: yapım yöntemi, NCR, İSG ve test kontrol listeleri aynı şemadan A4 belgeye dönüşür. Personelin sertifikaları ve disiplin onayları aynı platformda.",
+        "Mekanik, elektrik ve inşaat mühendisliği ekipleri için. Raporlar sahada form olarak doldurulur ve A4 belge olarak alınır. Personel sertifikaları ve disiplin onayları da aynı platformda izlenir.",
     },
     sheet: {
-      scope: "Mekanik · Elektrik · İnşaat · Peyzaj / altyapı",
+      scope: "Mekanik, elektrik, inşaat, peyzaj ve altyapı",
       reports: ["Yapım yöntemi", "NCR", "İSG raporu", "Kontrol listesi", "Malzeme sunumu"],
       roles: ["Makine Mühendisi", "Elektrik Mühendisi", "İnşaat Mühendisi", "Yönetici"],
     },
     realities: [
       {
-        title: "Yapım yöntemi her projede sıfırdan yazılır.",
+        title: "Yapım yöntemi her projede baştan yazılır.",
         body:
-          "Kapsam, sorumluluklar, ekipman, iş adımları, riskler ve muayene planı Word dosyalarında dağınık durur. Onaya sunulan sürüm ile sahada uygulanan sürüm her zaman aynı değildir.",
+          "Word dosyaları projeden projeye kopyalanır. Onaya giden sürümle sahada uygulanan sürüm her zaman aynı olmaz.",
       },
       {
-        title: "Uygunsuzluklar kapanmadan unutulur.",
+        title: "Açılan NCR'lerin kapanışı takip edilmez.",
         body:
-          "NCR açılır, düzeltici faaliyet söylenir ama doğrulama ve kapanış kaydı tutulmaz. Hangi NCR'nin açık, hangisinin doğrulama beklediği bir listede görünmez.",
+          "Düzeltici faaliyet konuşulur ama doğrulama kaydı tutulmaz. Hangi NCR'nin hâlâ açık olduğunu bir listede göremezsiniz.",
       },
       {
-        title: "Test ve devreye alma kayıtları kâğıtta kalır.",
+        title: "Test kayıtları kâğıtta kalır.",
         body:
-          "Basınç testi, izolasyon direnci, topraklama ölçümü, kaçak akım rölesi testi ve balanslama sahada formlara yazılır; teslim dosyası hazırlanırken yeniden derlenir.",
+          "Basınç testi, izolasyon ve topraklama ölçümleri sahada forma yazılır, teslim dosyası hazırlanırken yeniden derlenir.",
       },
       {
-        title: "Sertifikası biten personel sahada çalışmaya devam eder.",
+        title: "Sertifika bitiş tarihleri gözden kaçar.",
         body:
-          "Yüksekte çalışma eğitimi, MYK belgesi, operatör belgesi ve sağlık muayenesinin bitiş tarihleri ayrı bir tabloda izlenir; süresi geçen belge çoğu zaman denetimde fark edilir.",
+          "Yüksekte çalışma, MYK ve operatör belgeleri ayrı bir tabloda izlenir. Süresi geçen belge çoğu zaman denetimde fark edilir.",
       },
     ],
     approach: [
       {
         feature: "saha-raporlari",
-        title: "Yapım yöntemi, bölümleri hazır bir şablonla.",
+        title: "Yapım yöntemi hazır bir şablonla yazılır.",
         body:
-          "Kapsam ve referanslar, sorumluluklar, ekipman ve malzemeler, numaralı uygulama adımları ve her adımın kabul kriteri, riskler ve önlemler, muayene ve test planı. Onay durumu ve revizyonla birlikte A4 belge.",
-        detail: "YY-MEC-003 · Rev.",
+          "Kapsam, sorumluluklar, ekipman, uygulama adımları, riskler ve test planı için hazır bölümler vardır. Belge onay durumu ve revizyon numarasıyla A4 olarak alınır.",
       },
       {
         feature: "saha-raporlari",
-        title: "NCR açılır, atanır, doğrulanarak kapanır.",
+        title: "NCR kapanana kadar izlenir.",
         body:
-          "Kategori (malzeme, işçilik, tasarım, dokümantasyon), önem derecesi (minör, majör, kritik), kök neden, karar ve düzeltici / önleyici faaliyet. Durum açık, düzeltme sürüyor, doğrulama bekliyor ve kapandı olarak ilerler.",
-        detail: "NCR-2026-007",
+          "Kategori, önem derecesi, kök neden ve düzeltici faaliyet kaydedilir. Durum açık, düzeltme sürüyor, doğrulama bekliyor ve kapandı olarak ilerler.",
       },
       {
         feature: "saha-raporlari",
-        title: "Test kontrol listeleri hazır maddelerle.",
+        title: "Test kontrol listeleri hazır maddelerle hazırlanır.",
         body:
-          "Mekanik ve elektrik kütüphanesinden maddeleri seçin: temiz su basınç testi, sprinkler hattı testi, hava debisi ölçümü, izolasyon direnci, topraklama, kaçak akım, acil aydınlatma, yangın algılama. Sahada işaretleyin, fotoğrafla birlikte PDF alın.",
-        detail: "Mekanik · Elektrik",
+          "Mekanik ve elektrik kütüphanesinden basınç testi, izolasyon direnci, topraklama ve kaçak akım gibi maddeleri seçersiniz. Liste sahada işaretlenir, fotoğraflarıyla PDF olarak alınır.",
       },
       {
         feature: "insan-kaynaklari",
         title: "Sertifikalar bitiş tarihiyle izlenir.",
         body:
-          "İSG eğitimi, sağlık muayenesi, MYK, yüksekte çalışma, operatör ve ilk yardım belgeleri personel kartında durur. Belge listesi süresi geçmiş ve 30 gün içinde bitecek belgeleri ayrı gösterir.",
-        detail: "Geçerli · bitiyor · geçti",
+          "Belgeler personel kartında tutulur. Süresi geçmiş ve 30 gün içinde bitecek belgeler ayrı listelenir.",
       },
     ],
     workflow: [
-      { step: "Keşif", detail: "Poz no'lu kalemler Excel'den aktarılır, malzeme durumu izlenir.", feature: "kesif-ve-is-programi", record: "15.250.1011" },
+      { step: "Keşif", detail: "Poz no'lu kalemler Excel'den aktarılır.", feature: "kesif-ve-is-programi", record: "15.250.1011" },
       { step: "Yapım yöntemi", detail: "Adımlar, riskler ve kabul kriterleri onaya sunulur.", feature: "saha-raporlari", record: "YY-MEC-003" },
       { step: "İmalat", detail: "Günlük rapor ve İSG denetimi sahada tutulur.", feature: "saha-raporlari", record: "İSG-2026-014" },
-      { step: "Test ve kontrol", detail: "Basınç, izolasyon, topraklama testleri listede işaretlenir.", feature: "saha-raporlari", record: "KL-2026-021" },
+      { step: "Test ve kontrol", detail: "Basınç, izolasyon ve topraklama testleri listede işaretlenir.", feature: "saha-raporlari", record: "KL-2026-021" },
       { step: "NCR kapanışı", detail: "Açık uygunsuzluklar doğrulanıp kapatılır.", feature: "saha-raporlari", record: "DURUM: KAPANDI" },
-      { step: "Disiplin onayı", detail: "Mekanik ve elektrik onayı ilgili mühendis tarafından verilir.", feature: "talepler-ve-onaylar", record: "ONAY: MEK / ELK" },
+      { step: "Disiplin onayı", detail: "Mekanik ve elektrik onayını ilgili mühendis verir.", feature: "talepler-ve-onaylar", record: "ONAY: MEKANİK" },
     ],
     roles: [
       {
@@ -417,116 +380,89 @@ export const solutionDetails: Record<SolutionSlug, SolutionDetail> = {
         sees: "Tüm disiplinlerin onay durumu, sözleşme ve hakedişler.",
         does: "Bütün disiplinlerin onayını verebilir, projeyi açar ve kapatır.",
       },
-      {
-        role: "Özel rol",
-        label: "Özel rol (ör. İSG uzmanı, kalite kontrol)",
-        sees: "Firmanın bu rol için açtığı modüller.",
-        does: "İSG denetimi, NCR doğrulama gibi tanımlanan işleri yapar.",
-      },
     ],
     modules: ["saha-raporlari", "insan-kaynaklari", "kesif-ve-is-programi", "talepler-ve-onaylar", "envanter-ve-zimmet"],
     faqs: [
       {
         question: "Hangi rapor tipleri var?",
         answer:
-          "Altı rapor tipi bulunur: günlük şantiye raporu, İSG raporu, kalite ve uygunsuzluk raporu (NCR), yapım yöntemi, malzeme sunum formu ve kontrol listesi. Hepsi sahada form olarak doldurulur ve A4 belge olarak alınır.",
+          "Altı rapor tipi var: günlük şantiye raporu, İSG raporu, NCR, yapım yöntemi, malzeme sunum formu ve kontrol listesi. Hepsi sahada doldurulur ve A4 belge olarak alınır.",
       },
       {
         question: "Mekanik ve elektrik onayları ayrı mı veriliyor?",
         answer:
-          "Evet. Her sahanın mimari, mekanik ve elektrik onayı ayrı tutulur. Makine mühendisi mekanik, elektrik mühendisi elektrik onayını verir; Yönetici ve Bölge Müdürü bütün disiplinleri onaylayabilir.",
-      },
-      {
-        question: "Personelin sertifika bitiş tarihlerini nasıl görürüz?",
-        answer:
-          "Belgeler personel kartından bitiş tarihiyle eklenir. Belge listesinde geçerlilik filtresi bulunur; süresi geçmiş ve 30 gün içinde bitecek belgeler ayrıca sayılır.",
+          "Evet. Makine mühendisi mekanik, elektrik mühendisi elektrik onayını verir. Yönetici ve Bölge Müdürü bütün disiplinleri onaylayabilir.",
       },
       {
         question: "Ölçüm cihazlarını ve ekipmanı takip edebilir miyiz?",
         answer:
-          "Ekipman, araç, el aleti ve elektronik cihazlar demirbaş no ve seri no ile envantere kaydedilir, personele zimmetlenir. Bakımda ya da hurdaya ayrıldı durumları ve zimmet geçmişi tutulur.",
+          "Evet. Cihaz ve ekipmanlar demirbaş no ve seri no ile envantere kaydedilir, personele zimmetlenir. Bakım durumu ve zimmet geçmişi tutulur.",
       },
     ],
     cta: {
-      title: "Kalite kayıtlarınızı sahada, belgeye hazır tutun.",
+      title: "Kalite kayıtlarınızı sahada tutmaya başlayın.",
       lede:
-        "Yapım yöntemi, NCR ve test kontrol listelerinizi bir projeniz üzerinden birlikte kuralım; şablonların sizin disiplinlerinize nasıl uyduğunu görün.",
+        "Yapım yöntemi, NCR ve test listelerinizi bir projeniz üzerinden birlikte kuralım.",
     },
   },
 
   /* ------------------------------------------------------------------ Perakende yatırımları */
   "perakende-yatirimlari": {
     slug: "perakende-yatirimlari",
-    code: "PRK",
     hero: {
       title: "Farklı şehirlerdeki mağaza açılışlarını tek takvimde yönetin.",
       lede:
-        "Zincir mağaza, ofis ve AVM projeleri yürüten yatırım ve yapı ekipleri için: her lokasyon haritada, açılışa kalan gün panoda, tadilat talepleri kodlu kayıtlarla. Bölge müdürü haritayı kendi bölgesine süzer, merkez portföyün tamamını görür.",
+        "Zincir mağaza, ofis ve AVM projeleri yürüten ekipler için. Her lokasyon haritada, açılışa kalan gün panoda görünür. Bölge müdürü kendi bölgesini, merkez tüm portföyü izler.",
     },
     sheet: {
-      scope: "Mağaza · AVM · Cadde · Ofis · Kafe",
+      scope: "Mağaza, AVM, cadde, ofis ve kafe",
       reports: ["Günlük şantiye raporu", "Kontrol listesi", "Malzeme sunumu"],
       roles: ["Yönetici", "Bölge Müdürü", "Saha Sorumlusu", "Mimar", "Muhasebe"],
     },
     realities: [
       {
-        title: "Aynı ay içinde farklı şehirlerde birkaç açılış yürür.",
+        title: "Aynı ay içinde birkaç şehirde açılış olur.",
         body:
-          "Her açılışın kendi yüklenicisi, şantiye şefi ve teslim tarihi vardır. Hangi mağazanın gecikme riskinde olduğu, Excel'deki açılış listesi güncellenene kadar görünmez.",
+          "Her açılışın ayrı yüklenicisi ve teslim tarihi vardır. Geciken mağaza, Excel'deki açılış listesi güncellenene kadar görünmez.",
       },
       {
-        title: "AVM ve cadde lokasyonları farklı takip ister.",
+        title: "Açılıştan sonra tadilat talepleri gelir.",
         body:
-          "AVM projelerinde kat, birim ve AVM yönetimi çalışma koşulları; cadde mağazalarında adres ve ruhsat. Lokasyon bilgisi farklı kişilerin tablolarında farklı yazılır.",
+          "Bakım ve tadilat istekleri telefonla ya da mesajla iletilir. İşi kimin üstlendiği ve kapanıp kapanmadığı takip edilemez.",
       },
       {
-        title: "Açılıştan sonra tadilat talepleri başlar.",
+        title: "Merkez ve bölgeler ayrı listeler tutar.",
         body:
-          "Açılan mağazadan gelen bakım ve tadilat istekleri telefonla ya da mesajla iletilir; kimin üstlendiği, önceliği ve kapanıp kapanmadığı izlenemez.",
-      },
-      {
-        title: "Bölge müdürleri resmin yalnızca bir kısmını görür.",
-        body:
-          "Her bölge kendi listesini tutar; merkez portföyün tamamını, bölge müdürü ise yalnızca kendi şehirlerini hızlıca görmek ister. İkisi aynı veriden beslenmez.",
+          "Bölge müdürü kendi şehirlerini, merkez bütün portföyü görmek ister. Herkes kendi listesini tuttuğu için bilgiler birbirini tutmaz.",
       },
     ],
     approach: [
       {
         feature: "saha-ve-harita",
-        title: "Her lokasyon haritada, açılış tarihiyle.",
+        title: "Her mağaza haritada, açılış tarihiyle.",
         body:
-          "Mağazayı konumundan ekleyin; şehir ve adres konumdan doldurulur, şehir uyuşmazlığı uyarılır. Saha türü (mağaza, AVM, cadde, ofis, kafe), brüt m², kat sayısı, yüklenici ve şantiye şefi aynı kayıtta.",
-        detail: "Konum · tür · m²",
+          "Mağazayı haritadan eklersiniz, şehir ve adres konumdan doldurulur. Saha türü, brüt m², yüklenici ve şantiye şefi aynı kayıtta tutulur.",
       },
       {
         feature: "saha-ve-harita",
-        title: "Açılış takvimi ve gecikme uyarısı.",
+        title: "Panoda geciken açılışlar ayrı görünür.",
         body:
-          "Panoda 30 gün içindeki açılışlar, en yakın açılış ve tarihi geçmiş ama açılmamış sahalar ayrı görünür. Açılış eğrisi, planlanan ve gerçekleşen açılışları ay ay karşılaştırır.",
-        detail: "7 gün · 30 gün · geciken",
+          "Önümüzdeki 30 gündeki açılışlar ve tarihi geçtiği hâlde açılmamış mağazalar ayrı listelenir. Harita ve pano bölge filtresiyle tek bölgeye daraltılabilir.",
       },
       {
         feature: "talepler-ve-onaylar",
-        title: "Tadilat talepleri kodlu kayıtlarla.",
+        title: "Tadilat talepleri kodla açılır.",
         body:
-          "Her talep TT-0042 gibi otomatik kodla açılır; saha, öncelik ve atanan kişiyle birlikte izlenir. Durum açık, devam ediyor, çözüldü ve kapalı olarak ilerler; son 12 haftada açılan ve çözülen talepler grafikte.",
-        detail: "TT-0042",
-      },
-      {
-        feature: "saha-ve-harita",
-        title: "Bölgeler şehir gruplarıyla tanımlanır.",
-        body:
-          "Kurucu bölgeleri ve hangi şehirleri kapsadığını belirler. Harita ve pano bölge filtresiyle daraltılır; bölge müdürü kendi bölgesine odaklanırken merkez portföyün tamamını görür.",
-        detail: "Bölge filtresi",
+          "Her talep TT-0042 gibi bir kod alır, saha, öncelik ve atanan kişiyle izlenir. Durumu açık, devam ediyor, çözüldü ya da kapalı olarak güncellenir.",
       },
     ],
     workflow: [
       { step: "Lokasyon", detail: "Mağaza haritaya eklenir, AVM ya da cadde türü seçilir.", feature: "saha-ve-harita", record: "DURUM: PROJE" },
-      { step: "Proje onayları", detail: "Mimari, mekanik ve elektrik onayları ayrı ayrı verilir.", feature: "talepler-ve-onaylar", record: "3 DİSİPLİN" },
+      { step: "Proje onayları", detail: "Mimari, mekanik ve elektrik onayları ayrı verilir.", feature: "talepler-ve-onaylar", record: "ONAY: MİMARİ" },
       { step: "İhale ve sözleşme", detail: "Yüklenici seçilir, sahaya bağlı sözleşme açılır.", feature: "hakedis-ve-finans", record: "SZ-0012" },
       { step: "Şantiye", detail: "İş programı ve keşif yüklenir, günlük rapor başlar.", feature: "kesif-ve-is-programi", record: "DURUM: ŞANTİYE" },
       { step: "Açılış", detail: "Açılış öncesi kontrol listesi kapanır, mağaza açılır.", feature: "saha-raporlari", record: "14.11.2026" },
-      { step: "Tadilat talepleri", detail: "Açılan mağazadan gelen talepler kodla açılır, atanır.", feature: "talepler-ve-onaylar", record: "TT-0042" },
+      { step: "Tadilat talepleri", detail: "Mağazadan gelen talepler kodla açılır ve atanır.", feature: "talepler-ve-onaylar", record: "TT-0042" },
     ],
     roles: [
       {
@@ -537,7 +473,7 @@ export const solutionDetails: Record<SolutionSlug, SolutionDetail> = {
       },
       {
         role: "Bölge Müdürü",
-        sees: "Bölge filtresiyle kendi şehirlerindeki mağazalar ve açılışlar.",
+        sees: "Kendi bölgesindeki mağazalar ve açılışlar.",
         does: "Bölgesindeki açılışları ve talepleri izler, onay verebilir.",
       },
       {
@@ -562,28 +498,23 @@ export const solutionDetails: Record<SolutionSlug, SolutionDetail> = {
       {
         question: "Açılış tarihi yaklaşan ya da geçen mağazaları nasıl görürüz?",
         answer:
-          "Panodaki açılış takvimi henüz açılmamış sahaları açılışa kalan güne göre sıralar; 7 gün içinde, 30 gün içinde ve geciken olarak gruplar. Tarihi geçen sahalar gecikme gün sayısıyla gösterilir.",
+          "Panodaki açılış takvimi henüz açılmamış mağazaları kalan güne göre sıralar ve 7 gün, 30 gün ve geciken olarak gruplar. Geciken mağazaların kaç gün geciktiği de yazılır.",
       },
       {
         question: "Bölge müdürleri yalnızca kendi bölgelerini görebilir mi?",
         answer:
-          "Bölgeler şehir gruplarıyla tanımlanır; harita ve pano bölge filtresiyle daraltılır ve filtre hatırlanabilir. Kullanıcının hangi modülleri görüp düzenleyebileceği rol bazlı yetki matrisinden ayarlanır.",
-      },
-      {
-        question: "Tadilat talebi kodlarını kendi formatımıza göre ayarlayabilir miyiz?",
-        answer:
-          "Talepler varsayılan olarak TT-0001 biçiminde sıralı kod alır; ön ek firma ayarlarından değiştirilebilir. Sözleşmeler de aynı şekilde SZ ön ekiyle kodlanır.",
+          "Bölgeler şehir gruplarıyla tanımlanır, harita ve pano bölge filtresiyle daraltılır. Kullanıcının hangi modülleri görüp düzenleyebileceğini rol yetkilerinden ayarlarsınız.",
       },
       {
         question: "Mağaza portföyümüz hakkında soru sorabilir miyiz?",
         answer:
-          "Yapay zekâ asistanına “önümüzdeki 30 günde açılacak sahalar hangileri?” gibi sorular sorabilirsiniz. Asistan firma verinize göre cevap verir; tadilat talebi açmasını isterseniz önce önizleme gösterir, onaylarsanız kayıt eklenir.",
+          "Evet. Yapay zekâ asistanına “önümüzdeki 30 günde açılacak mağazalar hangileri?” gibi sorular sorabilirsiniz, firmanızın verisiyle cevap verir. Talep açtırmak isterseniz önce önizleme gösterilir, onayınızla kaydedilir.",
       },
     ],
     cta: {
       title: "Açılış takviminizi haritada birlikte kuralım.",
       lede:
-        "Mevcut mağaza listenizi getirin; görüşmede lokasyonlarınızı haritada, açılışlarınızı takvimde ve taleplerinizi kodlu kayıtlarla gösterelim.",
+        "Mağaza listenizi getirin. Görüşmede lokasyonlarınızı haritada, açılışlarınızı takvimde gösterelim.",
     },
   },
 };

@@ -21,11 +21,10 @@ export function RolesSection() {
     <section aria-labelledby="roles-title" className="border-b border-line bg-white py-20 sm:py-28">
       <Container size="wide">
         <SectionHeader
-          index="06"
           eyebrow="Roller ve yetkiler"
           align="split"
-          title={<span id="roles-title">Mühendis, mimar, saha ve muhasebe aynı sistemde; herkes kendi işini görür.</span>}
-          lede="Kurucu, mühendislik disiplinleri, mimar, yönetici, bölge müdürü, saha sorumlusu ve muhasebe için hazır roller gelir. Aşağıdaki tablo varsayılanlardır; kurucu her kullanıcı için modül modül değiştirebilir."
+          title={<span id="roles-title">Herkes yalnızca yetkili olduğu modülleri görür.</span>}
+          lede="Mühendis, mimar, saha sorumlusu ve muhasebe için hazır roller gelir. Tablodaki yetkiler varsayılandır, kurucu bunları her kullanıcı için değiştirebilir."
         />
 
         <div className="mt-14">
@@ -74,8 +73,9 @@ export function RolesSection() {
                 <span className="text-ink-950">{a.k}</span> {a.label}
               </span>
             ))}
-            <span>— erişim yok</span>
-            <span className="text-ink-400">Disiplin onayı: mimar mimari, makine mühendisi mekanik, elektrik mühendisi elektrik onayını verir.</span>
+            <span className="inline-flex items-center gap-1.5">
+              <span aria-hidden className="h-px w-3 bg-ink-300" /> erişim yok
+            </span>
           </div>
         </div>
 
@@ -84,13 +84,12 @@ export function RolesSection() {
             <ChatMockup />
           </div>
           <div className="lg:col-span-5">
-            <p className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-brand-700">EKP</p>
-            <h3 className="mt-2 text-balance text-[1.625rem] font-semibold leading-[1.15] tracking-[-0.02em] text-ink-950">
-              Ekip içi yazışma da işin kaydında.
+            <h3 className="text-balance text-[1.625rem] font-semibold leading-[1.15] tracking-[-0.02em] text-ink-950">
+              Ekip içi yazışma ve bildirimler.
             </h3>
             <p className="mt-3 text-[1.0625rem] leading-relaxed text-ink-600">
-              Firma içi sohbette rapor, fotoğraf ve dosya paylaşılır; talepler, hakedişler, izinler ve belge bitişleri bildirim
-              olarak gelir.
+              Firma içi sohbette rapor, fotoğraf ve dosya paylaşabilirsiniz. Talepler, hakedişler, izinler ve belge
+              bitişleri bildirim olarak gelir.
             </p>
             <dl className="mt-8 divide-y divide-line border-y border-line">
               {securityFacts.map((f) => (
@@ -113,8 +112,9 @@ export function RolesSection() {
 function Cell({ value }: { value: string }) {
   if (!value) {
     return (
-      <span className="font-mono text-[0.8125rem] text-ink-300">
-        —<span className="sr-only">Erişim yok</span>
+      <span className="inline-flex h-[22px] items-center">
+        <span aria-hidden className="h-px w-3 bg-ink-300" />
+        <span className="sr-only">Erişim yok</span>
       </span>
     );
   }

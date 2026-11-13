@@ -16,19 +16,19 @@ export const metadata = pageMetadata({ title, description, path: "/iletisim" });
 const steps = [
   {
     title: "Ön görüşme",
-    text: "Ekip yapınızı, yürüttüğünüz saha ve projeleri, bugün kullandığınız araçları dinleriz.",
+    text: "Ekibinizi, projelerinizi ve şu an kullandığınız araçları dinleriz.",
   },
   {
     title: "Ürün gösterimi",
-    text: "İlgilendiğiniz modülleri, sizin akışınıza yakın bir senaryo üzerinden yaklaşık 30 dakikada gösteririz.",
+    text: "İlgilendiğiniz modülleri yaklaşık 30 dakikada, sizin işinize benzer bir örnekle gösteririz.",
   },
   {
     title: "Kurulum planı",
-    text: "Roller ve yetkiler, açılacak modüller ve Excel'den keşif ve iş programı aktarımını birlikte planlarız.",
+    text: "Roller, kullanılacak modüller ve Excel'den veri aktarımını birlikte planlarız.",
   },
   {
     title: "Teklif",
-    text: "Kullanıcı sayınıza ve seçtiğiniz modüllere göre firmanıza özel teklif hazırlarız.",
+    text: "Kullanıcı sayınıza ve seçtiğiniz modüllere göre teklif hazırlarız.",
   },
 ];
 
@@ -43,7 +43,7 @@ export default function ContactPage() {
         crumbs={[{ name: "İletişim", path: "/iletisim" }]}
         eyebrow="İletişim"
         title="Koordine'yi kendi projelerinizle görün."
-        lede="Demo talebinizi iletin; ekibinize uygun bir zamanda, sizin saha ve proje akışınız üzerinden görüşelim. Sorularınız için doğrudan e-posta da gönderebilirsiniz."
+        lede="Formu doldurun, size uygun bir zamanda görüşelim. Sorularınız için doğrudan e-posta da gönderebilirsiniz."
       />
 
       <section aria-labelledby="demo-title" className="bg-white">
@@ -51,7 +51,7 @@ export default function ContactPage() {
           <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
             {/* Sol: iletişim bilgileri ve süreç */}
             <div className="lg:col-span-5">
-              <Eyebrow index="01">Doğrudan iletişim</Eyebrow>
+              <Eyebrow>Doğrudan iletişim</Eyebrow>
               <dl className="mt-6 divide-y divide-line border-y border-line">
                 <ContactRow label="Destek ve satış">
                   <a
@@ -84,7 +84,7 @@ export default function ContactPage() {
               </dl>
 
               <div className="mt-14">
-                <Eyebrow index="02">Demo görüşmesi</Eyebrow>
+                <Eyebrow>Demo görüşmesi</Eyebrow>
                 <h2 className="mt-5 text-balance text-2xl font-semibold tracking-[-0.02em] text-ink-950">
                   Görüşmede neler olur?
                 </h2>
@@ -95,7 +95,7 @@ export default function ContactPage() {
                         <span aria-hidden className="absolute bottom-0 left-[1.25rem] top-9 w-px bg-line" />
                       )}
                       <span className="flex size-10 items-center justify-center rounded-sm border border-line-strong bg-paper font-mono text-[0.75rem] tabular-nums text-ink-700">
-                        {String(i + 1).padStart(2, "0")}
+                        {i + 1}
                       </span>
                       <div className="pt-1.5">
                         <h3 className="font-semibold text-ink-950">{s.title}</h3>
@@ -111,16 +111,10 @@ export default function ContactPage() {
             <div id="demo" className="lg:col-span-7">
               <div className="crop-marks rounded-md border border-line bg-white p-6 text-ink-300 shadow-panel sm:p-10">
                 <div className="text-ink-950">
-                  <div className="flex items-start justify-between gap-4 border-b border-line pb-6">
-                    <div>
-                      <p className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-brand-700">Form / Demo</p>
-                      <h2 id="demo-title" className="mt-3 text-balance text-[1.75rem] font-semibold leading-tight tracking-[-0.02em]">
-                        Demo talep edin
-                      </h2>
-                    </div>
-                    <span aria-hidden className="hidden font-mono text-[0.6875rem] tracking-[0.12em] text-ink-400 sm:block">
-                      DT-01
-                    </span>
+                  <div className="border-b border-line pb-6">
+                    <h2 id="demo-title" className="text-balance text-[1.75rem] font-semibold leading-tight tracking-[-0.02em]">
+                      Demo talep edin
+                    </h2>
                   </div>
                   <div className="pt-6">
                     <ContactForm supportEmail={site.email.support} />
@@ -134,7 +128,7 @@ export default function ContactPage() {
 
       <CtaBand
         title="Önce modülleri incelemek ister misiniz?"
-        lede="Saha takibinden hakedişe, günlük saha raporundan puantaja kadar 9 modülün her biri için ayrıntılı sayfalar hazırladık."
+        lede="9 modülün her biri için ayrı bir tanıtım sayfası var."
       />
     </>
   );

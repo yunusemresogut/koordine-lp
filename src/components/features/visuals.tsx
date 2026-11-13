@@ -34,7 +34,6 @@ export function OpeningCalendarVisual({ className }: { className?: string }) {
     <AppFrame
       label="Koordine açılış takvimi örneği: geciken, 7 gün içinde ve 30 gün içinde açılacak sahalar, açılışa kalan günle."
       crumbs={["Pano", "Saha portföyü"]}
-      code="SAH"
       className={className}
     >
       <div className="grid grid-cols-3 divide-x divide-line border-b border-line">
@@ -134,7 +133,6 @@ export function AssignmentHistoryVisual({ className }: { className?: string }) {
     <AppFrame
       label="Koordine zimmet geçmişi örneği: bir kırıcı delicinin üç zimmet kaydı, şantiyesi, tarihleri ve teslimdeki durumu."
       crumbs={["Envanter", "Zimmet geçmişi"]}
-      code="ENV"
       className={className}
     >
       <div className="flex items-start justify-between gap-3 border-b border-line px-4 py-3">
@@ -208,7 +206,6 @@ export function PermissionMatrixVisual({ className }: { className?: string }) {
     <AppFrame
       label="Koordine yetki matrisi örneği: İnşaat Mühendisi rolünün 15 bölümdeki görüntüleme, ekleme, düzenleme ve silme yetkileri."
       crumbs={["Admin", "Yetkiler"]}
-      code="EKP"
       className={className}
     >
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line px-4 py-2.5">
@@ -283,7 +280,6 @@ export function CoverageVisual({ className }: { className?: string }) {
     <AppFrame
       label="Koordine günlük rapor kapsamı örneği: dört şantiyenin son 14 günde rapor girilen ve girilmeyen günleri."
       crumbs={["Pano", "Günlük rapor kapsamı"]}
-      code="RPR"
       className={className}
     >
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line px-4 py-2.5">

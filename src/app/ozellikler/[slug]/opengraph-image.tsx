@@ -19,6 +19,5 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     eyebrow: "Özellikler",
     title: feature.name,
     subtitle: feature.summary,
-    code: feature.code,
   });
 }

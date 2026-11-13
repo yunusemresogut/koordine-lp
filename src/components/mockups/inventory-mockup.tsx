@@ -3,7 +3,7 @@ import { AppFrame } from "./app-frame";
 import { Avatar, Badge, td, th, type Tone } from "./primitives";
 
 /**
- * InventoryMockup — Envanter listesi: demirbaş no, ad / marka-model, kategori (Ekipman, Araç, El aleti,
+ * InventoryMockup - Envanter listesi: demirbaş no, ad / marka-model, kategori (Ekipman, Araç, El aleti,
  * Elektronik, İş güvenliği), durum (Boşta / Zimmette / Bakımda), zimmetli kişi ve şantiye, teslim / belge uyarıları.
  *
  * Proplar:
@@ -23,7 +23,7 @@ export function InventoryMockup({
   className?: string;
 }) {
   return (
-    <AppFrame label={label} crumbs={["Envanter"]} code="ENV" bare={!frame} className={className}>
+    <AppFrame label={label} crumbs={["Envanter"]} bare={!frame} className={className}>
       <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-2.5">
         <div className="min-w-0">
           <div className="text-[13px] font-semibold text-ink-950">Envanter</div>
@@ -70,7 +70,7 @@ export function InventoryMockup({
                     </div>
                   </div>
                 ) : (
-                  <span className="text-ink-400">—</span>
+                  <span className="text-ink-400">-</span>
                 )}
               </td>
               <td className={cn(td, "hidden whitespace-nowrap @3xl:table-cell")}>
@@ -79,7 +79,7 @@ export function InventoryMockup({
                     {it.due}
                   </span>
                 ) : (
-                  <span className="text-ink-400">—</span>
+                  <span className="text-ink-400">-</span>
                 )}
               </td>
             </tr>

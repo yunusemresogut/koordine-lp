@@ -202,7 +202,6 @@ export default function PrivacyPage() {
       lede="Sitede ve platformda hangi bilgileri topladığımızı, nasıl kullandığımızı ve nasıl koruduğumuzu sade bir dille anlatıyoruz."
       path="/gizlilik"
       crumb="Gizlilik"
-      code="YS-02"
       description={description}
       sections={sections}
     />

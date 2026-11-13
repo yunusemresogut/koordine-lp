@@ -23,7 +23,7 @@ export function AssistantMockup({
   className?: string;
 }) {
   return (
-    <AppFrame label={label} crumbs={["Asistan"]} code="AI" bare={!frame} className={className} bodyClassName="flex flex-col">
+    <AppFrame label={label} crumbs={["Asistan"]} bare={!frame} className={className} bodyClassName="flex flex-col">
       <div className="flex items-center gap-2.5 border-b border-line px-4 py-2.5">
         <span className="grid size-7 place-items-center rounded-sm bg-ink-950">
           <svg viewBox="0 0 16 16" className="size-3.5 text-brand-300" fill="none" stroke="currentColor" strokeWidth="1.4">

@@ -11,7 +11,7 @@ import { site } from "@/lib/site";
 
 const title = "Hakkımızda";
 const description =
-  "Koordine; mühendislik, mimarlık ve taahhüt ekiplerinin Excel, mesaj grupları ve kâğıt raporlara dağılan saha işini tek kayıtta toplamak için var.";
+  "Koordine, mühendislik, mimarlık ve taahhüt ekiplerinin Excel, mesaj grupları ve kâğıt raporlara dağılan saha işlerini bir araya getirmek için geliştirildi.";
 
 export const metadata = pageMetadata({ title, description, path: "/hakkimizda" });
 
@@ -19,51 +19,42 @@ export const metadata = pageMetadata({ title, description, path: "/hakkimizda" }
 const scattered = [
   {
     tool: "Excel tabloları",
-    problem: "Keşif ve iş programı dosyaları kopyalanır; hangi sürümün güncel olduğu, kimin neyi değiştirdiği belirsizleşir.",
-    answer: "Poz numaralı keşif ve iş programı saha kaydına bağlı; Excel ve P6 dosyalarından içe aktarılır.",
+    problem: "Dosyalar kopyalanır, hangi sürümün güncel olduğu belirsizleşir.",
+    answer: "Keşif ve iş programı sahanın içinde tutulur. Excel ve P6 dosyaları içe aktarılabilir.",
   },
   {
     tool: "Mesajlaşma grupları",
-    problem: "Saha fotoğrafları, kararlar ve talimatlar sohbet akışında kaybolur; aradan aylar geçince bulunamaz.",
-    answer: "Günlük saha raporu fotoğrafla sahaya kaydedilir; firma içi sohbet ve dosya paylaşımı aynı platformda.",
+    problem: "Aylar sonra bir fotoğrafı ya da kararı bulmak zordur.",
+    answer: "Günlük rapor fotoğraflarıyla kaydedilir. Firma içi sohbet de Koordine'dedir.",
   },
   {
     tool: "E-posta zincirleri",
-    problem: "Tadilat talepleri ve onaylar farklı gelen kutularına dağılır; bir işin hangi aşamada olduğu sorulmadan öğrenilmez.",
-    answer: "Talepler kodlu kayıtlarla açılır, sorumlu atanır, durumu adım adım izlenir.",
+    problem: "Bir talebin hangi aşamada olduğu ancak sorularak öğrenilir.",
+    answer: "Talepler sorumlu kişiyle açılır ve durumu takip edilir.",
   },
   {
     tool: "Kâğıt raporlar",
-    problem: "İSG ve uygunsuzluk formları doldurulur, taranır, klasörlenir; geçmişe dönük arama neredeyse imkânsızdır.",
-    answer: "6 rapor tipi sahada doldurulur, saha kaydında aranır ve A4 belge olarak paylaşılır.",
+    problem: "İSG ve uygunsuzluk formları klasörlenir, sonradan aramak zordur.",
+    answer: "Raporlar sahada doldurulur, aranabilir ve PDF olarak paylaşılır.",
   },
 ];
 
 const principles = [
   {
-    title: "Sahada doğan veri, sahada kaydedilir.",
-    text: "Bilgi en doğru hâlini oluştuğu anda taşır. Günlük saha raporu, İSG, NCR ve kontrol listeleri; ofise dönüp yeniden yazılmak yerine sahada, fotoğrafıyla birlikte kayda girer.",
-    proof: "Günlük saha raporu · İSG · NCR · Kontrol listesi",
+    title: "Bilgi sahada girilir.",
+    text: "Raporlar ofise dönüp yeniden yazılmaz. Şantiye şefi formu sahada, fotoğraflarıyla birlikte doldurur.",
   },
   {
-    title: "Tek kayıt, çok görünüm.",
-    text: "Bir saha; haritada bir nokta, açılış takviminde bir tarih, keşifte bir kalem listesi, hakedişte bir tutardır. Hepsi aynı kayda bağlıdır; bir yerde güncellenen bilgi diğerlerinde de günceldir.",
-    proof: "Harita · Takvim · Keşif · Hakediş",
+    title: "Önemli kayıtlar onaydan geçer.",
+    text: "Projeler mimari, mekanik ve elektrik onaylarından geçer. Yapay zekâ asistanı da siz onaylamadan kayıt eklemez.",
   },
   {
-    title: "Onaysız kayıt yok — yapay zekâ dahil.",
-    text: "Projeler mimari, mekanik ve elektrik disiplin onaylarından geçer. Yapay zekâ asistanı da bu kurala uyar: kayıt önerir, önizleme gösterir; siz onaylamadan hiçbir şey eklenmez.",
-    proof: "Onay akışları · Önizleme ve onay",
+    title: "Herkes kendi işini görür.",
+    text: "Muhasebe ile saha sorumlusu aynı ekranı görmek zorunda değil. Yetkiler rol ve kullanıcı bazında ayarlanır.",
   },
   {
-    title: "Rol kadar erişim.",
-    text: "Muhasebe ile saha sorumlusu aynı ekranı görmek zorunda değildir. Her modülde görüntüleme, ekleme, düzenleme ve silme yetkisi rol ve kullanıcı bazında ayrı ayarlanır; her hesap için tek aktif oturum vardır.",
-    proof: "Rol bazlı yetkiler · Tek aktif oturum",
-  },
-  {
-    title: "Sektörün dilinde konuşmak.",
-    text: "Poz no, metraj, hakediş, puantaj, yapım yöntemi, malzeme sunumu. Ürün; ekiplerin her gün kullandığı terimlerle kurulur, onları başka bir yazılımın diline çevirmeye zorlamaz.",
-    proof: "Türkçe ve İngilizce · 5 para birimi",
+    title: "Sektörün terimleri kullanılır.",
+    text: "Poz no, metraj, hakediş, puantaj, yapım yöntemi. Ekipler her gün kullandığı kelimeleri ekranda da görür.",
   },
 ];
 
@@ -84,20 +75,19 @@ export default function AboutPage() {
       <PageHero
         crumbs={[{ name: "Hakkımızda", path: "/hakkimizda" }]}
         eyebrow="Hakkımızda"
-        title="Sahada olan, kayıtta da olsun."
-        lede="Koordine; mühendislik, mimarlık ve taahhüt firmalarının saha, proje ve şantiye işlerini tek bir kayıt üzerinde toplamak için geliştirildi. Bu sayfa, ürünü neden böyle kurduğumuzu anlatıyor."
+        title="Koordine'yi sahada çalışan ekipler için geliştiriyoruz."
+        lede="Mühendislik, mimarlık ve taahhüt firmalarında saha bilgisi Excel dosyalarına, mesaj gruplarına ve kâğıt raporlara dağılıyor. Koordine bu işleri bir araya getirmek için geliştirildi."
       />
 
-      {/* 01 — Sorun */}
+      {/* Sorun */}
       <section aria-labelledby="neden-title" className="border-b border-line">
         <Container size="wide" className="py-20 sm:py-28">
           <Reveal>
             <SectionHeader
-              index="01"
               eyebrow="Neden Koordine"
               align="split"
-              title={<span id="neden-title">Sahadaki iş, dört farklı araca dağılıyor.</span>}
-              lede="Bir şantiyede günün sonunda bilgi; bir Excel dosyasında, bir mesaj grubunda, birkaç e-postada ve klasördeki kâğıtlarda durur. Her araç tek başına işe yarar; sorun, aralarındaki bağın insan hafızasıyla kurulmasıdır."
+              title={<span id="neden-title">Saha bilgisi genelde dört farklı araçta tutulur.</span>}
+              lede="Her biri tek başına işe yarar. Ama aralarındaki bağlantıyı birinin aklında tutması gerekir."
             />
           </Reveal>
 
@@ -107,18 +97,17 @@ export default function AboutPage() {
               className="hidden grid-cols-12 border-b border-line bg-paper-2 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-500 md:grid"
             >
               <div className="col-span-3 px-6 py-3">Araç</div>
-              <div className="col-span-5 border-l border-line px-6 py-3">Sahada ne oluyor</div>
-              <div className="col-span-4 border-l border-line px-6 py-3">Koordine&apos;de karşılığı</div>
+              <div className="col-span-5 border-l border-line px-6 py-3">Sorun</div>
+              <div className="col-span-4 border-l border-line px-6 py-3">Koordine&apos;de</div>
             </div>
             <ul>
-              {scattered.map((row, i) => (
+              {scattered.map((row) => (
                 <li key={row.tool} className="grid border-b border-line last:border-b-0 md:grid-cols-12">
-                  <div className="flex items-baseline gap-3 px-6 pb-2 pt-6 md:col-span-3 md:py-6">
-                    <span className="font-mono text-[0.75rem] tabular-nums text-brand-700">{String(i + 1).padStart(2, "0")}</span>
+                  <div className="px-6 pb-2 pt-6 md:col-span-3 md:py-6">
                     <h3 className="font-semibold text-ink-950">{row.tool}</h3>
                   </div>
                   <p className="px-6 pb-3 text-pretty text-[0.9375rem] leading-relaxed text-ink-600 md:col-span-5 md:border-l md:border-line md:py-6">
-                    <span className="sr-only">Sahada ne oluyor: </span>
+                    <span className="sr-only">Sorun: </span>
                     {row.problem}
                   </p>
                   <p className="px-6 pb-6 text-pretty text-[0.9375rem] leading-relaxed text-ink-950 md:col-span-4 md:border-l md:border-line md:bg-paper/60 md:py-6">
@@ -135,57 +124,42 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* 02 — İlkeler */}
+      {/* İlkeler */}
       <section aria-labelledby="ilkeler-title" className="border-b border-line bg-white">
         <Container size="wide" className="py-20 sm:py-28">
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <div className="lg:sticky lg:top-28">
-                <Eyebrow index="02">İlkeler</Eyebrow>
+                <Eyebrow>İlkeler</Eyebrow>
                 <h2
                   id="ilkeler-title"
                   className="mt-5 text-balance text-[2rem] font-semibold leading-[1.1] tracking-[-0.025em] text-ink-950 sm:text-[2.625rem]"
                 >
-                  Ürünü yönlendiren beş madde.
+                  Ürünü geliştirirken dikkat ettiklerimiz.
                 </h2>
-                <p className="mt-5 max-w-sm text-pretty text-[1.0625rem] leading-relaxed text-ink-600">
-                  Yeni bir özellik eklerken ya da bir ekranı sadeleştirirken bu maddelere bakarız. Her birinin üründe somut bir
-                  karşılığı var.
-                </p>
               </div>
             </div>
 
-            <ol className="border-t border-ink-950 lg:col-span-8">
-              {principles.map((p, i) => (
-                <li key={p.title} className="grid gap-4 border-b border-line py-9 sm:grid-cols-[6rem_1fr] sm:gap-8">
-                  <div className="font-mono text-[0.75rem] tracking-[0.14em] text-ink-500">
-                    <span className="text-brand-700">İ-{String(i + 1).padStart(2, "0")}</span>
-                    <span aria-hidden className="ml-2 text-ink-300 sm:ml-0 sm:mt-2 sm:block">
-                      / 05
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="text-balance text-[1.375rem] font-semibold leading-snug tracking-[-0.015em] text-ink-950">
-                      {p.title}
-                    </h3>
-                    <p className="mt-3 max-w-2xl text-pretty leading-relaxed text-ink-600">{p.text}</p>
-                    <p className="mt-4 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-500">
-                      <span className="text-ink-400">Üründe:</span> {p.proof}
-                    </p>
-                  </div>
+            <ul className="border-t border-ink-950 lg:col-span-8">
+              {principles.map((p) => (
+                <li key={p.title} className="border-b border-line py-8">
+                  <h3 className="text-balance text-[1.375rem] font-semibold leading-snug tracking-[-0.015em] text-ink-950">
+                    {p.title}
+                  </h3>
+                  <p className="mt-3 max-w-2xl text-pretty leading-relaxed text-ink-600">{p.text}</p>
                 </li>
               ))}
-            </ol>
+            </ul>
           </div>
         </Container>
       </section>
 
-      {/* 03 — Kimler için */}
+      {/* Kimler için */}
       <section aria-labelledby="kimler-title" className="border-b border-line">
         <Container size="wide" className="py-20 sm:py-28">
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-5">
-              <Eyebrow index="03">Kimler için</Eyebrow>
+              <Eyebrow>Kimler için</Eyebrow>
               <h2
                 id="kimler-title"
                 className="mt-5 text-balance text-[2rem] font-semibold leading-[1.1] tracking-[-0.025em] text-ink-950 sm:text-[2.625rem]"
@@ -193,8 +167,8 @@ export default function AboutPage() {
                 Birden fazla sahayı aynı anda yürüten ekipler.
               </h2>
               <p className="mt-5 max-w-md text-pretty text-[1.0625rem] leading-relaxed text-ink-600">
-                Saha ekibi, ofis ve yönetim aynı kayıtlar üzerinde, kendi rolleriyle çalışır. Sektörünüze göre nasıl
-                kullanıldığını inceleyin.
+                Saha ekibi, ofis ve yönetim aynı sistemde kendi yetkileriyle çalışır. Sektörünüze göre nasıl kullanıldığına
+                bakabilirsiniz.
               </p>
             </div>
             <ul className="divide-y divide-line border-y border-line lg:col-span-7">

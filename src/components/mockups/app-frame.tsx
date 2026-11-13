@@ -2,15 +2,14 @@ import { cn } from "@/lib/utils";
 
 /**
  * Ürün görsellerinin ortak "uygulama penceresi" çerçevesi.
- * Üstte uygulama içi ince başlık çubuğu: Koordine işareti, yol kırıntısı (mono), sağda modül kodu.
+ * Üstte uygulama içi ince başlık çubuğu: Koordine işareti ve yol kırıntısı (mono).
  * Kök eleman `role="img"` + `aria-label` taşır; içerik `aria-hidden` olduğu için ekran okuyucu
  * yalnızca etiketi okur.
  *
  * Proplar:
  * - `label` (zorunlu): ekran okuyucu açıklaması, ör. "Saha haritası ve saha listesi örneği".
  * - `crumbs`: başlık çubuğundaki yol, ör. ["Saha", "Harita"].
- * - `code`: sağdaki mono modül kodu, ör. "SAH".
- * - `aside`: başlık çubuğunun sağına ek içerik (kod yerine ya da yanında).
+ * - `aside`: başlık çubuğunun sağına ek içerik.
  * - `bare`: çerçeve çizmeden yalnızca erişilebilirlik kökünü verir (iç içe kullanım için).
  * - `className` / `bodyClassName`: dış kutu ve gövde sınıfları.
  *
@@ -19,7 +18,6 @@ import { cn } from "@/lib/utils";
 export function AppFrame({
   label,
   crumbs = [],
-  code,
   aside,
   bare,
   className,
@@ -28,7 +26,6 @@ export function AppFrame({
 }: {
   label: string;
   crumbs?: string[];
-  code?: string;
   aside?: React.ReactNode;
   bare?: boolean;
   className?: string;
@@ -64,14 +61,7 @@ export function AppFrame({
               </span>
             ))}
           </span>
-          <span className="ml-auto flex shrink-0 items-center gap-2">
-            {aside}
-            {code && (
-              <span className="rounded-xs border border-line bg-white px-1.5 font-mono text-[9.5px] leading-4 tracking-[0.1em] text-ink-600">
-                {code}
-              </span>
-            )}
-          </span>
+          {aside && <span className="ml-auto flex shrink-0 items-center gap-2">{aside}</span>}
         </div>
         <div className={cn("min-h-0 flex-1", bodyClassName)}>{children}</div>
       </div>

@@ -31,7 +31,7 @@ export function WorkPlanMockup({
         : "Koordine keşif ve iş programı örneği: poz numaralı keşif kalemleri ve Gantt görünümünde iş kalemleri.");
 
   return (
-    <AppFrame label={aria} crumbs={["Sahalar", "Levent Ofis Katı"]} code="KSF" bare={!frame} className={className}>
+    <AppFrame label={aria} crumbs={["Sahalar", "Levent Ofis Katı"]} bare={!frame} className={className}>
       <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-2.5">
         <div className="flex items-center gap-4 text-[11.5px]">
           <Tab active={view !== "gantt"}>Keşif</Tab>

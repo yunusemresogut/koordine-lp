@@ -28,140 +28,140 @@ export const faqCategories: FaqCategory[] = [
 ];
 
 export const faq: FaqItem[] = [
-  /* ---------- Genel ---------- */
+  /* Genel */
   {
     id: "koordine-nedir",
     category: "genel",
     question: "Koordine nedir?",
     answer:
-      "Koordine; mühendislik, mimarlık ve taahhüt firmalarının saha, proje ve şantiye işlerini tek platformda yönetmesi için geliştirilmiş web tabanlı bir yazılımdır. Saha ve harita takibi, keşif ve iş programı, hakediş ve finans, saha raporları, talepler ve onaylar, insan kaynakları, envanter ve zimmet, ekip iletişimi ve yapay zekâ asistanı olmak üzere 9 modülden oluşur.",
+      "Koordine, mühendislik, mimarlık ve taahhüt firmalarının saha, proje ve şantiye işlerini yönetmesi için geliştirilmiş web tabanlı bir yazılımdır. Saha ve harita, keşif ve iş programı, hakediş ve finans, saha raporları, talepler ve onaylar, insan kaynakları, envanter, ekip iletişimi ve yapay zekâ asistanı olmak üzere 9 modülden oluşur.",
   },
   {
     id: "kimler-icin",
     category: "genel",
     question: "Koordine hangi firmalar için uygun?",
     answer:
-      "Birden fazla saha veya şantiyeyi aynı anda yürüten ekipler için tasarlandı: inşaat ve taahhüt firmaları, mimarlık ofisleri, mühendislik ve MEP ekipleri ile mağaza ve şube yatırımlarını yöneten perakende firmaları. Hazır roller arasında mühendis, mimar, saha sorumlusu, bölge müdürü ve muhasebe gibi sahadaki ve ofisteki görevler yer alır.",
+      "Aynı anda birden fazla saha ya da şantiye yürüten ekipler için tasarlandı. İnşaat ve taahhüt firmaları, mimarlık ofisleri, mühendislik ve MEP ekipleri ile mağaza yatırımı yapan perakende firmaları kullanabilir. Mühendis, mimar, saha sorumlusu, bölge müdürü ve muhasebe için hazır roller vardır.",
   },
   {
     id: "mobil-kullanim",
     category: "genel",
     question: "Telefon veya tabletten kullanılabilir mi?",
     answer:
-      "Koordine web tabanlıdır; kurulum gerektirmez ve güncel bir tarayıcıdan erişilir. Ayrı bir mobil uygulaması (App Store / Google Play) bulunmaz. Saha ekiplerinizin telefon ve tabletle çalışma senaryolarını demo görüşmesinde kendi akışınız üzerinden birlikte değerlendirebiliriz.",
+      "Koordine web tabanlıdır, kurulum gerektirmez ve güncel bir tarayıcıdan açılır. Ayrı bir mobil uygulaması (App Store, Google Play) yoktur. Saha ekibinizin telefon ve tabletle nasıl çalışacağını demo görüşmesinde birlikte değerlendirebiliriz.",
   },
   {
     id: "diller",
     category: "genel",
     question: "Hangi dilleri destekliyor?",
     answer:
-      "Arayüz Türkçe ve İngilizce kullanılabilir. Dil, uygulamanın üst menüsünden değiştirilir ve kullanılan cihazda saklanır; aynı firmada farklı dillerde çalışan kullanıcılar bulunabilir.",
+      "Arayüz Türkçe ve İngilizce kullanılabilir. Dil üst menüden değiştirilir ve cihazda saklanır, yani aynı firmada farklı dillerde çalışan kullanıcılar olabilir.",
   },
 
-  /* ---------- Modüller ---------- */
+  /* Modüller */
   {
     id: "rapor-tipleri",
     category: "moduller",
     question: "Hangi saha raporlarını hazırlayabiliriz?",
     answer:
-      "6 rapor tipi bulunur: günlük saha raporu, İSG raporu, uygunsuzluk (NCR) raporu, yapım yöntemi (method statement), malzeme sunumu (submittal) ve kontrol listesi. Raporlar saha kaydına bağlanır, fotoğraf eklenebilir ve A4 belge düzeninde paylaşılabilir.",
+      "6 rapor tipi var: günlük saha raporu, İSG raporu, uygunsuzluk (NCR), yapım yöntemi (method statement), malzeme sunumu (submittal) ve kontrol listesi. Raporlara fotoğraf eklenebilir ve A4 belge olarak paylaşılabilir.",
   },
   {
     id: "para-birimleri",
     category: "moduller",
     question: "Hangi para birimleriyle çalışabiliriz?",
     answer:
-      "Sözleşme, hakediş, fatura ve keşif kalemlerinde TRY, USD, EUR, GBP ve CHF kullanılabilir. Her kayıt kendi para birimini taşır. Koordine kur çevrimi yapmaz; farklı birimlerdeki tutarlar birbirine eklenmez, toplamlar her para birimi için ayrı gösterilir.",
+      "Sözleşme, hakediş, fatura ve keşif kalemlerinde TRY, USD, EUR, GBP ve CHF kullanılabilir. Koordine kur çevrimi yapmaz. Bu yüzden farklı para birimlerindeki tutarlar toplanmaz, her para biriminin toplamı ayrı gösterilir.",
   },
   {
     id: "modul-secimi",
     category: "moduller",
     question: "Kullanmadığımız modülleri kapatabilir miyiz?",
     answer:
-      "Evet. Firma yöneticisi tadilat talepleri, sözleşmeler, hakedişler, faturalar, ekip sohbeti ve insan kaynakları gibi modülleri ayarlardan açıp kapatabilir. Kapatılan modül kullanıcıların menüsünde görünmez.",
+      "Evet. Firma yöneticisi tadilat talepleri, sözleşmeler, hakedişler, faturalar, ekip sohbeti ve insan kaynakları gibi modülleri ayarlardan kapatabilir. Kapatılan modül menüde görünmez.",
   },
   {
     id: "yapay-zeka-ne-yapar",
     category: "moduller",
     question: "Yapay zekâ asistanı ne yapar?",
     answer:
-      "Asistana sahalarınız, açılış takviminiz, iş planlarınız ve finans kayıtlarınız hakkında doğal dille soru sorabilirsiniz. Ayrıca saha, tadilat talebi, iş planı kalemi veya keşif kalemi eklemesini isteyebilirsiniz; asistan önce bir önizleme hazırlar, kayıt yalnızca siz onaylarsanız eklenir.",
+      "Asistana sahalarınız, açılış takviminiz, iş planlarınız ve finans kayıtlarınız hakkında soru sorabilirsiniz. Saha, tadilat talebi, iş planı kalemi ya da keşif kalemi eklemesini de isteyebilirsiniz. Asistan önce önizleme hazırlar, kayıt yalnızca siz onaylarsanız eklenir.",
   },
 
-  /* ---------- Veri ve güvenlik ---------- */
+  /* Veri ve güvenlik */
   {
     id: "yapay-zeka-veri",
     category: "veri-ve-guvenlik",
     question: "Yapay zekâ asistanı verilerimizi nasıl kullanıyor?",
     answer:
-      "Asistan, sorularınızı firmanızın Koordine'deki kayıtlarına göre yanıtlar. Kullanıcı yetkileri asistanda da geçerlidir; yetkiniz olmayan bir kaydı asistan üzerinden de ekleyemezsiniz. Kayıt ekleme her zaman önizleme ve onay adımından geçer.\n\nYapay zekâ hata yapabilir; önemli kararlarda verileri kontrol etmenizi öneririz. Firma yöneticisi asistanı ya da asistanla kayıt eklemeyi ayarlardan tamamen kapatabilir. Sorular, yanıtın üretilmesi için yapay zekâ hizmet sağlayıcısına iletilir; ayrıntılar KVKK Aydınlatma Metni'nde yer alır.",
+      "Asistan sorularınızı firmanızın Koordine'deki kayıtlarına göre cevaplar. Kullanıcı yetkileri asistanda da geçerlidir, yani yetkiniz olmayan bir kaydı asistanla da ekleyemezsiniz.\n\nYapay zekâ hata yapabilir, önemli kararlarda verileri kontrol etmenizi öneririz. Firma yöneticisi asistanı ya da asistanla kayıt eklemeyi ayarlardan kapatabilir. Sorular, cevabın üretilmesi için yapay zekâ hizmet sağlayıcısına iletilir. Ayrıntılar KVKK Aydınlatma Metni'nde yer alır.",
   },
   {
     id: "roller-yetkiler",
     category: "veri-ve-guvenlik",
     question: "Roller ve yetkiler nasıl çalışıyor?",
     answer:
-      "Kurucu, yönetici, bölge müdürü, saha sorumlusu, mimar, inşaat, makine ve elektrik mühendisi ile muhasebe gibi hazır roller bulunur; firmanıza özel roller de tanımlayabilirsiniz. Her modül için görüntüleme, ekleme, düzenleme ve silme yetkileri rol ve kullanıcı bazında ayrı ayrı ayarlanır.",
+      "Kurucu, yönetici, bölge müdürü, saha sorumlusu, mimar, inşaat, makine ve elektrik mühendisi ile muhasebe için hazır roller vardır. Firmanıza özel rol de tanımlayabilirsiniz. Her modülde görüntüleme, ekleme, düzenleme ve silme yetkisi rol ve kullanıcı bazında ayrı ayarlanır.",
   },
   {
     id: "tek-oturum",
     category: "veri-ve-guvenlik",
     question: "Aynı hesapla birden fazla cihazdan giriş yapılabilir mi?",
     answer:
-      "Hayır. Koordine'de her hesap için tek aktif oturum bulunur. Aynı hesapla başka bir cihaz veya tarayıcıdan giriş yapıldığında önceki oturum kapatılır ve kullanıcı bu konuda bilgilendirilir. Böylece paylaşılan hesap kullanımı ve unutulan açık oturumlar sınırlanır.",
+      "Hayır. Her hesap için tek aktif oturum vardır. Aynı hesapla başka bir cihazdan giriş yapılırsa önceki oturum kapanır ve kullanıcıya bilgi verilir. Böylece hesap paylaşımı ve açık unutulan oturumlar sınırlanır.",
   },
   {
     id: "veri-saklama",
     category: "veri-ve-guvenlik",
     question: "Verilerimiz nerede saklanıyor, hangi güvenlik önlemleri var?",
     answer:
-      "Platformla tüm iletişim şifreli bağlantı (HTTPS) üzerinden yapılır; erişim rol bazlı yetkilerle ve tek aktif oturum kuralıyla sınırlandırılır. Barındırma konumu, yedekleme, sertifikalar ve hizmet seviyesi taahhütleri hakkında ayrıntılı bilgiyi destek ekibimizden alabilirsiniz.",
+      "Platformla tüm iletişim şifreli bağlantı (HTTPS) üzerinden yapılır. Erişim rol bazlı yetkilerle ve tek aktif oturum kuralıyla sınırlanır. Barındırma konumu, yedekleme, sertifikalar ve hizmet seviyesi hakkında ayrıntılı bilgiyi destek ekibimizden alabilirsiniz.",
   },
 
-  /* ---------- Kurulum ve destek ---------- */
+  /* Kurulum ve destek */
   {
     id: "excel-aktarim",
     category: "kurulum-ve-destek",
     question: "Mevcut Excel dosyalarımızı aktarabilir miyiz?",
     answer:
-      "Evet. Keşif kalemleri (poz no, açıklama, miktar, birim, birim fiyat, para birimi) ve iş programı (iş tanımı, başlangıç ve bitiş tarihleri, sorumlu, durum, WBS ve aktivite kodu, öncül işler) Excel'den içe aktarılabilir. Sütunlar dosyanızdaki başlıklara göre eşleştirilir ve hatalı satırlar aktarımdan önce gösterilir. Puantaj ve İK raporları da Excel olarak dışa aktarılabilir. Diğer verilerinizin aktarımını demo görüşmesinde birlikte planlayabiliriz.",
+      "Evet. Keşif kalemleri (poz no, açıklama, miktar, birim, birim fiyat, para birimi) ve iş programı Excel'den içe aktarılabilir. Sütunlar dosyanızdaki başlıklara göre eşleştirilir, hatalı satırlar aktarımdan önce gösterilir. Diğer verilerin aktarımını demo görüşmesinde birlikte planlayabiliriz.",
   },
   {
     id: "nasil-baslanir",
     category: "kurulum-ve-destek",
     question: "Koordine'yi kullanmaya nasıl başlarız?",
     answer:
-      "Önce kısa bir demo görüşmesi yaparız. Ardından firma hesabınız açılır; kurucu kullanıcı ekip üyelerini ekler, rollerini ve yetkilerini belirler, kullanılacak modülleri seçer. Keşif ve iş programı gibi mevcut verilerinizi Excel'den aktararak başlayabilirsiniz. Kurulum gerektiren bir yazılım yoktur; platform tarayıcıdan çalışır.",
+      "Önce kısa bir demo görüşmesi yaparız. Ardından firma hesabınız açılır. Kurucu kullanıcı ekibi ekler, rolleri belirler ve kullanılacak modülleri seçer. Keşif ve iş programı gibi verilerinizi Excel'den aktararak başlayabilirsiniz.",
   },
   {
     id: "destek",
     category: "kurulum-ve-destek",
     question: "Destek nasıl alabiliriz?",
     answer:
-      "Sorularınız ve destek talepleriniz için destek@koordine.com.tr adresine yazabilirsiniz. Başlangıç sürecinde rol yapısı, modül seçimi ve veri aktarımında ekibinizle birlikte ilerliyoruz.",
+      "Sorularınız ve destek talepleriniz için destek@koordine.com.tr adresine yazabilirsiniz. Başlangıçta rol yapısı, modül seçimi ve veri aktarımında ekibinizle birlikte ilerliyoruz.",
   },
 
-  /* ---------- Fiyatlandırma ---------- */
+  /* Fiyatlandırma */
   {
     id: "fiyat",
     category: "fiyatlandirma",
     question: "Koordine'nin fiyatı nedir?",
     answer:
-      "Fiyatlandırma; firmanızın kullanıcı sayısına ve kullanmak istediğiniz modüllere göre teklif olarak hazırlanır. Sitede sabit bir fiyat listesi yayımlamıyoruz. Teklif için iletişim formundan ya da destek@koordine.com.tr adresinden bize ulaşabilirsiniz.",
+      "Fiyat, kullanıcı sayınıza ve kullanmak istediğiniz modüllere göre teklif olarak hazırlanır. Sitede sabit bir fiyat listesi yayımlamıyoruz. Teklif için iletişim formundan ya da destek@koordine.com.tr adresinden bize ulaşabilirsiniz.",
   },
   {
     id: "demo",
     category: "fiyatlandirma",
     question: "Satın almadan önce ürünü görebilir miyiz?",
     answer:
-      "Evet. Demo görüşmesinde Koordine'yi sizin proje ve saha akışınıza yakın bir senaryo üzerinden gösteriyor, sorularınızı yanıtlıyoruz. Demo talebini iletişim sayfasındaki formdan iletebilirsiniz.",
+      "Evet. Demo görüşmesinde Koordine'yi sizin işinize benzer bir örnek üzerinden gösteriyor ve sorularınızı cevaplıyoruz. Talebinizi iletişim sayfasındaki formdan iletebilirsiniz.",
   },
   {
     id: "teklif-icerigi",
     category: "fiyatlandirma",
     question: "Teklif hazırlamak için hangi bilgilere ihtiyacınız var?",
     answer:
-      "Yaklaşık kullanıcı sayısı, ilgilendiğiniz modüller, yönettiğiniz saha veya proje sayısı ve aktarmak istediğiniz mevcut veriler teklifin kapsamını belirlemeye yeterlidir. Bu bilgileri demo formunda paylaşırsanız görüşmeye hazırlıklı geliriz.",
+      "Yaklaşık kullanıcı sayısı, ilgilendiğiniz modüller, saha ya da proje sayınız ve aktarmak istediğiniz veriler yeterlidir. Bunları demo formunda paylaşırsanız görüşmeye hazırlıklı geliriz.",
   },
 ];
 

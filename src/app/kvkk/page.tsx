@@ -312,7 +312,6 @@ export default function KvkkPage() {
       lede="Kişisel verilerinizi hangi amaçlarla, hangi hukuki sebeplere dayanarak işlediğimizi ve KVKK kapsamındaki haklarınızı bu metinde açıklıyoruz."
       path="/kvkk"
       crumb="KVKK"
-      code="YS-01"
       description={description}
       sections={sections}
     />

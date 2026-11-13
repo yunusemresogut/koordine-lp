@@ -9,6 +9,5 @@ export default function Image() {
     eyebrow: "Sık sorulan sorular",
     title: "Koordine hakkında merak edilenler",
     subtitle: "Modüller, veri güvenliği, kurulum, destek ve fiyatlandırma.",
-    code: "SSS",
   });
 }

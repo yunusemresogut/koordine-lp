@@ -42,7 +42,7 @@ export function ReportDocumentMockup({
 
   if (frame) {
     return (
-      <AppFrame label={aria} crumbs={["Raporlar", "Önizleme"]} code="RPR" className={className} bodyClassName="bg-paper-2 p-[4%]">
+      <AppFrame label={aria} crumbs={["Raporlar", "Önizleme"]} className={className} bodyClassName="bg-paper-2 p-[4%]">
         {sheet}
       </AppFrame>
     );
@@ -387,7 +387,7 @@ function NcrBody() {
           Satış alanı zemininde, B-C aksları arasında seramik derzlerinde 3 mm&apos;ye varan kot farkı tespit edildi.
         </p>
         <p className="mt-[0.8cqw] text-[1.6cqw] text-ink-600">
-          <span className="font-semibold text-ink-800">Gereklilik:</span> Teknik şartname 4.3 — komşu karolar arası kot farkı en fazla 1 mm.
+          <span className="font-semibold text-ink-800">Gereklilik:</span> Teknik şartname 4.3. Komşu karolar arası kot farkı en fazla 1 mm.
         </p>
       </Section>
       <Section title="Düzeltici ve önleyici faaliyet">
@@ -407,7 +407,7 @@ function MethodBody() {
   return (
     <>
       <Section title="Kapsam ve referanslar">
-        <p className="text-[1.7cqw]">Asma tavan (alçıpan) uygulaması — satış alanı ve depo, +3,20 kotu.</p>
+        <p className="text-[1.7cqw]">Asma tavan (alçıpan) uygulaması. Satış alanı ve depo, +3,20 kotu.</p>
         <p className="mt-[0.5cqw] text-[1.55cqw] text-ink-600">Referans: Mimari uygulama projesi A-310, üretici montaj talimatı.</p>
       </Section>
       <Section title="Uygulama adımları">
@@ -473,7 +473,7 @@ function MaterialBody() {
       </Section>
       <Section title="Açıklamalar ve görüş">
         <p className="text-[1.65cqw]">
-          <span className="font-semibold text-ink-950">Notlu onay (B)</span> — Renk numunesi sahada onaylanacak.
+          <span className="font-semibold text-ink-950">Notlu onay (B):</span> Renk numunesi sahada onaylanacak.
         </p>
       </Section>
     </>

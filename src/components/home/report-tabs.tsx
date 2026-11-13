@@ -14,7 +14,7 @@ export function ReportTabs({
   panels,
 }: {
   label: string;
-  tabs: { code: string; label: string; summary: string }[];
+  tabs: { label: string; summary: string }[];
   panels: React.ReactNode[];
 }) {
   const [active, setActive] = useState(0);
@@ -57,7 +57,7 @@ export function ReportTabs({
           const selected = i === active;
           return (
             <button
-              key={t.code}
+              key={t.label}
               ref={(el) => {
                 refs.current[i] = el;
               }}
@@ -70,7 +70,7 @@ export function ReportTabs({
               onClick={() => setActive(i)}
               onKeyDown={(e) => onKeyDown(e, i)}
               className={cn(
-                "group relative grid grid-cols-[3rem_minmax(0,1fr)] gap-x-3 border-b border-line-dark py-4 pl-1 pr-3 text-left transition-colors duration-200 focus-visible:outline-offset-[-2px]",
+                "group relative block border-b border-line-dark py-4 pl-4 pr-3 text-left transition-colors duration-200 focus-visible:outline-offset-[-2px]",
                 selected ? "text-white" : "text-ink-300 hover:text-white"
               )}
             >
@@ -81,7 +81,6 @@ export function ReportTabs({
                   selected ? "bg-brand-400" : "bg-transparent"
                 )}
               />
-              <span className={cn("pl-3 font-mono text-[0.75rem] tracking-[0.08em]", selected ? "text-brand-300" : "text-ink-400")}>{t.code}</span>
               <span>
                 <span className="block text-[1.0625rem] font-medium">{t.label}</span>
                 <span className={cn("mt-1 block text-[0.875rem] leading-relaxed", selected ? "text-ink-300" : "hidden")}>{t.summary}</span>

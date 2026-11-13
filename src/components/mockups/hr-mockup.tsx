@@ -3,7 +3,7 @@ import { AppFrame } from "./app-frame";
 import { Avatar, Badge, td, th, type Tone } from "./primitives";
 
 /**
- * HrMockup — İnsan kaynakları: aylık puantaj tablosu (X çalıştı, Y yarım gün, İ yıllık izin, R raporlu,
+ * HrMockup - İnsan kaynakları: aylık puantaj tablosu (X çalıştı, Y yarım gün, İ yıllık izin, R raporlu,
  * D devamsız, H hafta tatili) ve personel belgeleri / sertifika bitiş uyarıları.
  *
  * Proplar:
@@ -28,7 +28,7 @@ export function HrMockup({
       ? "Koordine personel belgeleri örneği: sertifika türleri, bitiş tarihleri ve süre uyarıları."
       : "Koordine puantaj örneği: personel bazında günlük çalışma ve izin kodları; altta süresi yaklaşan belgeler.");
   return (
-    <AppFrame label={aria} crumbs={["İnsan Kaynakları", view === "certificates" ? "Belgeler" : "Puantaj"]} code="İK" bare={!frame} className={className}>
+    <AppFrame label={aria} crumbs={["İnsan Kaynakları", view === "certificates" ? "Belgeler" : "Puantaj"]} bare={!frame} className={className}>
       {view !== "certificates" && <Timesheet />}
       {view !== "timesheet" && <Certificates compact={view === "both"} />}
     </AppFrame>
@@ -134,7 +134,7 @@ function Certificates({ compact }: { compact?: boolean }) {
     { name: "Ali Rıza Tan", doc: "Yüksekte çalışma eğitimi", end: "24.11.2026", state: "Yakında bitiyor", tone: "warn" },
     { name: "Hasan Polat", doc: "Sağlık muayenesi (periyodik)", end: "06.12.2026", state: "Yakında bitiyor", tone: "warn" },
     { name: "Mert Çelik", doc: "İSG eğitimi", end: "14.05.2027", state: "Geçerli", tone: "ok" },
-    { name: "Emre Aydın", doc: "Mesleki yeterlilik belgesi (MYK)", end: "—", state: "Süresiz", tone: "neutral" },
+    { name: "Emre Aydın", doc: "Mesleki yeterlilik belgesi (MYK)", end: "-", state: "Süresiz", tone: "neutral" },
   ];
   const list = compact ? rows.slice(0, 3) : rows;
   return (
@@ -154,7 +154,8 @@ function Certificates({ compact }: { compact?: boolean }) {
             <div className="min-w-0">
               <div className="truncate text-[11px] font-medium text-ink-950">{r.doc}</div>
               <div className="truncate text-[10px] text-ink-500 @xl:hidden">
-                {r.name} · {r.end}
+                {r.name}
+                {r.end !== "-" && ` · ${r.end}`}
               </div>
             </div>
             <div className="hidden truncate text-[11px] text-ink-700 @xl:block">{r.name}</div>

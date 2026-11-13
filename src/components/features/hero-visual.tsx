@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { FeatureVisual, isDocumentVisual, isNarrowVisual } from "./feature-visual";
 
 /**
- * Hero altındaki büyük ürün görseli: ölçü çizgisi + şekil başlığı ile pafta üzerindeki bir çizim gibi.
+ * Hero altındaki büyük ürün görseli: ölçü çizgisi ve alt yazı ile pafta üzerindeki bir çizim gibi.
  * A4 belge ve dar paneller ortalanır, geniş tablolar konteyner genişliğini kullanır.
  */
 export function HeroVisual({ feature }: { feature: FeatureWithDetail }) {
@@ -24,13 +24,7 @@ export function HeroVisual({ feature }: { feature: FeatureWithDetail }) {
           </div>
           <FeatureVisual visual={key} frameDocument className={cn(doc && "shadow-float")} />
           <figcaption className="mt-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-t border-line pt-3 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-ink-500">
-            <span>
-              <span className="text-brand-700">Şekil {feature.code}.1</span>
-              <span aria-hidden className="px-2 text-ink-300">
-                —
-              </span>
-              <span className="normal-case tracking-[0.04em] text-ink-600">{caption}</span>
-            </span>
+            <span className="normal-case tracking-[0.04em] text-ink-600">{caption}</span>
             <span className="text-ink-400">Örnek veri</span>
           </figcaption>
         </figure>

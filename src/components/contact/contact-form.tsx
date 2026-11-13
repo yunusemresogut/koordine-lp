@@ -264,7 +264,7 @@ export function ContactForm({ supportEmail }: { supportEmail: string }) {
       <fieldset aria-describedby={errorIds("modules", true)}>
         <legend className="text-[0.9375rem] font-medium text-ink-950">İlgilendiğiniz modüller</legend>
         <p id={id("modules-hint")} className="mt-1 text-sm text-ink-500">
-          İsteğe bağlı; görüşmeyi bu modüllere göre hazırlarız.
+          İsteğe bağlı. Görüşmeyi bu modüllere göre hazırlarız.
         </p>
         <div className="mt-3 grid gap-px overflow-hidden rounded-sm border border-line bg-line sm:grid-cols-2">
           {features.map((f, i) => {
@@ -288,7 +288,6 @@ export function ContactForm({ supportEmail }: { supportEmail: string }) {
                   onChange={(e) => toggleModule(f.slug, e.target.checked)}
                   className="size-4 shrink-0 rounded-xs accent-brand-600"
                 />
-                <span className="font-mono text-[0.6875rem] tracking-[0.08em] text-ink-500">{f.code}</span>
                 <span>{f.name}</span>
               </label>
             );

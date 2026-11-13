@@ -2,15 +2,12 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import type { FeatureWithDetail } from "@/content/feature-details";
-import { pad2 } from "@/lib/utils";
-
-const COUNT: Record<number, string> = { 4: "Dört", 5: "Beş", 6: "Altı" };
 
 /**
- * "Ne yapar": numaralı spesifikasyon listesi. Her madde gerçek alan / durum adlarını
+ * "Ne yapar": yetenek listesi. Her madde gerçek alan / durum adlarını
  * mono etiketler olarak taşır (uygulamada ekranda gördüğünüz kelimeler).
  */
-export function CapabilitiesSection({ index, feature }: { index: string; feature: FeatureWithDetail }) {
+export function CapabilitiesSection({ feature }: { feature: FeatureWithDetail }) {
   const items = feature.detail.capabilities;
   return (
     <section aria-labelledby="ne-yapar" className="border-b border-line bg-white py-20 sm:py-28">
@@ -18,22 +15,21 @@ export function CapabilitiesSection({ index, feature }: { index: string; feature
         <Reveal>
           <SectionHeader
             id="ne-yapar"
-            index={index}
             eyebrow="Ne yapar"
             align="split"
-            title={`${COUNT[items.length] ?? items.length} yetenek, ekrandaki adlarıyla.`}
-            lede="Her maddenin altındaki etiketler, uygulamada o ekranda gördüğünüz alan ve durum adlarıdır."
+            title={`${feature.name} modülünde neler var?`}
+            lede="Maddelerin altındaki etiketler, uygulamada aynı ekranda gördüğünüz alan ve durum adlarıdır."
           />
         </Reveal>
 
-        <ol className="mt-14 grid border-t border-ink-950 lg:grid-cols-2 lg:gap-x-16">
-          {items.map((c, i) => (
-            <li key={c.title} className="grid grid-cols-[3rem_minmax(0,1fr)] gap-x-4 border-b border-line py-8 sm:grid-cols-[4rem_minmax(0,1fr)]">
-              <span aria-hidden className="font-mono text-[1.5rem] leading-none tracking-[-0.02em] text-ink-300 sm:text-[1.75rem]">
-                {pad2(i + 1)}
-              </span>
-              <div>
+        <ul className="mt-14 grid border-t border-ink-950 lg:grid-cols-2 lg:gap-x-16">
+          {items.map((c) => (
+            <li key={c.title} className="border-b border-line py-8 lg:odd:last:col-span-2 lg:odd:last:[&>div]:max-w-[calc(50%-2rem)]">
+              <div className="flex items-baseline gap-3">
+                <span aria-hidden className="size-2 shrink-0 translate-y-[-0.1em] bg-brand-600" />
                 <h3 className="text-balance text-[1.1875rem] font-semibold leading-snug tracking-[-0.01em] text-ink-950">{c.title}</h3>
+              </div>
+              <div className="pl-5">
                 <p className="mt-2.5 text-pretty text-[0.9875rem] leading-relaxed text-ink-600">{c.body}</p>
                 {c.terms.length > 0 && (
                   <ul aria-label="Uygulamadaki karşılıkları" className="mt-4 flex flex-wrap gap-1.5">
@@ -50,7 +46,7 @@ export function CapabilitiesSection({ index, feature }: { index: string; feature
               </div>
             </li>
           ))}
-        </ol>
+        </ul>
       </Container>
     </section>
   );

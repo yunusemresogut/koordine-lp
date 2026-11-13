@@ -31,7 +31,6 @@ export function TicketMockup({
     <AppFrame
       label={aria}
       crumbs={view === "approvals" ? ["Projeler", "Onaylar"] : ["Talepler", "Tadilat Talepleri"]}
-      code="TLP"
       bare={!frame}
       className={className}
     >

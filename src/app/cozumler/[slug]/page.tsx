@@ -11,7 +11,7 @@ import { RolesTable } from "@/components/solutions/roles-table";
 import { SheetAside } from "@/components/solutions/sheet-aside";
 import { WorkflowDiagram } from "@/components/solutions/workflow-diagram";
 import { ButtonLink } from "@/components/ui/button";
-import { solutionDetailBySlug, solutionsWithDetails } from "@/content/solution-details";
+import { solutionDetailBySlug } from "@/content/solution-details";
 import { solutions } from "@/content/solutions";
 import { pageMetadata, webPageSchema } from "@/lib/seo";
 
@@ -41,7 +41,6 @@ export default async function SolutionPage({ params }: Props) {
 
   const { detail } = solution;
   const path = `/cozumler/${solution.slug}`;
-  const order = solutionsWithDetails.findIndex((s) => s.slug === solution.slug);
 
   return (
     <>
@@ -53,10 +52,9 @@ export default async function SolutionPage({ params }: Props) {
           { name: solution.name, path },
         ]}
         eyebrow={solution.name}
-        index={`ÇZM-${detail.code}`}
         title={detail.hero.title}
         lede={detail.hero.lede}
-        aside={<SheetAside solution={solution} index={order} />}
+        aside={<SheetAside solution={solution} />}
       >
         <div className="flex flex-wrap gap-3">
           <ButtonLink href="/iletisim#demo" size="lg" arrow>
@@ -68,12 +66,12 @@ export default async function SolutionPage({ params }: Props) {
         </div>
       </PageHero>
 
-      <RealitiesSection index="01" name={solution.name} realities={detail.realities} />
-      <ApproachSection index="02" approach={detail.approach} />
-      <WorkflowDiagram index="03" code={detail.code} name={solution.name} workflow={detail.workflow} />
-      <RolesTable index="04" roles={detail.roles} />
-      <RelatedSection index="05" solution={solution} />
-      <FaqSection index="06" faqs={detail.faqs} />
+      <RealitiesSection realities={detail.realities} />
+      <ApproachSection approach={detail.approach} />
+      <WorkflowDiagram name={solution.name} workflow={detail.workflow} />
+      <RolesTable roles={detail.roles} />
+      <RelatedSection solution={solution} />
+      <FaqSection faqs={detail.faqs} />
 
       <CtaBand title={detail.cta.title} lede={detail.cta.lede} />
     </>

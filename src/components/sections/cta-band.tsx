@@ -8,8 +8,8 @@ import { site } from "@/lib/site";
  * Koyu mürekkep zemin + ince ızgara; footer ile görsel olarak birleşir.
  */
 export function CtaBand({
-  title = "Sahadaki düzeni ekranınızda görün.",
-  lede = "30 dakikalık bir görüşmede Koordine'yi kendi projelerinizin akışı üzerinden gösterelim. Kurulum ve veri aktarımında birlikte ilerleyelim.",
+  title = "Koordine'yi kendi projeleriniz üzerinden görün.",
+  lede = "30 dakikalık bir görüşmede ekranları birlikte inceleyelim ve sorularınızı cevaplayalım. Kurulum ve veri aktarımında da birlikte ilerleriz.",
 }: {
   title?: string;
   lede?: string;
@@ -20,9 +20,7 @@ export function CtaBand({
       <Container size="wide" className="relative">
         <div className="grid gap-10 border-b border-line-dark py-20 sm:py-24 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <Eyebrow tone="dark" index="→">
-              Demo
-            </Eyebrow>
+            <Eyebrow tone="dark">Demo</Eyebrow>
             <h2
               id="cta-title"
               className="mt-5 text-balance text-[2.25rem] font-semibold leading-[1.08] tracking-[-0.025em] text-white sm:text-[3rem]"

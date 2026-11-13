@@ -24,7 +24,7 @@ export const site = {
   language: "tr",
   tagline: "Saha, proje ve şantiye yönetimi tek platformda",
   description:
-    "Koordine; mühendislik, mimarlık ve taahhüt firmaları için saha takibi, keşif, iş programı, hakediş, saha raporları ve ekip yönetimini tek platformda birleştirir.",
+    "Koordine, mühendislik, mimarlık ve taahhüt firmaları için saha takibi, keşif, iş programı, hakediş, saha raporları ve ekip yönetimi platformudur.",
   email: {
     support: "destek@koordine.com.tr",
   },

@@ -22,14 +22,11 @@ export function ReportsSection() {
         <ul className="mt-5 divide-y divide-line-dark border-y border-line-dark">
           {r.contents.map((c) => (
             <li key={c} className="flex gap-3 py-3 text-[0.9375rem] leading-relaxed text-ink-200">
-              <span aria-hidden className="mt-[0.75em] h-px w-3 shrink-0 bg-brand-400" />
+              <span aria-hidden className="mt-[0.6em] size-1.5 shrink-0 bg-brand-400" />
               {c}
             </li>
           ))}
         </ul>
-        <p className="mt-5 text-[0.875rem] leading-relaxed text-ink-400">
-          Kaydedilen rapor, firmanızın adını taşıyan A4 belge olarak önizlenir ve PDF olarak alınır.
-        </p>
       </div>
     </div>
   ));
@@ -40,17 +37,17 @@ export function ReportsSection() {
       <Container size="wide" className="relative">
         <div className="grid gap-6 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
-            <Eyebrow index="04" tone="dark" className="mb-5">
+            <Eyebrow tone="dark" className="mb-5">
               Saha raporları
             </Eyebrow>
             <h2 id="reports-title" className="text-balance text-[2rem] font-semibold leading-[1.1] tracking-[-0.025em] text-white sm:text-[2.625rem]">
-              Sahadan gelen her rapor, aynı düzende bir A4 belge.
+              Saha raporları her seferinde aynı düzende hazırlanır.
             </h2>
           </div>
           <div className="flex flex-col justify-end gap-6 lg:col-span-5">
             <p className="text-pretty text-[1.0625rem] leading-relaxed text-ink-300 sm:text-lg">
-              Altı rapor tipi hazır şablonla gelir. Saha ekibi formu doldurur; çıktı her seferinde aynı antet, aynı sıra ve
-              aynı imza alanlarıyla oluşur. Geçmiş raporlar şantiye, şehir ve hazırlayana göre aranır.
+              Altı rapor tipi hazır şablonla gelir. Saha ekibi formu doldurur, rapor firmanızın adıyla A4 PDF olarak
+              çıkar. Eski raporları şantiyeye, şehre ve hazırlayana göre arayabilirsiniz.
             </p>
           </div>
         </div>
@@ -58,16 +55,15 @@ export function ReportsSection() {
         <div className="mt-14">
           <ReportTabs
             label="Rapor tipleri"
-            tabs={reportTabs.map((r) => ({ code: r.code, label: r.label, summary: r.summary }))}
+            tabs={reportTabs.map((r) => ({ label: r.label, summary: r.summary }))}
             panels={panels}
           />
         </div>
 
-        <div className="mt-14 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-line-dark pt-6">
+        <div className="mt-14 border-t border-line-dark pt-6">
           <ButtonLink href="/ozellikler/saha-raporlari" variant="inverse-outline" arrow>
             Saha raporlarını inceleyin
           </ButtonLink>
-          <Eyebrow tone="dark">GSR · İSG · NCR · YY · MS · KL</Eyebrow>
         </div>
       </Container>
     </section>

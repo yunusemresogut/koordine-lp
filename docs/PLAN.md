@@ -1,4 +1,4 @@
-# Koordine — Tanıtım Sitesi Planı
+# Koordine Tanıtım Sitesi Planı
 
 Alan adı: `https://koordine.com.tr` (ana domain). Uygulama ayrı bir alt alan adında çalışır
 (varsayılan `https://app.koordine.com.tr`, `NEXT_PUBLIC_APP_URL` ile değiştirilebilir).
@@ -24,14 +24,14 @@ tek yerde yöneten bir platformdur. Site, ürünün **gerçekten var olan** mod�
 Kural: Uydurma müşteri logosu, sahte yorum, sahte istatistik **yok**. Sayılar yalnızca ürün
 gerçeklerinden gelir (6 rapor tipi, 5 para birimi, 2 dil vb.).
 
-## 2. Görsel dil — "Teknik pafta"
+## 2. Görsel dil "Teknik pafta"
 
 Mühendislik/mimarlık çizim paftasından türetilen, sakin ve kurumsal bir dil.
 
 - **Renk:** Lacivert mürekkep `#040C26`, marka mavisi `#005FFD`, kâğıt `#F6F7F9`, kıl çizgi `#DCE0E7`.
   Mavi yalnızca vurgu ve birincil aksiyonda; geniş gradyan, neon, mor yok.
 - **Tipografi:** IBM Plex Sans (başlık + gövde), IBM Plex Mono (etiketler, kodlar, koordinatlar).
-- **Motifler:** İnce ızgara çizgileri, köşe kesim işaretleri, bölüm numaraları (`01 / Saha`),
+- **Motifler:** İnce ızgara çizgileri, köşe kesim işaretleri,
   ölçü çizgisi detayları, pafta antet kutusu. Süs için değil, yapıyı göstermek için.
 - **Ürün görselleri:** HTML/CSS ile çizilmiş gerçekçi arayüz parçaları (harita, hakediş tablosu,
   A4 rapor, iş programı). Gerçek ekran görüntüleri geldiğinde değiştirilebilir.
@@ -72,7 +72,7 @@ Mühendislik/mimarlık çizim paftasından türetilen, sakin ve kurumsal bir dil
 1. Temel: iskelet, tasarım belirteçleri, layout, header/footer, UI bileşenleri, SEO altyapısı, içerik kayıtları.
 2. Paralel: (A) ana sayfa + ürün görselleri, (C) kurumsal/yasal/iletişim sayfaları + form API,
    (D) çözüm sayfaları.
-3. (B) modül sayfaları — A'nın ürün görsellerini yeniden kullanır.
+3. (B) modül sayfaları A'nın ürün görsellerini yeniden kullanır.
 4. QA: build, lint, erişilebilirlik, SEO denetimi, mobil/masaüstü ekran görüntüleri.
 
 ## 7. Açık konular (firma tarafından doldurulacak)

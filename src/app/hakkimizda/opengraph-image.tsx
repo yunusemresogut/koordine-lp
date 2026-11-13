@@ -7,8 +7,7 @@ export const contentType = ogContentType;
 export default function Image() {
   return renderOg({
     eyebrow: "Hakkımızda",
-    title: "Sahada olan, kayıtta da olsun.",
-    subtitle: "Koordine'nin neden var olduğu ve ürünü yönlendiren ilkeler.",
-    code: "HKK",
+    title: "Koordine'yi sahada çalışan ekipler için geliştiriyoruz.",
+    subtitle: "Neden geliştirdik ve ürünü nasıl kuruyoruz.",
   });
 }

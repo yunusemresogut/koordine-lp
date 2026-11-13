@@ -221,9 +221,9 @@ function FeaturesPanel() {
   return (
     <div id="menu-features" className="grid grid-cols-12 gap-10 py-8">
       <div className="col-span-3 border-r border-line pr-8">
-        <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-500">Platform</p>
+        <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-500">Modüller</p>
         <p className="mt-3 text-lg font-semibold leading-snug tracking-[-0.01em] text-ink-950">
-          Sahadan finansa, tek kayıt üzerinde çalışan dokuz modül.
+          Saha, proje, finans ve ekip için dokuz modül.
         </p>
         <Link
           href="/ozellikler"
@@ -260,14 +260,13 @@ function SolutionsPanel() {
       <div className="col-span-3 border-r border-line pr-8">
         <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-500">Kimler için</p>
         <p className="mt-3 text-lg font-semibold leading-snug tracking-[-0.01em] text-ink-950">
-          Sahada iş yapan her disiplin için aynı düzen.
+          Mühendislik, mimarlık, taahhüt ve perakende ekipleri için.
         </p>
       </div>
       <ul className="col-span-9 grid grid-cols-2 gap-x-6 gap-y-1">
-        {mainNav.solutions.items.map((s, i) => (
+        {mainNav.solutions.items.map((s) => (
           <li key={s.href}>
-            <Link href={s.href} className="group flex gap-4 rounded-sm p-3 transition-colors hover:bg-paper">
-              <span className="mt-0.5 font-mono text-xs text-ink-400 group-hover:text-brand-700">{String(i + 1).padStart(2, "0")}</span>
+            <Link href={s.href} className="group block rounded-sm p-3 transition-colors hover:bg-paper">
               <span>
                 <span className="block text-[0.9375rem] font-medium text-ink-950">{s.label}</span>
                 <span className="mt-0.5 block text-[0.8125rem] leading-snug text-ink-500">{s.description}</span>

@@ -21,9 +21,8 @@ export default function FeaturesPage() {
       <PageHero
         crumbs={[{ name: "Özellikler", path }]}
         eyebrow="Özellikler"
-        index="00"
-        title="Sahanın her işi için bir modül, hepsi aynı kayıtta."
-        lede="Haritadaki pin, keşif kalemi, günlük rapor, hakediş dönemi, puantaj hücresi ve zimmet kaydı aynı sahaya bağlıdır. Dokuz modül bu kayıtları farklı ekiplerin işine göre gösterir."
+        title="Saha, proje ve ekip işleri için dokuz modül."
+        lede="Keşif, günlük rapor, hakediş, puantaj ve zimmet kayıtları hep bir sahaya bağlıdır. Her ekip kendi işiyle ilgili modülü kullanır, bilgiyi tekrar girmez."
         aside={<FeaturesSheetIndex />}
       >
         <div className="flex flex-wrap gap-3">
@@ -36,13 +35,13 @@ export default function FeaturesPage() {
         </div>
       </PageHero>
 
-      <FeatureGroupsSection index="01" />
-      <PlatformSection index="02" />
-      <ConnectionMatrixSection index="03" />
+      <FeatureGroupsSection />
+      <PlatformSection />
+      <ConnectionMatrixSection />
 
       <CtaBand
         title="Hangi modülle başlayacağınızı birlikte seçelim."
-        lede="30 dakikalık görüşmede bugünkü iş akışınızı dinleyelim; Koordine'yi ihtiyacınız olan modüllerle, kendi saha tiplerinize yakın bir örnek üzerinden gösterelim."
+        lede="30 dakikalık görüşmede bugünkü iş akışınızı dinleyelim ve Koordine'yi ihtiyacınız olan modüllerle gösterelim."
       />
     </>
   );

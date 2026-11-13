@@ -19,23 +19,23 @@ export const metadata: Metadata = pageMetadata({ title, description, path });
 const adaptations = [
   {
     term: "Saha türleri",
-    body: "Mağaza, ofis, AVM, konut, otel, endüstriyel gibi saha türlerini firma ayarlarından ekler, yeniden adlandırırsınız (ör. Depo, Santral).",
+    body: "Mağaza, ofis, AVM, konut gibi saha türlerini ekler ya da yeniden adlandırırsınız (ör. Depo, Santral).",
   },
   {
     term: "Roller",
-    body: "Hazır rollerin adlarını değiştirir, özel rol tanımlarsınız. Her modülde görüntüleme, ekleme, düzenleme, silme yetkisi rol bazında ayarlanır.",
+    body: "Hazır rollerin adlarını değiştirir, özel rol tanımlarsınız. Her modüldeki yetkiler role göre ayarlanır.",
   },
   {
     term: "Kod önekleri",
-    body: "Tadilat talepleri ve sözleşmeler sıralı kod alır (TT-0001, SZ-0001); önekleri kendi düzeninize göre değiştirirsiniz.",
+    body: "Tadilat talepleri ve sözleşmeler TT-0001, SZ-0001 gibi sıralı kod alır. Önekleri değiştirebilirsiniz.",
   },
   {
     term: "Para birimi",
-    body: "Varsayılan para birimini seçersiniz; keşif, sözleşme, hakediş ve faturada TRY, USD, EUR, GBP ve CHF kullanılabilir.",
+    body: "Keşif, sözleşme, hakediş ve faturada TRY, USD, EUR, GBP ve CHF kullanılabilir.",
   },
   {
     term: "Kontrol listeleri",
-    body: "Hazır madde kütüphanesinden seçer ya da kendi maddelerinizi yazarsınız; her disiplin için ayrı gruplar tutulur.",
+    body: "Hazır maddelerden seçer ya da kendi maddelerinizi yazarsınız.",
   },
 ];
 
@@ -47,21 +47,18 @@ export default function SolutionsPage() {
       <PageHero
         crumbs={[{ name: "Çözümler", path }]}
         eyebrow="Çözümler"
-        index="00"
-        title="Aynı platform, dört farklı saha gerçeği."
-        lede="Taahhüt firmasının günlük raporu, mimarlık ofisinin malzeme onayı, MEP ekibinin test kaydı ve perakende yatırımcısının açılış takvimi. Koordine'nin modülleri her birine farklı bir sırayla karşılık verir."
+        title="Sektörünüze göre Koordine"
+        lede="Platform aynı, kullanım şekli sektöre göre değişir. Taahhüt firması günlük rapordan, mimarlık ofisi malzeme onayından, mağaza yatırımı yapan ekip açılış takviminden başlar."
         aside={<SolutionsSheetIndex />}
       />
 
-      <SolutionsIndexList index="01" />
+      <SolutionsIndexList />
 
       <section aria-labelledby="uyarlama" className="border-t border-line bg-paper py-20 sm:py-28">
         <Container size="wide">
           <Reveal className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
-              <Eyebrow index="02" className="mb-5">
-                Firmanıza göre
-              </Eyebrow>
+              <Eyebrow className="mb-5">Firmanıza göre</Eyebrow>
               <h2
                 id="uyarlama"
                 className="text-balance text-[2rem] font-semibold leading-[1.1] tracking-[-0.025em] text-ink-950 sm:text-[2.625rem]"
@@ -69,7 +66,7 @@ export default function SolutionsPage() {
                 Sektörünüz listede yok mu?
               </h2>
               <p className="mt-5 max-w-md text-pretty text-[1.0625rem] leading-relaxed text-ink-600">
-                Koordine sahası, projesi ve ekibi olan her firma için kurulabilir. Aşağıdaki ayarlar, platformu kendi iş düzeninize uydurmanın yoludur.
+                Sahası, projesi ve ekibi olan her firma Koordine&apos;yi kullanabilir. Aşağıdaki ayarlarla platformu kendi çalışma düzeninize göre kurarsınız.
               </p>
             </div>
             <dl className="border-t border-ink-950 lg:col-span-7">
@@ -85,8 +82,8 @@ export default function SolutionsPage() {
       </section>
 
       <CtaBand
-        title="Sizin sektörünüzün akışını birlikte çıkaralım."
-        lede="30 dakikalık görüşmede projelerinizin nasıl ilerlediğini dinleyelim, Koordine'yi bu akış üzerinden gösterelim."
+        title="Kendi iş akışınızı birlikte konuşalım."
+        lede="30 dakikalık görüşmede projelerinizin nasıl ilerlediğini dinleyip Koordine'yi buna göre gösterelim."
       />
     </>
   );

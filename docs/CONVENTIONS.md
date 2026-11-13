@@ -18,7 +18,7 @@ Bu sürüm eğitim verilerinizdeki Next.js'ten farklı olabilir. Bir API'yi kull
 | --- | --- |
 | `src/lib/site.ts` | Site URL, uygulama URL, destek e-postası, firma bilgileri (`site`, `appLinks`, `absoluteUrl`) |
 | `src/lib/seo.ts` | `pageMetadata`, JSON-LD üreticileri (`breadcrumbSchema`, `faqSchema`, `webPageSchema`, `softwareApplicationSchema`) |
-| `src/lib/og.tsx` | `renderOg({ eyebrow, title, subtitle, code })` → segment bazlı `opengraph-image.tsx` için |
+| `src/lib/og.tsx` | `renderOg({ eyebrow, title, subtitle })` → segment bazlı `opengraph-image.tsx` için |
 | `src/components/seo/json-ld.tsx` | `<JsonLd data={...} />` |
 | `src/components/ui/container.tsx` | `<Container size="default|narrow|wide">` |
 | `src/components/ui/button.tsx` | `ButtonLink`, `Button`, `TextLink`, `buttonClasses`, `Arrow` |
@@ -33,7 +33,7 @@ Bu sürüm eğitim verilerinizdeki Next.js'ten farklı olabilir. Bir API'yi kull
 Ortak dosyalarda değişiklik gerekiyorsa **kendiniz değiştirmeyin**; raporunuzda önerin.
 Kendi alanınıza ait yeni dosyalar oluşturabilirsiniz.
 
-## Görsel dil — "Teknik pafta"
+## Görsel dil "Teknik pafta"
 
 - **Renk belirteçleri** (`globals.css` @theme): `ink-50…950` (lacivert mürekkep), `brand-50…950`
   (marka mavisi, 600 = #005FFD), `paper`, `paper-2`, `line`, `line-strong`, `line-dark`, `ok`, `warn`, `risk`.
@@ -45,7 +45,9 @@ Kendi alanınıza ait yeni dosyalar oluşturabilirsiniz.
 - **Köşeler:** Keskin. `rounded-sm` (4px) üst sınır; kartlarda `rounded-md` (6px). `rounded-2xl/3xl/full` yok
   (yalnızca durum noktaları ve avatarlar `rounded-full` olabilir).
 - **Çizgiler:** 1px `border-line`. Gölgeler çok hafif (`shadow-panel`, `shadow-float`).
-- **Bölüm numaralandırma:** `Eyebrow index="01"`. Sayfa içinde sıralı.
+- **Numara ve kod yok:** Bölümlere, modüllere, maddelere "00/01/02", "S.01", "M-03", "P.02", "R.01" gibi
+  numaralar ve "SAH/KSF/HKD/ÇZM-…/Pafta 00" gibi süs kısaltmaları **verilmez**. `Eyebrow` yalnızca kısa bir etiket alır.
+  Mockup'lardaki gerçek uygulama verileri (TT-0042, poz no, demirbaş no, tarih, tutar) kalabilir.
 - **Ritim:** Bölümler `py-20 sm:py-28`. Bölümler arasında `border-t border-line` ile ayrım. Zemin değişimi:
   `bg-paper` (varsayılan) ↔ `bg-white` ↔ `bg-ink-950` (en fazla 1-2 koyu bölüm/sayfa + CtaBand).
 
@@ -70,6 +72,19 @@ Gerçek ekran görüntüsü yok; arayüz parçaları HTML/CSS ile çizilir. Kura
 
 ## Metin dili
 
+> Kullanıcı geri bildirimi (2026-11): Site "yapay zekâ yazmış gibi" görünmemeli. Aşağıdaki kurallar bağlayıcıdır.
+
+- **Uzun çizgi (—) ve iki tire (--) kullanılmaz.** Yerine nokta, virgül, iki nokta ya da "ve" kullanın;
+  gerekirse cümleyi bölün. En dash (–) yalnızca sayı aralığında (09:00–18:00) kalabilir.
+- **İnsan gibi yazın.** Bir satış danışmanının ya da proje müdürünün müşteriye anlatacağı gibi; doğal, düz cümleler.
+  Kaçının: "X'ten Y'ye, her şey tek yerde" kalıpları, art arda üçlü sıralamalar, her cümlede iki noktalı
+  vurgu, "kendiliğinden", "ait olduğu yere bağlı kalır", "tek kayıt", "birbirinden habersiz" gibi
+  edebi/betimleyici süsler, kişileştirme ("asistan sınırını açıkça söyler"), "Bugün / Koordine ile" tipi
+  abartılı karşıtlıklar, "·" ile dizilmiş anahtar kelime listeleri.
+- **Az ve öz.** Her bölüm tek bir şey söylesin. Her detayı sıralamayın; okuyucunun karar vermesine yarayan
+  2–4 madde yeterli. Aynı bilgiyi sayfa içinde tekrar etmeyin. Teknik dip notları, alan adı listeleri,
+  "şunu yapmaz, bunu yapmaz" açıklamaları gerekmedikçe çıkarın.
+
 - Türkçe, kurumsal ama sade; "siz" hitabı. Kısa cümleler. Sektör terimleri doğru:
   hakediş, keşif, metraj, poz no, iş programı, puantaj, zimmet, İSG, NCR (uygunsuzluk), yapım yöntemi
   (method statement), malzeme sunumu (submittal), taşeron, şantiye şefi.
@@ -91,6 +106,6 @@ Gerçek ekran görüntüsü yok; arayüz parçaları HTML/CSS ile çizilir. Kura
 
 - `npx tsc --noEmit` ve `npx eslint <dosyalarınız>` temiz olmalı.
 - **`next build` veya `next dev` çalıştırmayın** (paralel çalışan diğer agent'larla çakışır).
-  Paylaşılan dev sunucusu: `http://localhost:3200` (çalışıyor, değişiklikleri anında yansıtır).
+  Paylaşılan dev sunucusu: `http://localhost:3000` (çalışıyor, değişiklikleri anında yansıtır).
 - Ekran görüntüsü: `node /private/tmp/claude-501/-Users-yunusemresogut-Documents-koordine-lp/c43e3292-7b19-4f2b-ba2f-6a199cfbd262/scratchpad/shot/shot.mjs <url> <çıktı.png> [genişlik=1440] [tamSayfa=1]`
   Çıktıları scratchpad'e yazın. Masaüstü (1440) ve mobil (390) kontrol edin; görüntüyü Read ile açıp bakın.

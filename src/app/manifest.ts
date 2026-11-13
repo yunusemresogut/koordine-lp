@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${site.name} — Saha, Proje ve Şantiye Yönetimi`,
+    name: `${site.name} | Saha, Proje ve Şantiye Yönetimi`,
     short_name: site.name,
     description: site.description,
     lang: "tr",

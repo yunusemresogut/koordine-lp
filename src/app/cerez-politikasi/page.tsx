@@ -175,7 +175,6 @@ export default function CookiePolicyPage() {
       lede="Sitemiz reklam veya takip çerezi kullanmaz. Hangi teknikleri, hangi amaçla kullandığımızı aşağıda tablo hâlinde bulabilirsiniz."
       path="/cerez-politikasi"
       crumb="Çerez Politikası"
-      code="YS-03"
       description={description}
       sections={sections}
     />

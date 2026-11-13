@@ -7,7 +7,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Eyebrow, SectionHeader } from "@/components/ui/section-header";
 import { featureDetailBySlug, featureGroups, featuresWithDetails, type FeatureWithDetail } from "@/content/feature-details";
 import type { FeatureSlug } from "@/content/features";
-import { cn, pad2 } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { FeatureVisual, isDocumentVisual } from "./feature-visual";
 
 /* ------------------------------------------------------------------ Hero yanı: grup dizini */
@@ -16,21 +16,20 @@ export function FeaturesSheetIndex() {
   return (
     <nav aria-label="Modül grupları" className="crop-marks border border-line-strong bg-white text-ink-400 shadow-panel">
       <div className="flex items-center justify-between border-b border-line-strong px-4 py-3 font-mono text-[0.6875rem] uppercase tracking-[0.14em]">
-        <span className="text-ink-500">Pafta dizini</span>
-        <span className="text-brand-700">M / {pad2(featuresWithDetails.length)}</span>
+        <span className="text-ink-500">Modül grupları</span>
+        <span className="text-brand-700">{featuresWithDetails.length} modül</span>
       </div>
       <ol className="divide-y divide-line">
         {featureGroups.map((g) => (
           <li key={g.id}>
             <a
               href={`#${g.id}`}
-              className="group/btn grid grid-cols-[1.75rem_minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 transition-colors duration-200 hover:bg-paper"
+              className="group/btn grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-3 transition-colors duration-200 hover:bg-paper"
             >
-              <span className="font-mono text-[0.75rem] text-brand-700">{g.code}</span>
               <span className="min-w-0">
                 <span className="block truncate text-[0.9375rem] font-medium text-ink-900">{g.name}</span>
-                <span className="block truncate font-mono text-[0.6875rem] tracking-[0.08em] text-ink-500">
-                  {g.slugs.map((s) => featureDetailBySlug(s)?.code).join(" · ")}
+                <span className="block text-[0.8125rem] leading-snug text-ink-500">
+                  {g.slugs.map((s) => featureDetailBySlug(s)?.name).join(", ")}
                 </span>
               </span>
               <Arrow className="rotate-90 text-ink-400 group-hover/btn:text-brand-700" />
@@ -39,7 +38,7 @@ export function FeaturesSheetIndex() {
         ))}
       </ol>
       <div className="border-t border-line-strong bg-paper px-4 py-2.5 font-mono text-[0.625rem] uppercase tracking-[0.14em] text-ink-500">
-        9 modül · 6 rapor tipi · 5 para birimi · TR / EN
+        6 rapor tipi, 5 para birimi, Türkçe ve İngilizce
       </div>
     </nav>
   );
@@ -47,7 +46,7 @@ export function FeaturesSheetIndex() {
 
 /* ------------------------------------------------------------------ Gruplu modül dizini */
 
-export function FeatureGroupsSection({ index }: { index: string }) {
+export function FeatureGroupsSection() {
   let n = 0;
   return (
     <section aria-labelledby="moduller" className="border-b border-line bg-white py-20 sm:py-28">
@@ -55,23 +54,19 @@ export function FeatureGroupsSection({ index }: { index: string }) {
         <Reveal>
           <SectionHeader
             id="moduller"
-            index={index}
             eyebrow="Modüller"
             align="split"
             title="Beş çalışma alanında dokuz modül."
-            lede="Modüller işin türüne göre gruplanmıştır. İstediğinizle başlarsınız; kullanmadığınız bazı modülleri firma ayarlarından kapatabilirsiniz."
+            lede="Modüller işin türüne göre gruplanmıştır. İstediğiniz modülle başlayabilir, kullanmadıklarınızın bir kısmını firma ayarlarından kapatabilirsiniz."
           />
         </Reveal>
 
         <div className="mt-16 space-y-20">
           {featureGroups.map((g) => (
             <div key={g.id} id={g.id} className="scroll-mt-24">
-              <Reveal className="grid gap-4 border-t-2 border-ink-950 pt-5 sm:grid-cols-[4rem_minmax(0,1fr)] lg:grid-cols-[4rem_minmax(0,18rem)_minmax(0,1fr)] lg:gap-8">
-                <span aria-hidden className="font-mono text-[2.5rem] font-medium leading-none text-ink-200">
-                  {g.code}
-                </span>
+              <Reveal className="grid gap-3 border-t-2 border-ink-950 pt-5 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-8">
                 <h3 className="text-[1.5rem] font-semibold leading-tight tracking-[-0.015em] text-ink-950">{g.name}</h3>
-                <p className="max-w-xl text-pretty text-[1rem] leading-relaxed text-ink-600 sm:col-start-2 lg:col-start-auto">{g.summary}</p>
+                <p className="max-w-xl text-pretty text-[1rem] leading-relaxed text-ink-600">{g.summary}</p>
               </Reveal>
               <ul className="mt-8 divide-y divide-line border-y border-line">
                 {g.slugs.map((slug) => {
@@ -97,12 +92,7 @@ function ModuleRow({ feature, flip }: { feature: FeatureWithDetail; flip: boolea
     <li>
       <Reveal className="grid items-center gap-8 py-10 lg:grid-cols-12 lg:gap-14">
         <div className={cn("lg:col-span-6", flip && "lg:order-2")}>
-          <p className="flex items-center gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-500">
-            <span className="text-brand-700">M-{pad2(feature.index + 1)}</span>
-            <span aria-hidden className="h-px w-6 bg-line-strong" />
-            <span>{feature.code}</span>
-          </p>
-          <h4 className="mt-4 flex items-center gap-3 text-[1.75rem] font-semibold leading-tight tracking-[-0.02em] text-ink-950">
+          <h4 className="flex items-center gap-3 text-[1.75rem] font-semibold leading-tight tracking-[-0.02em] text-ink-950">
             <FeatureIcon name={feature.icon} className="size-6 shrink-0 text-ink-500" />
             <Link href={`/ozellikler/${feature.slug}`} className="transition-colors duration-200 hover:text-brand-700">
               {feature.name}
@@ -138,9 +128,6 @@ function ModuleRow({ feature, flip }: { feature: FeatureWithDetail; flip: boolea
             >
               <FeatureVisual visual={key} className={cn(doc && "shadow-panel")} />
             </div>
-            <span className="absolute bottom-3 right-3 rounded-xs border border-line-strong bg-white px-1.5 py-0.5 font-mono text-[0.625rem] tracking-[0.12em] text-ink-600">
-              ŞEKİL {feature.code}.1
-            </span>
           </div>
         </Link>
       </Reveal>
@@ -154,73 +141,61 @@ const PLATFORM: { figure: string; title: string; body: string; href?: string }[]
   {
     figure: "TR / EN",
     title: "İki arayüz dili",
-    body: "Dil üst menüden değiştirilir ve cihazda saklanır; aynı firmada farklı dillerde çalışan kullanıcılar olabilir.",
+    body: "Her kullanıcı dili üst menüden seçer. Aynı firmada Türkçe ve İngilizce çalışan kullanıcılar olabilir.",
   },
   {
-    figure: "05",
+    figure: "5",
     title: "Para birimi",
-    body: "TRY, USD, EUR, GBP ve CHF. Her kayıt kendi birimini taşır; kur çevrimi yapılmaz, toplamlar birim başına ayrıdır.",
+    body: "TRY, USD, EUR, GBP ve CHF. Kur çevrimi yapılmaz, toplamlar her para birimi için ayrı tutulur.",
     href: "/ozellikler/hakedis-ve-finans",
   },
   {
-    figure: "09",
-    title: "Hazır rol, ayrıca özel roller",
-    body: "15 bölümün her birinde görüntüle, ekle, düzenle, sil yetkisi rol ve kullanıcı bazında ayrı açılır.",
+    figure: "9",
+    title: "Hazır rol ve özel roller",
+    body: "Her bölümde görüntüleme, ekleme, düzenleme ve silme yetkisi rol ve kullanıcı bazında ayrı açılır.",
     href: "/ozellikler/ekip-ve-iletisim",
-  },
-  {
-    figure: "01",
-    title: "Aktif oturum",
-    body: "Aynı hesapla başka bir yerden giriş yapıldığında önceki oturum kapanır ve kullanıcıya nedeni söylenir.",
   },
   {
     figure: "17",
     title: "Bildirim türü",
-    body: "Açılış, sözleşme, hakediş, fatura, talep, belge, izin, duyuru ve araç bildirimleri; uygulama içinde ve masaüstünde.",
+    body: "Açılış, sözleşme, hakediş, fatura, talep, izin, belge ve araç bildirimleri; uygulama içinde ve masaüstünde.",
     href: "/ozellikler/ekip-ve-iletisim",
   },
   {
-    figure: ".xlsx · .xer",
-    title: "Excel ve P6",
-    body: "Keşif ve iş planı Excel'den, iş planı ayrıca Primavera P6 .xer dosyasından içe aktarılır. Puantaj ve İK raporu Excel olarak alınır.",
+    figure: "Excel, P6",
+    title: "İçe ve dışa aktarım",
+    body: "Keşif ve iş planı Excel'den, iş planı ayrıca Primavera P6 dosyasından alınır. Puantaj Excel olarak indirilir.",
     href: "/ozellikler/kesif-ve-is-programi",
   },
   {
     figure: "A4",
     title: "PDF çıktı",
-    body: "Altı rapor tipi aynı antet, bilgi ızgarası, fotoğraf ve imza düzeninde A4 belge olarak önizlenir ve PDF olarak alınır.",
+    body: "Altı rapor tipi aynı düzende A4 belge olarak önizlenir ve PDF olarak indirilir.",
     href: "/ozellikler/saha-raporlari",
-  },
-  {
-    figure: "ON / OFF",
-    title: "Modül seçimi",
-    body: "Tadilat talepleri, sözleşmeler, hakediş, faturalar, ekip sohbeti, İK ve asistan firma ayarlarından kapatılabilir; kayıtlar silinmez.",
   },
 ];
 
-export function PlatformSection({ index }: { index: string }) {
+export function PlatformSection() {
   return (
     <section aria-labelledby="platform" className="border-b border-line bg-paper py-20 sm:py-28">
       <Container size="wide">
         <Reveal>
           <SectionHeader
             id="platform"
-            index={index}
             eyebrow="Platform genelinde"
             align="split"
-            title="Her modülde aynı kalan kurallar."
-            lede="Dil, para birimi, yetki, oturum, bildirim ve dosya biçimleri modülden modüle değişmez. Sayılar ürünün kendisinden gelir."
+            title="Her modülde geçerli olan ayarlar."
+            lede="Dil, para birimi, yetki, bildirim ve dosya biçimleri bütün modüllerde aynı şekilde çalışır."
           />
         </Reveal>
-        <Reveal className="mt-14 grid border-l border-t border-line-strong bg-white sm:grid-cols-2 lg:grid-cols-4">
-          {PLATFORM.map((p, i) => {
+        <Reveal className="mt-14 grid border-l border-t border-line-strong bg-white sm:grid-cols-2 lg:grid-cols-3">
+          {PLATFORM.map((p) => {
             const body = (
               <>
-                <span className="flex h-4 items-center justify-between gap-3 font-mono text-[0.625rem] uppercase tracking-[0.14em] text-ink-400">
-                  <span>P.{pad2(i + 1)}</span>
-                  {p.href && <Arrow className="text-ink-300 group-hover/btn:text-brand-700" />}
+                <span className="flex items-start justify-between gap-3">
+                  <span className="block font-mono text-[2rem] font-medium leading-none tracking-[-0.02em] text-ink-950">{p.figure}</span>
+                  {p.href && <Arrow className="mt-1 text-ink-300 group-hover/btn:text-brand-700" />}
                 </span>
-                <span className="mt-5 block font-mono text-[2rem] font-medium leading-none tracking-[-0.02em] text-ink-950">{p.figure}</span>
                 <span className="mt-4 block text-[1.0625rem] font-semibold text-ink-950">{p.title}</span>
                 <span className="mt-2 block text-pretty text-[0.9375rem] leading-relaxed text-ink-600">{p.body}</span>
               </>
@@ -259,7 +234,7 @@ function buildEdges() {
   return edges;
 }
 
-export function ConnectionMatrixSection({ index }: { index: string }) {
+export function ConnectionMatrixSection() {
   const edges = buildEdges();
   const list = featuresWithDetails;
   const has = (a: FeatureSlug, b: FeatureSlug) => edges.get(`${a}>${b}`);
@@ -271,12 +246,11 @@ export function ConnectionMatrixSection({ index }: { index: string }) {
         <Reveal>
           <SectionHeader
             id="matris"
-            index={index}
             eyebrow="Bağlantı matrisi"
             tone="dark"
             align="split"
             title="Veri bir modülde girilir, diğerlerinde kullanılır."
-            lede="Satırdaki modülün kaydı, sütundaki modüle akar. Her işaret, modül sayfalarında ayrıntısıyla anlatılan gerçek bir bağlantıdır."
+            lede="Satırdaki modülde girilen bilgi, sütundaki modülde kullanılır. Her bağlantının ayrıntısı ilgili modül sayfasında anlatılır."
           />
         </Reveal>
         <Reveal className="mt-14 border border-line-dark bg-ink-950/70">
@@ -293,10 +267,9 @@ export function ConnectionMatrixSection({ index }: { index: string }) {
                     Kaynak
                   </th>
                   {list.map((f) => (
-                    <th key={f.slug} scope="col" className="pb-3 text-center font-mono text-[0.6875rem] font-medium tracking-[0.06em] text-ink-300">
-                      <abbr title={f.name} className="no-underline">
-                        {f.code}
-                      </abbr>
+                    <th key={f.slug} scope="col" title={f.name} className="pb-3 text-center font-medium text-ink-300">
+                      <FeatureIcon name={f.icon} className="mx-auto size-4" />
+                      <span className="sr-only">{f.name}</span>
                     </th>
                   ))}
                 </tr>
@@ -306,7 +279,7 @@ export function ConnectionMatrixSection({ index }: { index: string }) {
                   <tr key={row.slug} className="border-t border-line-dark">
                     <th scope="row" className="py-2.5 pr-4 text-left font-normal">
                       <Link href={`/ozellikler/${row.slug}`} className="group/btn flex items-baseline gap-3 text-[0.875rem] text-ink-200 hover:text-white">
-                        <span className="w-8 font-mono text-[0.6875rem] text-brand-300">{row.code}</span>
+                        <FeatureIcon name={row.icon} className="size-3.5 shrink-0 translate-y-0.5 text-brand-300" />
                         <span className="truncate">{row.name}</span>
                       </Link>
                     </th>
@@ -336,7 +309,7 @@ export function ConnectionMatrixSection({ index }: { index: string }) {
           </div>
         </Reveal>
         <Eyebrow tone="dark" className="mt-6">
-          Ayrıntı için her modül sayfasındaki 04 · Bağlantılar bölümüne bakın
+          Ayrıntısı her modül sayfasının Bağlantılar bölümünde
         </Eyebrow>
       </Container>
     </section>

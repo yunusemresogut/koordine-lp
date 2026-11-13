@@ -21,7 +21,6 @@ export function LegalPage({
   lede,
   path,
   crumb,
-  code,
   description,
   intro,
   sections,
@@ -30,8 +29,6 @@ export function LegalPage({
   lede: string;
   path: string;
   crumb: string;
-  /** Pafta kodu, ör. "YS-01" */
-  code: string;
   description: string;
   intro?: React.ReactNode;
   sections: LegalSection[];
@@ -41,7 +38,7 @@ export function LegalPage({
   return (
     <>
       <JsonLd data={webPageSchema({ name: title, description, path })} />
-      <PageHero crumbs={[{ name: crumb, path }]} eyebrow={`Yasal · ${code}`} title={title} lede={lede}>
+      <PageHero crumbs={[{ name: crumb, path }]} eyebrow="Yasal metin" title={title} lede={lede}>
         <p className="font-mono text-[0.75rem] uppercase tracking-[0.14em] text-ink-500">
           Son güncelleme: <time dateTime={LEGAL_UPDATED.iso} className="text-ink-950">{LEGAL_UPDATED.display}</time>
         </p>
@@ -76,7 +73,7 @@ export function LegalPage({
                   <section key={s.id} id={s.id} aria-labelledby={`${s.id}-h`} className="scroll-mt-28">
                     <h2 id={`${s.id}-h`}>
                       <span className="mr-3 font-mono text-[0.8125rem] font-medium tabular-nums text-brand-700">
-                        {String(i + 1).padStart(2, "0")}
+                        {i + 1}.
                       </span>
                       {s.title}
                     </h2>

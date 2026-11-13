@@ -33,11 +33,11 @@ export function LegalToc({ items }: { items: { id: string; title: string }[] }) 
                 href={`#${item.id}`}
                 aria-current={isActive ? "location" : undefined}
                 className={cn(
-                  "-ml-px grid grid-cols-[1.75rem_1fr] border-l py-1.5 pl-4 text-[0.875rem] leading-snug transition-colors duration-150",
+                  "-ml-px grid grid-cols-[1.5rem_1fr] border-l py-1.5 pl-4 text-[0.875rem] leading-snug transition-colors duration-150",
                   isActive ? "border-brand-600 text-ink-950" : "border-transparent text-ink-600 hover:border-ink-400 hover:text-ink-950"
                 )}
               >
-                <span className="font-mono text-[0.6875rem] leading-[1.6] tabular-nums text-ink-400">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-mono text-[0.6875rem] leading-[1.6] tabular-nums text-ink-400">{i + 1}.</span>
                 <span>{item.title}</span>
               </a>
             </li>

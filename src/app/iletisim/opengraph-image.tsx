@@ -9,6 +9,5 @@ export default function Image() {
     eyebrow: "İletişim",
     title: "Koordine'yi kendi projelerinizle görün.",
     subtitle: "Demo talep edin ya da destek@koordine.com.tr adresine yazın.",
-    code: "İLT",
   });
 }

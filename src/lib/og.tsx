@@ -23,13 +23,10 @@ export async function renderOg({
   eyebrow,
   title,
   subtitle,
-  code,
 }: {
   eyebrow: string;
   title: string;
   subtitle?: string;
-  /** Sağ alttaki pafta kodu, ör. "SAH" */
-  code?: string;
 }) {
   const [regular, semibold, mono, logo] = await assets();
   const logoSrc = `data:image/png;base64,${logo.toString("base64")}`;
@@ -91,7 +88,6 @@ export async function renderOg({
           }}
         >
           <div style={{ display: "flex" }}>KOORDINE.COM.TR</div>
-          <div style={{ display: "flex" }}>{`PAFTA / ${code ?? "00"}`}</div>
         </div>
       </div>
     ),

@@ -14,7 +14,7 @@ export function ScreenTabs({
   panels,
 }: {
   label: string;
-  tabs: { code: string; label: string }[];
+  tabs: { label: string }[];
   panels: React.ReactNode[];
 }) {
   const [active, setActive] = useState(0);
@@ -43,7 +43,7 @@ export function ScreenTabs({
             const selected = i === active;
             return (
               <button
-                key={t.code + t.label}
+                key={t.label}
                 ref={(el) => {
                   refs.current[i] = el;
                 }}
@@ -56,11 +56,10 @@ export function ScreenTabs({
                 onClick={() => setActive(i)}
                 onKeyDown={(e) => onKeyDown(e, i)}
                 className={cn(
-                  "flex shrink-0 items-baseline gap-2.5 border-b-2 px-4 py-3.5 text-left transition-colors duration-200 focus-visible:outline-offset-[-2px] sm:px-5",
+                  "flex shrink-0 items-baseline border-b-2 px-4 py-3.5 text-left transition-colors duration-200 focus-visible:outline-offset-[-2px] sm:px-5",
                   selected ? "border-brand-600 bg-white text-ink-950" : "border-transparent text-ink-500 hover:text-ink-950"
                 )}
               >
-                <span className={cn("font-mono text-[0.6875rem] tracking-[0.1em]", selected ? "text-brand-700" : "text-ink-400")}>{t.code}</span>
                 <span className="whitespace-nowrap text-[0.9375rem] font-medium">{t.label}</span>
               </button>
             );

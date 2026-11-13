@@ -35,7 +35,7 @@ export function MapMockup({
   const selected = mockSites.find((s) => s.id === selectedId);
 
   return (
-    <AppFrame label={label} crumbs={["Saha", "Harita"]} code="SAH" bare={!frame} className={className}>
+    <AppFrame label={label} crumbs={["Saha", "Harita"]} bare={!frame} className={className}>
       <div className={cn("grid", showList && "@2xl:grid-cols-[minmax(0,15.5rem)_minmax(0,1fr)]")}>
         {showList && <SiteList selectedId={selected?.id} />}
         <div className="relative aspect-[20/13] w-full overflow-hidden bg-[#e9ecf1]">
@@ -78,7 +78,7 @@ export function MapMockup({
 
           <div className="absolute bottom-2.5 right-2.5 flex items-end gap-2">
             <div className="flex flex-col items-start gap-0.5 font-mono text-[9px] text-ink-500">
-              <span>0 — 2 km</span>
+              <span>0–2 km</span>
               <span className="flex h-1.5 w-16 border border-t-0 border-ink-500" />
             </div>
           </div>

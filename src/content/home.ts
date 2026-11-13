@@ -8,112 +8,89 @@ import type { SolutionSlug } from "./solutions";
 export const homeSeo = {
   title: "Koordine | Saha, Proje ve Şantiye Yönetimi Platformu",
   description:
-    "Mühendislik, mimarlık ve taahhüt firmaları için saha ve şantiye yönetimi: harita, keşif, iş programı, hakediş, saha raporları ve puantaj tek platformda.",
+    "Mühendislik, mimarlık ve taahhüt firmaları için saha ve şantiye yönetimi. Harita, keşif, iş programı, hakediş, saha raporları ve puantaj tek platformda.",
 };
 
 export const hero = {
-  eyebrow: "Saha, proje ve şantiye yönetimi",
-  title: "Sahadan hakedişe, her proje tek kayıt üzerinde.",
-  lede: "Koordine; mühendislik, mimarlık ve taahhüt firmalarının sahalarını, keşif ve iş programlarını, saha raporlarını, hakedişlerini ve ekibini aynı platformda toplar. Haritadaki pinden A4 rapora, sözleşmeden faturaya her bilgi ait olduğu sahaya bağlı kalır.",
+  eyebrow: "Mühendislik, mimarlık ve taahhüt firmaları için",
+  title: "Saha, proje ve şantiye takibi için tek platform.",
+  lede: "Sahalarınızı, keşif ve iş programlarınızı, günlük raporları, hakedişleri ve personeli Koordine'den takip edersiniz. Şantiyede girilen bilgi ofiste de aynı anda görünür.",
   facts: [
-    { k: "Modül", v: "09", note: "Sahadan finansa" },
-    { k: "Rapor tipi", v: "06", note: "A4 belge çıktısı" },
-    { k: "Para birimi", v: "05", note: "TRY · USD · EUR · GBP · CHF" },
-    { k: "Arayüz dili", v: "TR / EN", note: "Türkçe ve İngilizce" },
+    { k: "Modül", v: "9", note: "Sahadan muhasebeye" },
+    { k: "Rapor tipi", v: "6", note: "PDF olarak alınır" },
+    { k: "Para birimi", v: "5", note: "TRY, USD, EUR, GBP, CHF" },
+    { k: "Arayüz dili", v: "2", note: "Türkçe ve İngilizce" },
   ],
 };
 
-/** Bağlam bölümü: bugün bilgi nerede, Koordine'de nerede */
-export const contextRows: { topic: string; before: string; after: string; code: string }[] = [
+/** Bağlam bölümü: bilgi çoğu firmada nerede tutuluyor, Koordine'de nasıl tutuluyor */
+export const contextRows: { topic: string; before: string; after: string }[] = [
   {
     topic: "Günlük saha raporu",
-    before: "WhatsApp grubuna atılan fotoğraflar, e-postayla gelen Word dosyası.",
-    after: "Sahada doldurulan form, firmanızın antetli A4 belgesi; yoklama puantaja işlenir.",
-    code: "RPR",
+    before: "WhatsApp'a atılan fotoğraflar ve e-postayla gelen Word dosyaları.",
+    after: "Şantiye şefi formu doldurur, rapor PDF olarak hazır olur. Yoklama puantaja işlenir.",
   },
   {
     topic: "Keşif ve metraj",
-    before: "Her revizyonda yeniden adlandırılan Excel dosyaları.",
-    after: "Poz numaralı keşif kalemleri, Excel'den içe aktarım, malzeme durumu (bekleniyor, geldi, gitti).",
-    code: "KSF",
+    before: "Her revizyonda yeni adla kaydedilen Excel dosyaları.",
+    after: "Poz numaralı keşif kalemleri. Mevcut Excel dosyanızı içe aktarabilirsiniz.",
   },
   {
     topic: "Hakediş ve fatura",
-    before: "Saha ve muhasebede birbirinden habersiz iki ayrı tablo.",
-    after: "Sözleşme, hakediş ve fatura birbirine bağlı kayıtlar; sözleşme ilerlemesi kendiliğinden görünür.",
-    code: "HKD",
-  },
-  {
-    topic: "Açılış takvimi",
-    before: "Kimsenin güncellemediği bir Gantt çıktısı, duvarda.",
-    after: "Haritada durum renkli pinler, yaklaşan ve geciken açılışlar için bildirim.",
-    code: "SAH",
+    before: "Şantiyede ve muhasebede ayrı ayrı tutulan tablolar.",
+    after: "Hakediş sözleşmeye, fatura hakedişe bağlanır. Sözleşmenin ilerlemesi ayrıca hesaplanmaz.",
   },
   {
     topic: "Ekipman ve araçlar",
-    before: "Kırıcının kimde olduğu telefonla sorulur.",
-    after: "Demirbaş numarası, zimmetli kişi, kullanıldığı şantiye ve teslim geçmişi.",
-    code: "ENV",
-  },
-  {
-    topic: "Personel belgeleri",
-    before: "Bitiş tarihleri bir klasörde, fark edildiğinde süre çoktan geçmiş.",
-    after: "Sertifika ve muayene bitişleri izlenir; süresi yaklaşan belge için bildirim gider.",
-    code: "İK",
+    before: "Kırıcının hangi şantiyede olduğu telefonla sorulur.",
+    after: "Her demirbaşın kimde ve hangi şantiyede olduğu listede görünür.",
   },
 ];
 
-/** Platform dizini — her modül için kısa kapsam satırı (features.ts özetlerine ek) */
+/** Modül listesi: her modül için kısa kapsam satırı (features.ts özetlerine ek) */
 export const moduleScope: Record<FeatureSlug, string> = {
-  "saha-ve-harita": "Harita · saha listesi · açılış takvimi · konumdan adres",
-  "kesif-ve-is-programi": "Poz no · metraj · Excel / P6 içe aktarım · Gantt",
-  "hakedis-ve-finans": "Sözleşme · hakediş · fatura · 5 para birimi",
-  "saha-raporlari": "Günlük · İSG · NCR · yapım yöntemi · malzeme sunumu · kontrol listesi",
-  "talepler-ve-onaylar": "TT kodlu talepler · öncelik · disiplin onayları",
-  "insan-kaynaklari": "Personel · belgeler · puantaj · izin · duyuru",
-  "envanter-ve-zimmet": "Demirbaş · zimmet · teslim · araç belgeleri",
-  "ekip-ve-iletisim": "Sohbet · dosya · bildirim · rol bazlı yetki",
-  "yapay-zeka-asistani": "Soru-cevap · önizlemeli kayıt ekleme",
+  "saha-ve-harita": "Harita, saha listesi, açılış takvimi",
+  "kesif-ve-is-programi": "Poz no, metraj, Excel ve P6 aktarımı, Gantt",
+  "hakedis-ve-finans": "Sözleşme, hakediş, fatura, 5 para birimi",
+  "saha-raporlari": "Günlük rapor, İSG, NCR, kontrol listesi",
+  "talepler-ve-onaylar": "Tadilat talepleri, öncelik, disiplin onayları",
+  "insan-kaynaklari": "Personel, belgeler, puantaj, izin",
+  "envanter-ve-zimmet": "Demirbaş, zimmet, araç belgeleri",
+  "ekip-ve-iletisim": "Sohbet, dosya paylaşımı, bildirimler",
+  "yapay-zeka-asistani": "Soru sorma, onaylı kayıt ekleme",
 };
 
 /** Saha raporları sekmeleri */
-export const reportTabs: { type: "daily" | "hse" | "ncr" | "method" | "material" | "checklist"; label: string; code: string; summary: string; contents: string[] }[] = [
+export const reportTabs: { type: "daily" | "hse" | "ncr" | "method" | "material" | "checklist"; label: string; summary: string; contents: string[] }[] = [
   {
     type: "daily",
     label: "Günlük saha raporu",
-    code: "GSR",
-    summary: "Şantiye şefinin yöneticilere günlük özeti: personel, yapılan işler, sorunlar, iş güvenliği ve fotoğraflar.",
+    summary: "Şantiye şefinin yöneticilere gönderdiği günlük özet.",
     contents: [
-      "Saha, tarih, hava durumu ve sıcaklık",
-      "Ekip sayıları ve isimli yoklama; kaydederken puantaja işlenir",
-      "Bugün yapılan işler; iş planındaki o güne denk gelen kalemler rapora alınabilir",
-      "Gelen malzeme, sorunlar ve gecikmeler",
-      "İş güvenliği notları ve yarın planlanan işler",
-      "Açıklamalı fotoğraflar, imza alanları",
+      "Hava durumu, ekip sayıları ve isimli yoklama",
+      "Yapılan işler, gelen malzeme ve sorunlar",
+      "İş güvenliği notları ve ertesi günün planı",
+      "Açıklamalı fotoğraflar ve imza alanları",
     ],
   },
   {
     type: "hse",
     label: "İSG raporu",
-    code: "İSG",
-    summary: "Saha iş sağlığı ve güvenliği denetimi: kontrol listesi, kaza ve ramak kala kayıtları, düzeltici faaliyetler.",
+    summary: "Sahadaki iş sağlığı ve güvenliği denetimi.",
     contents: [
       "Günlük, haftalık, aylık ya da olay sonrası denetim",
-      "Göstergeler: çalışan, adam-saat, iş kazası, ramak kala, kayıp gün",
-      "13 maddelik saha kontrol listesi (KKD, yüksekte çalışma, iskele…)",
-      "Uygunsuzluk, risk seviyesi, sorumlu ve termin",
-      "Eğitimler, toolbox toplantıları ve değerlendirme",
+      "İş kazası, ramak kala ve kayıp gün sayıları",
+      "13 maddelik saha kontrol listesi",
+      "Uygunsuzluklar, sorumlu kişi ve termin",
     ],
   },
   {
     type: "ncr",
     label: "Uygunsuzluk (NCR)",
-    code: "NCR",
-    summary: "Malzeme, işçilik ya da projeye aykırı imalatın kaydı ve kapanış doğrulaması.",
+    summary: "Projeye ya da şartnameye aykırı imalatın kaydı.",
     contents: [
-      "Kategori ve önem derecesi: minör, majör, kritik",
-      "İlgili proje, şartname ya da çizim referansı",
-      "Kök neden ve karar: yeniden yapım, onarım, olduğu gibi kabul, ret",
+      "Minör, majör ya da kritik önem derecesi",
+      "Kök neden ve verilen karar",
       "Düzeltici ve önleyici faaliyet",
       "Doğrulama notu ve kapanış tarihi",
     ],
@@ -121,38 +98,34 @@ export const reportTabs: { type: "daily" | "hse" | "ncr" | "method" | "material"
   {
     type: "method",
     label: "Yapım yöntemi",
-    code: "YY",
     summary: "Bir imalatın nasıl yapılacağını anlatan onay dokümanı (method statement).",
     contents: [
-      "Amaç, kapsam ve referans dokümanlar",
-      "Sorumluluklar, ekipman ve malzemeler",
-      "Uygulama adımları ve kabul kriterleri",
+      "Kapsam ve referans dokümanlar",
+      "Ekipman, malzeme ve uygulama adımları",
       "Riskler ve alınacak önlemler",
-      "Muayene ve test planı, çevre ve acil durum",
+      "Muayene ve test planı",
     ],
   },
   {
     type: "material",
     label: "Malzeme sunumu",
-    code: "MS",
-    summary: "Kullanılacak malzemenin işveren ya da müşavir onayına sunulması (submittal).",
+    summary: "Malzemenin işveren ya da müşavir onayına sunulması (submittal).",
     contents: [
-      "Ürün, üretici, marka/model, tedarikçi ve menşei",
-      "Şartname değeri ile önerilen ürünün karşılaştırması",
-      "Ekli dokümanlar: teknik föy, SDS, test raporu, sertifika",
-      "Onay kodları: A onaylı, B notlu onay, C revize, D ret",
+      "Ürün, üretici, marka ve model",
+      "Şartname ile önerilen ürünün karşılaştırması",
+      "Teknik föy, test raporu ve sertifika ekleri",
+      "A, B, C ve D onay kodları",
     ],
   },
   {
     type: "checklist",
     label: "Kontrol listesi",
-    code: "KL",
-    summary: "Hazır maddelerden seçin ya da kendi maddelerinizi yazın; sahada işaretleyip PDF olarak paylaşın.",
+    summary: "Hazır maddelerden seçin ya da kendi maddelerinizi yazın.",
     contents: [
-      "İnşaat, mimari, mekanik, elektrik, peyzaj ve İSG için hazır maddeler",
-      "Kontrol aşaması: imalat öncesi, sırası, teslim öncesi, periyodik",
-      "Uygun, uygun değil, kapsam dışı işaretleme",
-      "Fotoğraflar, genel not ve sonuç",
+      "İnşaat, mimari, mekanik, elektrik, peyzaj ve İSG maddeleri",
+      "İmalat öncesi, imalat sırası ve teslim öncesi kontrol",
+      "Uygun, uygun değil ya da kapsam dışı işaretleme",
+      "Fotoğraflar, not ve PDF çıktısı",
     ],
   },
 ];
@@ -171,8 +144,8 @@ export const permissionColumns = [
 
 export const permissionRows: { role: string; note?: string; cells: string[] }[] = [
   { role: "Kurucu", note: "Firma hesabını açan kişi", cells: ["GEDS", "GEDS", "GEDS", "GEDS", "GEDS", "GEDS", "GEDS", "GEDS"] },
-  { role: "Yönetici · Bölge Müdürü", cells: ["GED", "GED", "GED", "GED", "GED", "GED", "", ""] },
-  { role: "Mimar · Makine, Elektrik, İnşaat Mühendisi", note: "Onayı kendi disiplininde", cells: ["GED", "GED", "GD", "GED", "", "", "", ""] },
+  { role: "Yönetici, Bölge Müdürü", cells: ["GED", "GED", "GED", "GED", "GED", "GED", "", ""] },
+  { role: "Mimar ve mühendisler", note: "Onayı kendi disiplininde verir", cells: ["GED", "GED", "GD", "GED", "", "", "", ""] },
   { role: "Saha Sorumlusu", cells: ["GD", "G", "", "GED", "", "", "", ""] },
   { role: "Muhasebe", cells: ["G", "", "", "", "", "GED", "GED", ""] },
 ];
@@ -180,61 +153,57 @@ export const permissionRows: { role: string; note?: string; cells: string[] }[] 
 export const securityFacts: { title: string; body: string }[] = [
   {
     title: "Tek aktif oturum",
-    body: "Aynı hesapla başka bir cihazdan giriş yapıldığında önceki oturum kendiliğinden kapanır.",
+    body: "Aynı hesapla başka bir cihazdan giriş yapılırsa önceki oturum kapanır.",
   },
   {
-    title: "Modül modül yetki",
-    body: "Her kullanıcı için görüntüleme, ekleme, düzenleme ve silme ayrı ayrı açılıp kapatılır.",
+    title: "Özlük bilgisine ayrı yetki",
+    body: "Personelin özlük bilgilerini görmek için ayrıca yetki gerekir.",
   },
   {
-    title: "Hassas bilgiye ayrı kilit",
-    body: "Personelin özlük bilgileri, personel listesinden ayrı bir yetkiyle korunur.",
-  },
-  {
-    title: "Firmanıza göre roller",
-    body: "Hazır rollerin adlarını değiştirebilir, ihtiyacınıza göre özel rol tanımlayabilirsiniz.",
+    title: "Kendi rolleriniz",
+    body: "Hazır rollerin adını değiştirebilir, firmanıza göre yeni rol tanımlayabilirsiniz.",
   },
 ];
 
 export const assistantPoints: { title: string; body: string }[] = [
   {
-    title: "Cevap kendi kayıtlarınızdan gelir",
-    body: "Sahalar, açılış takvimi, iş planları ve finans kayıtlarınız hakkında doğal dille sorun. Genel bir sohbet botu değil; firmanızın verisine bakar.",
+    title: "Firmanızın verisiyle cevap verir",
+    body: "Sahalar, açılış takvimi, iş planları ve finans kayıtları hakkında soru sorabilirsiniz.",
   },
   {
-    title: "Önce önizleme, sonra kayıt",
-    body: "Saha, tadilat talebi, iş planı ya da keşif kalemi eklemesini isteyebilirsiniz. Asistan önce önizleme gösterir; siz onaylamadan hiçbir kayıt oluşmaz.",
+    title: "Onaylamadan kayıt oluşmaz",
+    body: "Saha, talep, iş planı ya da keşif kalemi eklemesini isteyebilirsiniz. Önce önizleme gelir, siz onaylarsınız.",
   },
   {
     title: "Yetkinizin dışına çıkmaz",
-    body: "Ekleme yetkiniz olmayan bir modülde asistan da kayıt ekleyemez. Eksik ya da belirsiz bilgiyi önizlemede uyarı olarak gösterir.",
+    body: "Ekleme yetkiniz olmayan bir modülde asistan da kayıt ekleyemez.",
   },
   {
-    title: "Sınırını açıkça söyler",
-    body: "Her sohbette görünen not: yapay zekâ hata yapabilir; önemli kararlarda verileri kontrol edin.",
+    title: "Önemli kararlarda kontrol etmenizi hatırlatır",
+    body: "Her sohbette yapay zekânın hata yapabileceğini belirten bir not görünür.",
   },
 ];
 
-/** Kimler için — çözümlerle eşleşen modül kodları */
-export const solutionModules: Record<SolutionSlug, string[]> = {
-  "insaat-ve-taahhut": ["SAH", "RPR", "HKD", "İK"],
-  "mimarlik-ofisleri": ["RPR", "KSF", "TLP"],
-  "muhendislik-ve-mep": ["RPR", "KSF", "İK"],
-  "perakende-yatirimlari": ["SAH", "TLP", "HKD"],
+/** Kimler için: her çözümde öne çıkan modüller (düz metin) */
+export const solutionModules: Record<SolutionSlug, string> = {
+  "insaat-ve-taahhut": "Saha raporları, hakediş, puantaj",
+  "mimarlik-ofisleri": "Saha raporları, keşif, talepler",
+  "muhendislik-ve-mep": "Saha raporları, keşif, personel belgeleri",
+  "perakende-yatirimlari": "Harita, talepler, hakediş",
 };
 
 export const onboardingSteps: { title: string; body: string }[] = [
   {
     title: "Demo görüşmesi",
-    body: "Ekibinizin bugünkü akışını dinler, Koordine'yi kendi proje tipleriniz ve rapor düzeniniz üzerinden gösteririz.",
+    body: "Nasıl çalıştığınızı dinler, Koordine'yi kendi proje tipleriniz üzerinden gösteririz.",
   },
   {
     title: "Kurulum ve veri aktarımı",
-    body: "Firma hesabı, bölgeler ve roller kurulur. Keşif kalemleri ve iş planları Excel şablonlarıyla, iş planı ayrıca Primavera P6 (.xer) dosyasından içe aktarılır.",
+    body: "Firma hesabı, bölgeler ve roller kurulur. Keşif ve iş planlarınız Excel'den, iş planı ayrıca Primavera P6 dosyasından aktarılır.",
   },
   {
     title: "Ekip daveti",
-    body: "Kullanıcıları rolleriyle eklersiniz. Herkes yalnızca yetkili olduğu modülleri görür.",
+    body: "Kullanıcıları rolleriyle davet edersiniz ve ekip çalışmaya başlar.",
   },
 ];
 
@@ -242,26 +211,25 @@ export const homeFaq: { question: string; answer: string }[] = [
   {
     question: "Koordine hangi firmalar için uygun?",
     answer:
-      "Birden fazla saha ya da şantiyeyi aynı anda yürüten mühendislik, mimarlık ve taahhüt firmaları için tasarlandı. Mağaza açılışı ve tadilat projeleri yöneten perakende yatırım ekipleri de aynı yapıyı kullanır.",
+      "Aynı anda birden fazla saha ya da şantiye yürüten mühendislik, mimarlık ve taahhüt firmaları için. Mağaza açılışı ve tadilat projesi yöneten perakende ekipleri de kullanabilir.",
   },
   {
     question: "Mevcut Excel dosyalarımızı kullanabilir miyiz?",
     answer:
-      "Evet. Keşif kalemleri (poz no, açıklama, miktar, birim, birim fiyat, para birimi) ve iş planları Excel şablonuyla içe aktarılır. İş planı için Primavera P6 .xer dosyası da desteklenir.",
+      "Evet. Keşif kalemleri ve iş planları Excel şablonuyla içe aktarılır. İş planı için Primavera P6 .xer dosyası da desteklenir.",
   },
   {
     question: "Kim hangi bilgiyi görür?",
     answer:
-      "Her rolün varsayılan yetkileri vardır; kurucu bunları kullanıcı ve modül bazında değiştirebilir. Örneğin muhasebe hakediş ve faturaları yönetir, saha sorumlusu talepleri açar ama sözleşmeleri görmez.",
+      "Her rolün varsayılan yetkileri vardır ve kurucu bunları kullanıcı bazında değiştirebilir. Örneğin muhasebe hakediş ve faturaları yönetir, saha sorumlusu talep açar ama sözleşmeleri görmez.",
   },
   {
     question: "Hangi dil ve para birimleri destekleniyor?",
     answer:
-      "Arayüz Türkçe ve İngilizcedir. Tutarlar TRY, USD, EUR, GBP ve CHF ile girilebilir; kur çevrimi yapılmadığı için farklı para birimlerindeki toplamlar ayrı gösterilir.",
+      "Arayüz Türkçe ve İngilizcedir. Tutarlar TRY, USD, EUR, GBP ve CHF ile girilebilir. Kur çevrimi yapılmadığı için her para biriminin toplamı ayrı gösterilir.",
   },
   {
     question: "Yapay zekâ asistanı verilerimizi kendi başına değiştirir mi?",
-    answer:
-      "Hayır. Asistan kayıt eklemeden önce önizleme gösterir; kayıt yalnızca siz onayladığınızda ve yetkiniz varsa oluşur.",
+    answer: "Hayır. Asistan kayıt eklemeden önce önizleme gösterir. Kayıt yalnızca siz onaylarsanız ve yetkiniz varsa oluşur.",
   },
 ];

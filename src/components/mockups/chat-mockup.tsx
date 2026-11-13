@@ -28,7 +28,6 @@ export function ChatMockup({
     <AppFrame
       label={label}
       crumbs={["Ekip", "Mesajlar"]}
-      code="EKP"
       bare={!frame}
       className={className}
       aside={

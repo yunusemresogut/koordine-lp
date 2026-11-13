@@ -37,7 +37,6 @@ export function ProgressPaymentMockup({
     <AppFrame
       label={label ?? meta.label}
       crumbs={["Finans", meta.title]}
-      code="HKD"
       bare={!frame}
       className={className}
     >

@@ -1,16 +1,14 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Pafta tarzı bölüm etiketi: "01 — SAHA". Mono, büyük harf, ince çizgiyle.
+ * Bölüm etiketi: kısa, mono, büyük harf.
  * tone="dark" koyu (mürekkep) zeminler içindir.
  */
 export function Eyebrow({
-  index,
   children,
   tone = "light",
   className,
 }: {
-  index?: string;
   children: React.ReactNode;
   tone?: "light" | "dark";
   className?: string;
@@ -18,20 +16,18 @@ export function Eyebrow({
   return (
     <p
       className={cn(
-        "flex items-center gap-3 font-mono text-[0.75rem] font-medium uppercase tracking-[0.14em]",
+        "flex items-center gap-2.5 font-mono text-[0.75rem] font-medium uppercase tracking-[0.14em]",
         tone === "light" ? "text-ink-500" : "text-ink-300",
         className
       )}
     >
-      {index && <span className={tone === "light" ? "text-brand-700" : "text-brand-300"}>{index}</span>}
-      {index && <span aria-hidden className={cn("h-px w-6", tone === "light" ? "bg-line-strong" : "bg-white/25")} />}
+      <span aria-hidden className={cn("size-1.5 shrink-0", tone === "light" ? "bg-brand-600" : "bg-brand-300")} />
       <span>{children}</span>
     </p>
   );
 }
 
 type SectionHeaderProps = {
-  index?: string;
   eyebrow?: string;
   title: React.ReactNode;
   lede?: React.ReactNode;
@@ -50,7 +46,6 @@ type SectionHeaderProps = {
  * (her bölümün ortalanmış başlık+paragraf olmasından kaçınmak için).
  */
 export function SectionHeader({
-  index,
   eyebrow,
   title,
   lede,
@@ -72,7 +67,7 @@ export function SectionHeader({
     return (
       <div className={cn("grid gap-6 lg:grid-cols-12 lg:gap-12", className)}>
         <div className="lg:col-span-7">
-          {eyebrow && <Eyebrow index={index} tone={tone} className="mb-5">{eyebrow}</Eyebrow>}
+          {eyebrow && <Eyebrow tone={tone} className="mb-5">{eyebrow}</Eyebrow>}
           <Tag id={id} className={titleCls}>{title}</Tag>
         </div>
         {(lede || children) && (
@@ -87,7 +82,7 @@ export function SectionHeader({
 
   return (
     <div className={cn("max-w-3xl", className)}>
-      {eyebrow && <Eyebrow index={index} tone={tone} className="mb-5">{eyebrow}</Eyebrow>}
+      {eyebrow && <Eyebrow tone={tone} className="mb-5">{eyebrow}</Eyebrow>}
       <Tag id={id} className={titleCls}>{title}</Tag>
       {lede && <p className={cn(ledeCls, "mt-5 max-w-2xl")}>{lede}</p>}
       {children && <div className="mt-8">{children}</div>}

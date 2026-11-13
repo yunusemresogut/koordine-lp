@@ -35,7 +35,7 @@ export function pageMetadata({ title, description, path, absoluteTitle, noindex,
       description,
       // Yalnızca kendi opengraph-image dosyası olmayan sayfalar için (aksi halde dosyayı ezer)
       ...(defaultOgImage
-        ? { images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: `${site.name} — ${site.tagline}` }] }
+        ? { images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: `${site.name}: ${site.tagline}` }] }
         : {}),
     },
     twitter: {

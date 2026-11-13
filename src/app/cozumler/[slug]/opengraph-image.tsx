@@ -20,6 +20,5 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     eyebrow: "Çözümler",
     title: solution.name,
     subtitle: solution.summary,
-    code: `ÇZM-${solution.detail.code}`,
   });
 }

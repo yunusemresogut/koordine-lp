@@ -2,12 +2,12 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeader } from "@/components/ui/section-header";
 import type { FeatureWithDetail, FlowTone, SpecialBlock } from "@/content/feature-details";
-import { cn, pad2 } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { CoverageVisual } from "./visuals";
 
 /**
  * Modüle özgü derin anlatım bölümü. İçerik feature-details.ts'deki bloklardan gelir:
- * akış (flow), sütun eşleme (mapping), yetki matrisi (matrix), kod listesi (codes),
+ * akış (flow), sütun eşleme (mapping), yetki matrisi (matrix), uygulama kodları (codes),
  * tanım listesi (list), kayıt zinciri (chain) ve rapor kapsamı (coverage).
  */
 
@@ -27,7 +27,7 @@ function isFull(b: SpecialBlock) {
   return false;
 }
 
-export function SpecialSection({ index, feature }: { index: string; feature: FeatureWithDetail }) {
+export function SpecialSection({ feature }: { feature: FeatureWithDetail }) {
   const { special } = feature.detail;
 
   // Tek kalan yarım blok tam genişliğe yayılır (boş hücre kalmasın)
@@ -51,7 +51,6 @@ export function SpecialSection({ index, feature }: { index: string; feature: Fea
         <Reveal>
           <SectionHeader
             id={`${special.id}-baslik`}
-            index={index}
             eyebrow={special.eyebrow}
             align="split"
             title={special.title}
@@ -61,7 +60,7 @@ export function SpecialSection({ index, feature }: { index: string; feature: Fea
         <div className="mt-14 grid gap-x-12 gap-y-14 lg:grid-cols-2">
           {special.blocks.map((b, i) => (
             <Reveal key={b.title} className={cn("min-w-0", layout[i] && "lg:col-span-2")}>
-              <BlockTitle n={i + 1} title={b.title} />
+              <BlockTitle title={b.title} />
               <Block block={b} wide={layout[i]} />
             </Reveal>
           ))}
@@ -71,10 +70,9 @@ export function SpecialSection({ index, feature }: { index: string; feature: Fea
   );
 }
 
-function BlockTitle({ n, title }: { n: number; title: string }) {
+function BlockTitle({ title }: { title: string }) {
   return (
-    <h3 className="flex items-baseline gap-3 border-b border-ink-950 pb-3 text-[1.0625rem] font-semibold text-ink-950">
-      <span className="font-mono text-[0.6875rem] font-medium tracking-[0.12em] text-brand-700">{pad2(n)}</span>
+    <h3 className="border-b border-ink-950 pb-3 text-[1.0625rem] font-semibold text-ink-950">
       {title}
     </h3>
   );
@@ -136,10 +134,7 @@ function Flow({ block, horizontal }: { block: Extract<SpecialBlock, { type: "flo
               )}
               <Marker step={s} />
               <div className={cn("min-w-0", horizontal && "lg:mt-4")}>
-                <p className="flex flex-wrap items-baseline gap-x-2">
-                  <span className="text-[1rem] font-semibold text-ink-950">{s.label}</span>
-                  {s.code && <span className="font-mono text-[0.6875rem] tracking-[0.08em] text-ink-500">{s.code}</span>}
-                </p>
+                <p className="text-[1rem] font-semibold text-ink-950">{s.label}</p>
                 <p className="mt-1 text-pretty text-[0.9063rem] leading-relaxed text-ink-600">{s.body}</p>
               </div>
             </li>
@@ -279,16 +274,15 @@ function Chain({ block }: { block: Extract<SpecialBlock, { type: "chain" }> }) {
         return (
           <li key={n.label} className="relative flex flex-col lg:pr-8">
             <div className="flex-1 border border-ink-950 bg-white">
-              <div className="flex items-center justify-between border-b border-ink-950 px-4 py-2.5">
+              <div className="border-b border-ink-950 px-4 py-2.5">
                 <span className="text-[1.0625rem] font-semibold text-ink-950">{n.label}</span>
-                <span className="font-mono text-[0.6875rem] tracking-[0.08em] text-brand-700">{n.code}</span>
               </div>
               <div className="px-4 py-3">
                 <p className="font-mono text-[0.625rem] uppercase tracking-[0.14em] text-ink-400">Alanlar</p>
                 <ul className="mt-1.5 space-y-1 text-[0.875rem] text-ink-700">
                   {n.fields.map((f) => (
                     <li key={f} className="flex gap-2">
-                      <span aria-hidden className="mt-[0.7em] h-px w-2.5 shrink-0 bg-ink-400" />
+                      <span aria-hidden className="mt-[0.6em] size-1.5 shrink-0 bg-ink-400" />
                       {f}
                     </li>
                   ))}

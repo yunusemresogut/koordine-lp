@@ -219,7 +219,6 @@ export default function TermsPage() {
       lede="Koordine platformunu ve internet sitesini kullanırken geçerli olan kuralları, tarafların sorumluluklarını ve haklarını açıklar."
       path="/kullanim-kosullari"
       crumb="Kullanım Koşulları"
-      code="YS-04"
       description={description}
       sections={sections}
     />

@@ -13,7 +13,7 @@ import { PageHero } from "@/components/sections/page-hero";
 import { JsonLd } from "@/components/seo/json-ld";
 import { FaqSection } from "@/components/solutions/faq-section";
 import { ButtonLink } from "@/components/ui/button";
-import { featureDetailBySlug, featuresWithDetails } from "@/content/feature-details";
+import { featureDetailBySlug } from "@/content/feature-details";
 import { features } from "@/content/features";
 import { pageMetadata, webPageSchema } from "@/lib/seo";
 
@@ -55,10 +55,9 @@ export default async function FeaturePage({ params }: Props) {
           { name: feature.name, path },
         ]}
         eyebrow={feature.name}
-        index={feature.code}
         title={detail.hero.title}
         lede={detail.hero.lede}
-        aside={<ModuleSheet feature={feature} total={featuresWithDetails.length} />}
+        aside={<ModuleSheet feature={feature} />}
       >
         <div className="flex flex-wrap gap-3">
           <ButtonLink href="/iletisim#demo" size="lg" arrow>
@@ -71,12 +70,12 @@ export default async function FeaturePage({ params }: Props) {
       </PageHero>
 
       <HeroVisual feature={feature} />
-      <CapabilitiesSection index="01" feature={feature} />
-      <ScreensSection index="02" feature={feature} />
-      <SpecialSection index="03" feature={feature} />
-      <ConnectionsSection index="04" feature={feature} />
-      <SolutionsSection index="05" feature={feature} />
-      <FaqSection index="06" faqs={detail.faqs} />
+      <CapabilitiesSection feature={feature} />
+      <ScreensSection feature={feature} />
+      <SpecialSection feature={feature} />
+      <ConnectionsSection feature={feature} />
+      <SolutionsSection feature={feature} />
+      <FaqSection faqs={detail.faqs} />
       <ModulePager feature={feature} />
 
       <CtaBand title={detail.cta.title} lede={detail.cta.lede} />

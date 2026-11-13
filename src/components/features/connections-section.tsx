@@ -15,7 +15,7 @@ type Conn = FeatureWithDetail["detail"]["connections"][number];
  * Solda bu modüle veri getiren modüller, ortada modül düğümü, sağda verinin aktığı modüller.
  * Dar ekranda yukarıdan aşağı akar.
  */
-export function ConnectionsSection({ index, feature }: { index: string; feature: FeatureWithDetail }) {
+export function ConnectionsSection({ feature }: { feature: FeatureWithDetail }) {
   const incoming = feature.detail.connections.filter((c) => c.dir === "in");
   const outgoing = feature.detail.connections.filter((c) => c.dir === "out");
 
@@ -26,12 +26,11 @@ export function ConnectionsSection({ index, feature }: { index: string; feature:
         <Reveal>
           <SectionHeader
             id="baglantilar"
-            index={index}
             eyebrow="Bağlantılar"
             tone="dark"
             align="split"
             title="Diğer modüllerle bağlantısı."
-            lede="Koordine'de veri bir kez girilir. Aşağıdaki her çizgi, bir modülün kaydının başka bir modülde kendiliğinden kullanıldığı yeri gösterir."
+            lede="Koordine'de bir bilgi bir kez girilir ve ilgili modüllerde tekrar kullanılır. Aşağıda bu modülün hangi modüllerden veri aldığı ve hangilerine veri verdiği görünüyor."
           />
         </Reveal>
 
@@ -39,7 +38,9 @@ export function ConnectionsSection({ index, feature }: { index: string; feature:
           <figure className="border border-line-dark bg-ink-950/70">
             <div className="flex items-center justify-between border-b border-line-dark px-4 py-2.5 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-400 sm:px-6">
               <span>Bağlantı şeması</span>
-              <span className="text-brand-300">BŞ-{feature.code}</span>
+              <span>
+                {incoming.length} gelen, {outgoing.length} giden
+              </span>
             </div>
 
             <div className="grid gap-0 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_13rem_minmax(0,1fr)] lg:py-10">
@@ -49,12 +50,8 @@ export function ConnectionsSection({ index, feature }: { index: string; feature:
               <div className="relative flex flex-col items-center justify-center py-6 lg:py-0 lg:pt-8">
                 <span aria-hidden className="absolute inset-y-0 left-1/2 w-px bg-white/15 lg:hidden" />
                 <div className="relative flex w-full max-w-[13rem] flex-col items-center justify-center border border-brand-400 bg-ink-900 px-4 py-7 text-center">
-                  <FeatureIcon name={feature.icon} className="size-5 text-brand-300" />
-                  <span className="mt-3 font-mono text-[1.75rem] font-medium leading-none tracking-[0.04em] text-white">{feature.code}</span>
-                  <span className="mt-2 text-[0.9375rem] font-medium text-ink-200">{feature.name}</span>
-                  <span className="mt-3 font-mono text-[0.625rem] uppercase tracking-[0.14em] text-ink-400">
-                    {incoming.length} giriş · {outgoing.length} çıkış
-                  </span>
+                  <FeatureIcon name={feature.icon} className="size-6 text-brand-300" />
+                  <span className="mt-3 text-balance text-[1.125rem] font-semibold leading-snug text-white">{feature.name}</span>
                 </div>
               </div>
 
@@ -117,9 +114,9 @@ function ConnItem({ conn, side }: { conn: Conn; side: "left" | "right" }) {
       />
       <Link
         href={`/ozellikler/${f.slug}`}
-        className="group/btn grid grid-cols-[3rem_minmax(0,1fr)_1rem] items-start gap-3 border border-line-dark bg-ink-900/60 px-4 py-3.5 transition-colors duration-200 hover:border-white/40 hover:bg-ink-900"
+        className="group/btn grid grid-cols-[1.25rem_minmax(0,1fr)_1rem] items-start gap-3 border border-line-dark bg-ink-900/60 px-4 py-3.5 transition-colors duration-200 hover:border-white/40 hover:bg-ink-900"
       >
-        <span className="pt-0.5 font-mono text-[0.75rem] tracking-[0.08em] text-brand-300">{f.code}</span>
+        <FeatureIcon name={f.icon} className="mt-0.5 size-4 text-brand-300" />
         <span className="min-w-0">
           <span className="block text-[0.9375rem] font-semibold text-white">{f.name}</span>
           <span className="mt-1 block text-pretty text-[0.875rem] leading-relaxed text-ink-300">{conn.what}</span>

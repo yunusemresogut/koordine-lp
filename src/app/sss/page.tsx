@@ -31,14 +31,13 @@ export default function FaqPage() {
             <nav aria-label="Soru kategorileri" className="lg:col-span-3">
               <div className="lg:sticky lg:top-28">
                 <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-500">Başlıklar</p>
-                <ol className="mt-4 flex flex-wrap gap-2 lg:flex-col lg:gap-0 lg:border-l lg:border-line">
-                  {faqCategories.map((c, i) => (
+                <ul className="mt-4 flex flex-wrap gap-2 lg:flex-col lg:gap-0 lg:border-l lg:border-line">
+                  {faqCategories.map((c) => (
                     <li key={c.id}>
                       <a
                         href={`#${c.id}`}
                         className="flex items-baseline gap-3 rounded-sm border border-line px-3 py-2 text-[0.9375rem] text-ink-700 transition-colors duration-150 hover:border-ink-950 hover:text-ink-950 lg:-ml-px lg:rounded-none lg:border-0 lg:border-l lg:border-transparent lg:py-2.5 lg:pl-5 lg:hover:border-ink-950"
                       >
-                        <span className="font-mono text-[0.6875rem] tabular-nums text-ink-400">{String(i + 1).padStart(2, "0")}</span>
                         <span>{c.label}</span>
                         <span className="ml-auto hidden font-mono text-[0.6875rem] tabular-nums text-ink-400 lg:inline">
                           {faqByCategory(c.id).length}
@@ -46,15 +45,14 @@ export default function FaqPage() {
                       </a>
                     </li>
                   ))}
-                </ol>
+                </ul>
               </div>
             </nav>
 
             <div className="space-y-16 lg:col-span-9">
-              {faqCategories.map((c, ci) => (
+              {faqCategories.map((c) => (
                 <section key={c.id} id={c.id} aria-labelledby={`${c.id}-title`} className="scroll-mt-28">
-                  <div className="flex items-baseline gap-4 border-b border-ink-950 pb-4">
-                    <span className="font-mono text-[0.75rem] tabular-nums text-brand-700">{String(ci + 1).padStart(2, "0")}</span>
+                  <div className="border-b border-ink-950 pb-4">
                     <h2 id={`${c.id}-title`} className="text-[1.625rem] font-semibold tracking-[-0.02em] text-ink-950">
                       {c.label}
                     </h2>
@@ -91,7 +89,7 @@ export default function FaqPage() {
                 <div>
                   <h2 className="text-lg font-semibold text-ink-950">Sorunuz burada yok mu?</h2>
                   <p className="mt-1 text-[0.9375rem] text-ink-600">
-                    Barındırma, sözleşme veya teknik ayrıntılar için ekibimize doğrudan yazın.
+                    Barındırma, sözleşme ya da teknik konular için ekibimize yazın.
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-3">

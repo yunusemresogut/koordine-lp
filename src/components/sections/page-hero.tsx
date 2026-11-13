@@ -5,13 +5,12 @@ import type { Crumb } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 /**
- * İç sayfaların üst bölümü: içerik yolu, pafta etiketi, h1 ve açıklama.
+ * İç sayfaların üst bölümü: içerik yolu, bölüm etiketi, h1 ve açıklama.
  * Sağ tarafa (aside) görsel/özet kutusu konabilir.
  */
 export function PageHero({
   crumbs,
   eyebrow,
-  index,
   title,
   lede,
   aside,
@@ -20,7 +19,6 @@ export function PageHero({
 }: {
   crumbs: Crumb[];
   eyebrow?: string;
-  index?: string;
   title: React.ReactNode;
   lede?: React.ReactNode;
   aside?: React.ReactNode;
@@ -35,7 +33,7 @@ export function PageHero({
         <div className={cn("mt-12 grid gap-12", aside && "lg:grid-cols-12 lg:items-end")}>
           <div className={cn(aside && "lg:col-span-7")}>
             {eyebrow && (
-              <Eyebrow index={index} className="mb-5">
+              <Eyebrow className="mb-5">
                 {eyebrow}
               </Eyebrow>
             )}

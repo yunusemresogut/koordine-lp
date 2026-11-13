@@ -126,11 +126,11 @@ export function contactSummaryLines(input: ContactInput): [label: string, value:
     ["Ad soyad", input.name],
     ["E-posta", input.email],
     ["Firma", input.company],
-    ["Telefon", input.phone || "—"],
-    ["Firma tipi", input.companyType || "—"],
-    ["Ekip büyüklüğü", input.teamSize || "—"],
-    ["İlgilenilen modüller", input.modules.length ? moduleNames(input.modules) : "—"],
-    ["Mesaj", input.message || "—"],
+    ["Telefon", input.phone || "Belirtilmedi"],
+    ["Firma tipi", input.companyType || "Belirtilmedi"],
+    ["Ekip büyüklüğü", input.teamSize || "Belirtilmedi"],
+    ["İlgilenilen modüller", input.modules.length ? moduleNames(input.modules) : "Belirtilmedi"],
+    ["Mesaj", input.message || "Belirtilmedi"],
   ];
 }
 
