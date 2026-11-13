@@ -28,6 +28,8 @@ Bu sürüm eğitim verilerinizdeki Next.js'ten farklı olabilir. Bir API'yi kull
 | `src/components/ui/breadcrumbs.tsx` | Görünür içerik yolu + BreadcrumbList şeması |
 | `src/components/sections/page-hero.tsx` | İç sayfa üst bölümü (h1 burada) |
 | `src/components/sections/cta-band.tsx` | Sayfa sonu demo çağrısı (her sayfanın sonunda) |
+| `src/components/home/hero-scene/` | Ana sayfa hero'sundaki three.js topografik sahne. Ayarlar `config.ts`; kaldırmak için hero.tsx'teki `<HeroScene />` satırı. Yalnızca ≥1024px'te ve tembel yüklenir |
+| `src/components/layout/footer-crane.tsx` | Footer'daki kule vinç çizimi (statik SVG, ≥1024px). Kanca Çözümler sütununa bağlı; footer.tsx'te iki satırla kaldırılır |
 | `src/content/features.ts`, `solutions.ts`, `navigation.ts` | İçerik kayıtları (slug, ad, özet, SEO metinleri) |
 
 Ortak dosyalarda değişiklik gerekiyorsa **kendiniz değiştirmeyin**; raporunuzda önerin.

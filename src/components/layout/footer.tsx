@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
 import { Container } from "@/components/ui/container";
+import { CRANE_JIB_BOTTOM_PX, FooterCrane, FooterCraneHook } from "./footer-crane";
 import { features } from "@/content/features";
 import { companyNav, legalNav } from "@/content/navigation";
 import { solutions } from "@/content/solutions";
@@ -14,7 +15,9 @@ export function Footer() {
     <footer className="relative overflow-hidden bg-ink-950 text-ink-300">
       <div aria-hidden className="bg-grid-dark mask-fade-b pointer-events-none absolute inset-0" />
       <Container size="wide" className="relative">
-        <div className="grid gap-12 border-b border-line-dark py-16 lg:grid-cols-12">
+        {/* Kule vinç çizimi (kanca Çözümler sütununda). Kaldırmak için bu iki satırı silin */}
+        <FooterCrane className="absolute -right-3 top-0 hidden text-white/[0.16] lg:block" />
+        <div className="grid gap-12 border-b border-line-dark py-16 lg:grid-cols-12 lg:pt-40">
           <div className="lg:col-span-4">
             <Logo tone="dark" className="h-7" />
             <p className="mt-6 max-w-sm text-[0.9375rem] leading-relaxed text-ink-300">
@@ -54,10 +57,16 @@ export function Footer() {
             links={features.map((f) => ({ href: `/ozellikler/${f.slug}`, label: f.name }))}
           />
           <FooterColumn
-            className="lg:col-span-3"
+            className="relative lg:col-span-3"
             title="Çözümler"
             links={solutions.map((s) => ({ href: `/cozumler/${s.slug}`, label: s.name }))}
-          />
+          >
+            {/* Kanca, Özellikler ile Çözümler arasındaki boşluğa sarkar (sütun üstü = lg:pt-40 = 160px) */}
+            <FooterCraneHook
+              className="absolute -left-6 hidden -translate-x-1/2 text-white/[0.16] lg:block"
+              style={{ top: CRANE_JIB_BOTTOM_PX - 160 }}
+            />
+          </FooterColumn>
           <div className="grid gap-10 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-1">
             <FooterColumn title="Kurumsal" links={companyNav} />
             <FooterColumn title="Hesap" links={[{ href: appLinks.login, label: "Giriş yap", external: true }]} />
@@ -87,13 +96,16 @@ function FooterColumn({
   title,
   links,
   className,
+  children,
 }: {
   title: string;
   links: { href: string; label: string; external?: boolean }[];
   className?: string;
+  children?: React.ReactNode;
 }) {
   return (
     <div className={className}>
+      {children}
       <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-500">{title}</p>
       <ul className="mt-5 space-y-3 text-[0.9375rem]">
         {links.map((l) => (

@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/section-header";
 import { hero } from "@/content/home";
 import { cn } from "@/lib/utils";
+import { HeroScene } from "./hero-scene";
 
 /**
  * Ana sayfa üst bölümü: tek h1, değer önerisi, iki CTA, ürün gerçekleri satırı ve
@@ -13,6 +14,8 @@ export function HomeHero() {
   return (
     <section aria-labelledby="hero-title" className="relative overflow-hidden border-b border-line">
       <div aria-hidden className="bg-grid mask-fade-b pointer-events-none absolute inset-0 opacity-80" />
+      {/* Topografik saha sahnesi (three.js). Kaldırmak için bu satırı silin; ayarlar hero-scene/config.ts */}
+      <HeroScene className="h-[620px] sm:h-[680px]" />
       <Container size="wide" className="relative pt-12 sm:pt-20">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
           <div className="lg:col-span-7">
@@ -40,7 +43,7 @@ export function HomeHero() {
         </div>
 
         {/* Ürün gerçekleri */}
-        <dl className="mt-14 grid grid-cols-2 border-l border-t border-line-strong bg-white/70 sm:grid-cols-4">
+        <dl className="mt-14 lg:mt-24 grid grid-cols-2 border-l border-t border-line-strong bg-white/70 sm:grid-cols-4">
           {hero.facts.map((f) => (
             <div key={f.k} className="border-b border-r border-line-strong px-4 py-3 sm:px-5">
               <dt className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-500">{f.k}</dt>
