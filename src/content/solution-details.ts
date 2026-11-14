@@ -127,8 +127,8 @@ export const solutionDetails: Record<SolutionSlug, SolutionDetail> = {
       { step: "Sözleşme", detail: "Sahaya bağlı sözleşme açılır, taraf ve tutar girilir.", feature: "hakedis-ve-finans", record: "SZ-0012" },
       { step: "Keşif ve iş programı", detail: "Poz no'lu keşif ve iş programı Excel ya da P6'dan aktarılır.", feature: "kesif-ve-is-programi", record: "15.150.1005" },
       { step: "Günlük rapor", detail: "Şantiye şefi raporu her gün girer, yoklama puantaja işlenir.", feature: "saha-raporlari", record: "GÜNLÜK RAPOR" },
-      { step: "Hakediş", detail: "Dönem tarihleriyle hakediş hazırlanır ve onaylanır.", feature: "hakedis-ve-finans", record: "DÖNEM 03" },
-      { step: "Fatura", detail: "Hakedişe bağlı fatura kesilir, ödeme izlenir.", feature: "hakedis-ve-finans", record: "KDV %20" },
+      { step: "Hakediş", detail: "Bu dönemin metrajı girilir, kesintilerle net ödenecek hesaplanır ve onaylanır.", feature: "hakedis-ve-finans", record: "3. HAKEDİŞ" },
+      { step: "Fatura", detail: "Yüklenicinin faturası hakedişten açılır, PDF'i eklenir, ödeme izlenir.", feature: "hakedis-ve-finans", record: "TEVKİFAT 4/10" },
     ],
     roles: [
       {

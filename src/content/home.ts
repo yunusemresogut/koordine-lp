@@ -38,7 +38,7 @@ export const contextRows: { topic: string; before: string; after: string }[] = [
   {
     topic: "Hakediş ve fatura",
     before: "Şantiyede ve muhasebede ayrı ayrı tutulan tablolar.",
-    after: "Hakediş sözleşmeye, fatura hakedişe bağlanır. Sözleşmenin ilerlemesi ayrıca hesaplanmaz.",
+    after: "Hakediş metrajla hazırlanır, önceki miktarlar bir sonrakine taşınır. Fatura hakedişten açılır.",
   },
   {
     topic: "Ekipman ve araçlar",
@@ -51,13 +51,13 @@ export const contextRows: { topic: string; before: string; after: string }[] = [
 export const moduleScope: Record<FeatureSlug, string> = {
   "saha-ve-harita": "Harita, saha listesi, açılış takvimi",
   "kesif-ve-is-programi": "Poz no, metraj, Excel ve P6 aktarımı, Gantt",
-  "hakedis-ve-finans": "Sözleşme, hakediş, fatura, 5 para birimi",
+  "hakedis-ve-finans": "Metrajlı hakediş, kesintiler, kalemli fatura",
   "saha-raporlari": "Günlük rapor, İSG, NCR, kontrol listesi",
   "talepler-ve-onaylar": "Tadilat talepleri, öncelik, disiplin onayları",
   "insan-kaynaklari": "Personel, belgeler, puantaj, izin",
   "envanter-ve-zimmet": "Demirbaş, zimmet, araç belgeleri",
-  "ekip-ve-iletisim": "Sohbet, dosya paylaşımı, bildirimler",
-  "yapay-zeka-asistani": "Soru sorma, onaylı kayıt ekleme",
+  "ekip-ve-iletisim": "Sohbet, sesli mesaj, bildirimler",
+  "yapay-zeka-asistani": "Soru sorma, sesle yazma, onaylı kayıt ekleme",
 };
 
 /** Saha raporları sekmeleri */
@@ -177,6 +177,10 @@ export const assistantPoints: { title: string; body: string }[] = [
   {
     title: "Yetkinizin dışına çıkmaz",
     body: "Ekleme yetkiniz olmayan bir modülde asistan da kayıt ekleyemez.",
+  },
+  {
+    title: "Kullanmadan önce onayınızı alır",
+    body: "Sorular yurt dışındaki yapay zekâ hizmetinde işlendiği için firma yöneticisi ve her kullanıcı önce veri işleme onayı verir.",
   },
   {
     title: "Önemli kararlarda kontrol etmenizi hatırlatır",

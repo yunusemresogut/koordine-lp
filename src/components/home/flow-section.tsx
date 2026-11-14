@@ -51,7 +51,7 @@ export function FlowSection() {
             flip
             title="Hakedişler sözleşmeye, faturalar hakedişe bağlanır."
             body="Sözleşmenin ne kadarının hakedişe dönüştüğünü ve ne kadarının ödendiğini ayrıca hesaplamanız gerekmez. Farklı para birimleri kur çevrimi yapılmadan ayrı toplanır."
-            points={["Sözleşme ve hakediş durumları ayrı izlenir", "Faturada KDV oranı ve KDV hariç tutar"]}
+            points={["Metraj, kesintiler ve net ödenecek tutar", "Kalemli fatura, KDV tevkifatı ve vade takibi"]}
             href="/ozellikler/hakedis-ve-finans"
             linkText="Hakediş ve finans"
             visual={<ProgressPaymentMockup />}

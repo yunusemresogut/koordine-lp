@@ -3,9 +3,9 @@ import { AppFrame } from "./app-frame";
 import { Badge } from "./primitives";
 
 /**
- * AssistantMockup — "Koordine Asistan" paneli: kullanıcı sorusu, firma verisine dayalı cevap ve
+ * AssistantMockup — "Koordine'ye Sor" asistan paneli: kullanıcı sorusu, firma verisine dayalı cevap ve
  * kayıt eklemeden önce gösterilen "önizleme → Onayla ve ekle" kartı. Altta yapay zekâ uyarısı.
- * (Uygulamadaki adı "Maps'e Sor"; sitede marka "Koordine Asistan" olarak gösterilir.)
+ * (Uygulamadaki adıyla aynı: "Koordine'ye Sor". Giriş alanında sesle yazma için mikrofon düğmesi var.)
  *
  * Proplar:
  * - `variant`: "full" (soru + cevap + önizleme, varsayılan) | "answer" (soru + cevap) | "preview" (yalnız kayıt önizlemesi akışı).
@@ -14,7 +14,7 @@ import { Badge } from "./primitives";
 export function AssistantMockup({
   variant = "full",
   frame = true,
-  label = "Koordine Asistan örneği: açılış takvimiyle ilgili bir soruya verilen cevap ve onay bekleyen yeni tadilat talebi önizlemesi.",
+  label = "Koordine'ye Sor asistanı örneği: açılış takvimiyle ilgili bir soruya verilen cevap ve onay bekleyen yeni tadilat talebi önizlemesi.",
   className,
 }: {
   variant?: "full" | "answer" | "preview";
@@ -31,7 +31,7 @@ export function AssistantMockup({
           </svg>
         </span>
         <div className="min-w-0">
-          <div className="text-[12.5px] font-semibold text-ink-950">Koordine Asistan</div>
+          <div className="text-[12.5px] font-semibold text-ink-950">Koordine&apos;ye Sor</div>
           <div className="truncate text-[10.5px] text-ink-500">Firma verilerinize göre cevaplar, onayınızla kayıt ekler</div>
         </div>
       </div>
@@ -93,7 +93,13 @@ export function AssistantMockup({
 
       <div className="border-t border-line px-4 py-3">
         <div className="flex h-8 items-center justify-between rounded-sm border border-line-strong bg-white px-2.5 text-[11px] text-ink-400">
-          Bir soru sorun…
+          Koordine&apos;ye bir soru sorun…
+          <span className="ml-auto mr-1.5 grid size-5 place-items-center text-ink-500" aria-hidden>
+            <svg viewBox="0 0 16 16" className="size-3" fill="none" stroke="currentColor" strokeWidth="1.4">
+              <rect x="6" y="2" width="4" height="7.5" rx="2" />
+              <path d="M3.5 7.5a4.5 4.5 0 0 0 9 0M8 12v2" />
+            </svg>
+          </span>
           <span className="grid size-5 place-items-center rounded-xs bg-ink-950 text-white">
             <svg viewBox="0 0 12 12" className="size-2.5" fill="none" stroke="currentColor" strokeWidth="1.6">
               <path d="M6 10V2M2.5 5.5 6 2l3.5 3.5" />

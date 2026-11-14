@@ -70,14 +70,20 @@ function Tab({ active, children }: { active?: boolean; children: React.ReactNode
   );
 }
 
-const MAT_TONE: Record<string, Tone> = { Geldi: "ok", Bekleniyor: "warn", Gitti: "brand" };
+/** Uygulamadaki keşif malzeme durumları */
+const MAT_TONE: Record<string, Tone> = {
+  "Sahaya teslim edildi": "ok",
+  "Tedarik bekleniyor": "warn",
+  Depoda: "brand",
+  "Depoya geri getirildi": "neutral",
+};
 
 function Estimate() {
   const rows = [
-    ["15.250.1011", "12,5 mm alçı levha ile bölme duvar", "420", "m²", "₺685,40", "₺287.868,00", "Geldi"],
-    ["15.275.1102", "Taş yünü ses yalıtımı, 50 mm", "420", "m²", "₺212,60", "₺89.292,00", "Geldi"],
-    ["35.255.1301", "NYM 3×2,5 mm² kablo", "1.850", "m", "₺48,90", "₺90.465,00", "Bekleniyor"],
-    ["25.110.1201", "VRF iç ünite, kaset tip", "14", "adet", "€1.420,00", "€19.880,00", "Gitti"],
+    ["15.250.1011", "12,5 mm alçı levha ile bölme duvar", "420", "m²", "₺685,40", "₺287.868,00", "Sahaya teslim edildi"],
+    ["15.275.1102", "Taş yünü ses yalıtımı, 50 mm", "420", "m²", "₺212,60", "₺89.292,00", "Sahaya teslim edildi"],
+    ["35.255.1301", "NYM 3×2,5 mm² kablo", "1.850", "m", "₺48,90", "₺90.465,00", "Tedarik bekleniyor"],
+    ["25.110.1201", "VRF iç ünite, kaset tip", "14", "adet", "€1.420,00", "€19.880,00", "Depoda"],
   ];
   return (
     <>
@@ -105,7 +111,7 @@ function Estimate() {
             <td className={cn(td, "hidden whitespace-nowrap text-right font-mono text-[11px] tabular-nums @2xl:table-cell")}>{price}</td>
             <td className={cn(td, "whitespace-nowrap text-right font-mono text-[11px] tabular-nums")}>{amount}</td>
             <td className={cn(td, "hidden @xl:table-cell")}>
-              <Badge tone={MAT_TONE[status]}>{status}</Badge>
+              <Badge tone={MAT_TONE[status]} className="whitespace-nowrap">{status}</Badge>
             </td>
           </tr>
         ))}

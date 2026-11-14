@@ -20,8 +20,8 @@ export function AssistantSection() {
               Kayıtlarınıza soru sorun, eklemeleri siz onaylayın.
             </h2>
             <p className="mt-5 max-w-xl text-pretty text-[1.0625rem] leading-relaxed text-ink-600 sm:text-lg">
-              &ldquo;Önümüzdeki 30 günde hangi sahalar açılıyor?&rdquo; gibi bir soruyu Koordine Asistan&apos;a
-              yazarsınız, asistan firmanızın kayıtlarına bakarak cevap verir.
+              &ldquo;Önümüzdeki 30 günde hangi sahalar açılıyor?&rdquo; gibi bir soruyu Koordine&apos;ye Sor
+              asistanına yazarsınız ya da söylersiniz, asistan firmanızın kayıtlarına bakarak cevap verir.
             </p>
 
             <ul className="mt-10 grid border-l border-t border-line sm:grid-cols-2">

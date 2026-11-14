@@ -94,7 +94,7 @@ export const faq: FaqItem[] = [
     category: "veri-ve-guvenlik",
     question: "Yapay zekâ asistanı verilerimizi nasıl kullanıyor?",
     answer:
-      "Asistan sorularınızı firmanızın Koordine'deki kayıtlarına göre cevaplar. Kullanıcı yetkileri asistanda da geçerlidir, yani yetkiniz olmayan bir kaydı asistanla da ekleyemezsiniz.\n\nYapay zekâ hata yapabilir, önemli kararlarda verileri kontrol etmenizi öneririz. Firma yöneticisi asistanı ya da asistanla kayıt eklemeyi ayarlardan kapatabilir. Sorular, cevabın üretilmesi için yapay zekâ hizmet sağlayıcısına iletilir. Ayrıntılar KVKK Aydınlatma Metni'nde yer alır.",
+      "Asistan sorularınızı firmanızın Koordine'deki kayıtlarına göre cevaplar. Sorular ve cevap için gereken kayıt bilgileri yapay zekâ hizmet sağlayıcısına iletilir ve yurt dışındaki sunucularda işlenir. Bu yüzden asistan, önce firma yöneticisi ardından her kullanıcı veri işleme onayı vermeden açılmaz. Onay istenildiğinde Ayarlar sayfasından geri çekilebilir.\n\nKullanıcı yetkileri asistanda da geçerlidir, yani yetkiniz olmayan bir kaydı asistanla da ekleyemezsiniz. Yapay zekâ hata yapabilir, önemli kararlarda verileri kontrol etmenizi öneririz. Ayrıntılar KVKK Aydınlatma Metni'nde yer alır.",
   },
   {
     id: "roller-yetkiler",

@@ -57,7 +57,7 @@ export default function PrivacyPage() {
             <li>
               <strong>Müşteri içeriği:</strong> Firmanızın platforma girdiği sahalar, keşif ve iş programı kalemleri,
               sözleşme, hakediş ve fatura kayıtları, saha raporları, fotoğraflar, dosyalar, talepler, insan kaynakları
-              kayıtları, envanter ve sohbet mesajları.
+              kayıtları, envanter, sohbet mesajları ve sesli mesajlar.
             </li>
             <li>
               <strong>Kullanım ve güvenlik kayıtları:</strong> Oturum bilgileri, giriş zamanları ve platformdaki işlem
@@ -92,8 +92,8 @@ export default function PrivacyPage() {
           <p>
             Bu veriler içindeki kişisel veriler bakımından müşteri firma veri sorumlusu, Koordine ise veri işleyendir. Hangi
             kullanıcının hangi modülü görebileceği, ekleyebileceği, düzenleyebileceği veya silebileceği müşteri firmanın
-            yöneticisi tarafından rol ve kullanıcı bazında belirlenir. Ekip sohbetindeki mesajların ve dosyaların saklama
-            süresi de firma ayarlarından belirlenir; süresi dolan mesajlar ve dosyalar kalıcı olarak silinir.
+            yöneticisi tarafından rol ve kullanıcı bazında belirlenir. Ekip sohbetindeki mesajların, dosyaların ve sesli
+            mesajların saklama süresi de firma ayarlarından belirlenir; süresi dolanlar kalıcı olarak silinir.
           </p>
         </>
       ),
@@ -108,6 +108,14 @@ export default function PrivacyPage() {
             amaçla soru ve yanıt için gereken kayıt bilgileri, yanıtı üretmek üzere yapay zekâ hizmet sağlayıcısına iletilir.
           </p>
           <ul>
+            <li>
+              Hizmet sağlayıcının sunucuları yurt dışındadır. Asistan, önce firma yöneticisi ardından her kullanıcı veri
+              işleme ve yurt dışına aktarım onayı vermeden çalışmaz; onay Ayarlar sayfasından geri çekilebilir.
+            </li>
+            <li>
+              Sesle yazma kullanıldığında konuşma, kullanılan tarayıcının konuşma tanıma hizmetinde (Chrome ve Edge&apos;de
+              Google, Safari&apos;de Apple) yazıya çevrilir. Ses kaydı Koordine&apos;de saklanmaz.
+            </li>
             <li>Asistan kayıt eklemeyi önerdiğinde önce bir önizleme gösterir; kayıt yalnızca kullanıcı onaylarsa eklenir.</li>
             <li>Kullanıcının yetkileri asistanda da geçerlidir.</li>
             <li>Firma yöneticisi asistanı veya asistanla kayıt eklemeyi ayarlardan tamamen kapatabilir.</li>

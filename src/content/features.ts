@@ -52,10 +52,10 @@ export const features: Feature[] = [
     slug: "hakedis-ve-finans",
     name: "Hakediş ve Finans",
     icon: "receipt",
-    summary: "Sözleşme, hakediş ve faturaları birbirine bağlı olarak takip edin.",
+    summary: "Metrajlı hakediş, kesintiler ve kalemli faturalar; sözleşmeye bağlı takip.",
     seoTitle: "Hakediş, Sözleşme ve Fatura Takibi",
     seoDescription:
-      "Sözleşme, hakediş ve faturaları saha bazında birbirine bağlayın. TRY, USD, EUR, GBP ve CHF tutarlar ayrı toplanır, sözleşme ilerlemesi güncel kalır.",
+      "Hakedişi metrajla hazırlayın; teminat, damga vergisi, stopaj ve KDV tevkifatıyla net ödenecek tutarı görün. Faturaları kalem kalem girin, PDF ya da e-Fatura XML ekleyin.",
   },
   {
     slug: "saha-raporlari",
@@ -97,10 +97,10 @@ export const features: Feature[] = [
     slug: "ekip-ve-iletisim",
     name: "Ekip ve İletişim",
     icon: "messages",
-    summary: "Firma içi sohbet, dosya paylaşımı, bildirimler ve rol bazlı yetkiler.",
+    summary: "Firma içi sohbet, sesli mesaj, bildirimler ve rol bazlı yetkiler.",
     seoTitle: "Ekip İletişimi, Roller ve Yetkiler",
     seoDescription:
-      "Firma içi sohbet ve dosya paylaşımı, modül bazında bildirimler. Mühendis, mimar, saha sorumlusu ve muhasebe gibi rollere göre ayarlanan yetkiler.",
+      "Firma içi sohbet, dosya paylaşımı ve sesli mesaj, modül bazında bildirimler. Mühendis, mimar, saha sorumlusu ve muhasebe gibi rollere göre ayarlanan yetkiler.",
   },
   {
     slug: "yapay-zeka-asistani",

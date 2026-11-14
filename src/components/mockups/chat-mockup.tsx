@@ -62,7 +62,7 @@ function Contacts() {
     { name: "Emre Aydın", role: "Saha Sorumlusu", last: "Rapor ekte, armatürler gecikiyor.", unread: 0, active: true },
     { name: "Selin Kara", role: "Mimar", last: "Malzeme sunumunu güncelledim.", unread: 2 },
     { name: "Burak Yıldız", role: "Makine Mühendisi", last: "VRF test raporu yarın.", unread: 0 },
-    { name: "Ayşe Koç", role: "Muhasebe", last: "3. hakediş faturası kesildi.", unread: 1 },
+    { name: "Ayşe Koç", role: "Muhasebe", last: "Sesli mesaj (0:18)", unread: 1 },
     { name: "Deniz Arslan", role: "Bölge Müdürü", last: "Siz: Açılış planını konuşalım.", unread: 0 },
   ];
   return (
@@ -130,6 +130,7 @@ function Conversation() {
           </svg>
           <div className="px-2 py-1 text-[10px] text-ink-500">Vitrin camı, sol köşe</div>
         </div>
+        <VoiceMsg duration="0:24" />
         <Msg mine>Teşekkürler. Vitrin için talebi açtım, TT-0047. Elektrik onayını bugün tamamlayalım.</Msg>
         <div className="text-right font-mono text-[9.5px] text-ink-400">Görüldü · 14:32</div>
       </div>
@@ -142,6 +143,35 @@ function Conversation() {
         <span className="flex h-7 flex-1 items-center truncate rounded-sm border border-line-strong px-2 text-[10.5px] text-ink-400">
           Emre Aydın kişisine mesaj yazın…
         </span>
+        {/* Mesaj kutusu boşken gönder düğmesi mikrofona döner (sesli mesaj) */}
+        <span className="grid size-7 place-items-center rounded-sm bg-brand-600 text-white">
+          <svg viewBox="0 0 16 16" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="1.4">
+            <rect x="6" y="2" width="4" height="7.5" rx="2" />
+            <path d="M3.5 7.5a4.5 4.5 0 0 0 9 0M8 12v2" />
+          </svg>
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/** Sesli mesaj balonu: oynat düğmesi, dalga çizgisi ve süre */
+function VoiceMsg({ duration }: { duration: string }) {
+  const bars = [4, 7, 10, 6, 12, 9, 5, 11, 8, 13, 7, 4, 9, 6, 10, 5, 8, 4];
+  return (
+    <div className="flex">
+      <div className="flex w-[62%] max-w-60 items-center gap-2 rounded-md rounded-bl-xs border border-line bg-white px-2.5 py-2">
+        <span className="grid size-6 shrink-0 place-items-center rounded-full bg-ink-950 text-white">
+          <svg viewBox="0 0 10 10" className="ml-px size-2.5" fill="currentColor">
+            <path d="M2.5 1.5v7l6-3.5-6-3.5Z" />
+          </svg>
+        </span>
+        <span className="flex h-4 flex-1 items-center gap-[2px]">
+          {bars.map((h, i) => (
+            <span key={i} className={cn("w-[2px] rounded-full", i < 5 ? "bg-brand-600" : "bg-ink-300")} style={{ height: `${h}px` }} />
+          ))}
+        </span>
+        <span className="font-mono text-[9.5px] tabular-nums text-ink-500">{duration}</span>
       </div>
     </div>
   );

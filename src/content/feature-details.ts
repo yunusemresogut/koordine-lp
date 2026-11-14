@@ -281,7 +281,7 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
     },
     sheet: [
       { label: "Keşif", value: "Poz no, miktar, birim, birim fiyat, para birimi" },
-      { label: "Malzeme", value: "Bekleniyor, geldi, gitti" },
+      { label: "Malzeme", value: "Tedarik bekleniyor, depoda, sahada, depoya iade" },
       { label: "İçe aktarım", value: "Excel (.xlsx) ve Primavera P6 (.xer)" },
     ],
     capabilities: [
@@ -300,8 +300,8 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
       {
         title: "Malzeme durumu",
         body:
-          "Her keşif kaleminin malzemesi Bekleniyor, Geldi ya da Gitti olarak işaretlenir. Pano, malzemenin sahaya ulaşma oranını ve en çok malzeme bekleyen sahaları gösterir.",
-        terms: ["Bekleniyor", "Geldi", "Gitti"],
+          "Her keşif kaleminde malzemenin nerede olduğu işaretlenir: tedarik bekleniyor, depoda, sahaya teslim edildi ya da fazlası depoya geri getirildi. Pano, kalemlerin ne kadarının sahaya ulaştığını, keşif tutarının para birimine göre dağılımını ve en çok malzeme bekleyen sahaları gösterir.",
+        terms: ["Tedarik bekleniyor", "Depoda", "Sahaya teslim edildi", "Depoya geri getirildi"],
       },
       {
         title: "İş programı ve Gantt",
@@ -423,7 +423,7 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
     hero: {
       title: "Sözleşme, hakediş ve faturaları sahaya bağlı tutun.",
       lede:
-        "Sözleşme sahaya, hakediş sözleşmeye, fatura hakedişe bağlanır. Fatura ödendi olarak işaretlenince sözleşme ilerlemesi güncellenir. Farklı para birimlerindeki tutarlar ayrı toplanır.",
+        "Hakedişi metrajla hazırlayın; kesintileri, KDV'yi ve tevkifatı Koordine hesaplasın. Onaylanan hakedişten faturaya geçin, fatura belgesini PDF ya da e-Fatura XML olarak ekleyin.",
       secondary: { label: "Kayıtların bağlantısını görün", href: "#zincir" },
     },
     visual: {
@@ -432,7 +432,8 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
     },
     sheet: [
       { label: "Kayıtlar", value: "Sözleşme, hakediş, fatura" },
-      { label: "KDV", value: "%0, %1, %10, %20 ya da özel oran" },
+      { label: "Kesintiler", value: "Teminat, damga vergisi, stopaj, avans, SGK, ceza" },
+      { label: "KDV", value: "Kalem bazında oran, tevkifat 2/10 ile 10/10 arası" },
       { label: "Para birimi", value: "TRY, USD, EUR, GBP, CHF" },
     ],
     capabilities: [
@@ -443,28 +444,34 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
         terms: ["SZ-0012", "Aktif", "Süresi doldu", "Fesih"],
       },
       {
-        title: "Hakediş dönemi",
+        title: "Metrajlı hakediş",
         body:
-          "Her hakediş bir sözleşmeye bağlıdır ve dönem başlangıcı ile bitişini taşır. Hakediş ekranında sözleşmenin toplam hakedişi ve ödenen tutarı birlikte görünür.",
-        terms: ["Dönem başlangıcı", "Gönderildi", "Onaylandı", "Ödendi"],
+          "Her kalemde poz no, birim fiyat, sözleşme miktarı, önceki ve bu dönem miktarı tutulur. Yeni hakediş açtığınızda önceki hakedişin kalemleri ve miktarları gelir, siz bu dönem yapılanı girersiniz. Kalemleri sahanın keşfinden de aktarabilirsiniz.",
+        terms: ["Önceki", "Bu dönem", "Kümülatif", "Keşiften aktar"],
       },
       {
-        title: "Fatura",
+        title: "Kesintiler ve net ödenecek",
         body:
-          "Fatura no, bağlı olduğu hakediş ve KDV hariç tutar girilir. KDV oranını seçtiğinizde KDV ve toplam hesaplanır; varsayılan oran firma ayarlarından gelir.",
-        terms: ["Fatura no", "Tutar (KDV hariç)", "KDV oranı"],
+          "Teminat, damga vergisi ve stopaj oranla; avans mahsubu, SGK ve ceza kesintisi tutarla girilir. Fiyat farkı, KDV ve KDV tevkifatı eklendiğinde net ödenecek tutar hesaplanır.",
+        terms: ["Teminat %5", "Damga vergisi ‰9,48", "Tevkifat 4/10", "Net ödenecek"],
       },
       {
-        title: "Sözleşme ilerlemesi",
+        title: "Onay ve hakediş raporu",
         body:
-          "İlerleme, ödenmiş faturaların KDV dahil toplamının sözleşme tutarına oranıdır. Ayrıca yüzde girmeniz gerekmez; fatura “Ödendi” olduğunda ilerleme değişir.",
-        terms: ["Sözleşme ilerlemesi", "Toplam hakediş", "Ödenen"],
+          "Hakediş taslaktan onaya gönderilir, onaylanır ve ödendi olarak kapanır. Onaylanan hakedişin miktar ve tutarları değiştirilemez. Hakediş raporu imza alanlarıyla A4 olarak yazdırılır.",
+        terms: ["Onaya gönder", "Onaylandı", "Ödendi", "Yazdır"],
       },
       {
-        title: "Para birimleri ayrı tutulur",
+        title: "Kalemli fatura",
         body:
-          "Her kayıt kendi para birimini taşır ve kur çevrimi yapılmaz. Listelerde toplamlar her para birimi için ayrı satırda gösterilir.",
-        terms: ["Toplam (TRY)", "Toplam (EUR)"],
+          "Gelen ve giden faturaları kalem kalem girersiniz; her kalemin kendi KDV oranı ve iskontosu olabilir. KDV oranlara göre ayrı gösterilir, tevkifat düşülerek ödenecek tutar bulunur. Vadesi geçen fatura listede işaretlenir.",
+        terms: ["Gelen", "Giden", "KDV %10", "KDV %20", "Vade"],
+      },
+      {
+        title: "Fatura belgesi ve e-Fatura",
+        body:
+          "PDF ya da fotoğrafı sürüklediğinizde belge formun yanında açılır. e-Fatura XML dosyası eklerseniz fatura no, ETTN, firma, vergi no ve kalemler forma aktarılır.",
+        terms: ["PDF önizleme", "e-Fatura XML", "ETTN"],
       },
     ],
     screens: {
@@ -474,11 +481,11 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
         {
           key: "payments",
           label: "Hakedişler",
-          summary: "Sözleşmeye bağlı dönemler; üstte sözleşme ilerlemesi ve ödenen tutar.",
+          summary: "Hakediş no, sözleşme ve yüklenici, dönem, tutar, net ödenecek ve sözleşme ilerlemesi.",
           points: [
-            "Arama hakediş ve sözleşme adına göre yapılır, durumla filtrelenir.",
-            "Gönderilen hakediş onaylanana kadar “Onay bekleyen hakediş” bildirimi gelir.",
-            "Hakedişe dosya eklenir, ekler önizlenir ve indirilir.",
+            "Üstte taslak, onay bekleyen ve ödeme bekleyen hakedişlerin sayısı ve net tutarı görünür.",
+            "Onay bekleyen hakediş, onaylayabilecek kişilerin menüsünde sayıyla görünür ve bildirim gelir.",
+            "Onaylanan hakedişin faturası hakediş ekranından açılır; yüklenici, tutar, KDV ve tevkifat dolu gelir.",
           ],
         },
         {
@@ -494,10 +501,11 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
         {
           key: "invoices",
           label: "Faturalar",
-          summary: "Fatura no, saha, KDV ve tutar; para birimi başına toplam.",
+          summary: "Fatura no ve firma, tarih, vade, toplam ve net ödenecek; gelen ve giden ayrı süzülür.",
           points: [
-            "Fatura bir hakedişe bağlanır; fatura no ve tutar zorunludur.",
-            "Kesilmiş ama ödenmemiş fatura için bildirim gelir.",
+            "Üstte ödenecek, tahsil edilecek ve vadesi geçen toplamlar görünür.",
+            "Aynı firmadan aynı numaralı fatura girilirse uyarı çıkar.",
+            "Fatura bir hakedişe bağlanabilir; malzeme alımı gibi hakedişsiz faturalar da girilir.",
           ],
         },
       ],
@@ -526,14 +534,14 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
             },
             {
               label: "Hakediş",
-              fields: ["Dönem başlangıcı", "Dönem bitişi", "Tutar", "Ekler"],
-              states: ["Taslak", "Gönderildi", "Onaylandı", "Ödendi"],
+              fields: ["Hakediş no ve dönem", "Metraj kalemleri", "Kesintiler", "Net ödenecek"],
+              states: ["Taslak", "Onay bekliyor", "Onaylandı", "Ödendi"],
               link: "Hakedişe bağlanır",
             },
             {
               label: "Fatura",
-              fields: ["Fatura no", "Tutar (KDV hariç)", "KDV oranı", "Toplam"],
-              states: ["Taslak", "Kesildi", "Ödendi", "İptal"],
+              fields: ["Fatura no ve ETTN", "Kalemler ve KDV", "Tevkifat", "Vade"],
+              states: ["Taslak", "Ödeme bekliyor", "Ödendi", "İptal"],
             },
           ],
         },
@@ -542,6 +550,8 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
           title: "Bilmeniz gerekenler",
           items: [
             { term: "Varsayılanlar", body: "Para birimi ve KDV oranı firma ayarlarından önerilir, kayıtta değiştirilebilir." },
+            { term: "Sözleşme ilerlemesi", body: "Ödenmiş faturaların KDV dahil toplamının sözleşme tutarına oranıdır; ayrıca yüzde girmeniz gerekmez." },
+            { term: "Para birimi", body: "Kur çevrimi yapılmaz. Farklı para birimindeki tutarlar toplanmaz, her biri ayrı satırda gösterilir." },
             { term: "Bütçe takibi", body: "Saha bütçesi keşif tutarıyla karşılaştırılır; bütçeyi aşan şantiyeler ayrıca listelenir." },
             { term: "Yetki", body: "Muhasebe rolü varsayılan olarak hakediş ve faturaları yönetir. Bu ayar değiştirilebilir." },
           ],
@@ -550,8 +560,8 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
     },
     connections: [
       { feature: "saha-ve-harita", dir: "in", what: "Sözleşme bir sahaya bağlanır. İhaledeki sahada sözleşme yoksa uyarı çıkar.", record: "Saha → Sözleşme" },
-      { feature: "kesif-ve-is-programi", dir: "in", what: "Keşif tutarı saha bütçesiyle karşılaştırılır.", record: "Keşif → Bütçe" },
-      { feature: "ekip-ve-iletisim", dir: "out", what: "Sözleşme bitişi, onay bekleyen hakediş ve ödenmemiş fatura bildirimleri.", record: "Bildirim" },
+      { feature: "kesif-ve-is-programi", dir: "in", what: "Hakediş kalemleri sahanın keşfinden aktarılır; keşif tutarı saha bütçesiyle karşılaştırılır.", record: "Keşif → Hakediş" },
+      { feature: "ekip-ve-iletisim", dir: "out", what: "Sözleşme bitişi, onay bekleyen hakediş ve ödenmemiş fatura bildirimleri; onay bekleyenler menüde sayıyla.", record: "Bildirim" },
       { feature: "yapay-zeka-asistani", dir: "out", what: "Asistan hakediş ve fatura durumunu sorulduğunda yorumlar.", record: "Soru ve cevap" },
     ],
     solutions: [
@@ -565,14 +575,19 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
           "Fatura kaydedilir, ancak kur çevrimi yapılmadığı için sözleşme ilerlemesine sayılmaz. Fatura formu bunu kaydetmeden önce uyarı olarak gösterir.",
       },
       {
+        question: "Koordine'den e-Fatura kesebilir miyiz?",
+        answer:
+          "Hayır. Koordine fatura kesmez ve GİB'e göndermez. Entegratörünüzden gelen ya da kestiğiniz faturaları kaydetmek ve ödemesini takip etmek içindir. e-Fatura XML dosyasını eklerseniz bilgiler forma aktarılır.",
+      },
+      {
+        question: "Önceki hakedişlerdeki miktarlar nasıl taşınır?",
+        answer:
+          "Aynı sözleşmeye yeni hakediş açtığınızda son hakedişin kalemleri gelir. O hakedişteki toplam miktar yeni hakedişte önceki miktar olur, bu dönem miktarı sıfırdan başlar. Oranlı kesintiler de aynen devam eder.",
+      },
+      {
         question: "Feshedilen sözleşmenin kayıtları silinir mi?",
         answer:
           "Hayır. Sözleşmenin durumu Fesih olur; sözleşme, ekleri ve bağlı hakedişler yerinde kalır. İhale aşamasındaki sahada sözleşme uyarısı yeniden görünür.",
-      },
-      {
-        question: "Hakediş modülünü kullanmaya başlamak için ne gerekir?",
-        answer:
-          "Firma profilinde vergi numarası, yetkili kişi, telefon ve adresin dolu olması gerekir. Eksikse uygulama sizi profile yönlendirir.",
       },
     ],
     cta: {
@@ -1183,8 +1198,8 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
       {
         title: "Birebir sohbet",
         body:
-          "Ekip listesinde kişinin rolü ve okunmamış mesaj sayısı görünür. Sohbette 10 MB'a kadar dosya ve görsel paylaşılır. Mesajların ne kadar saklanacağını firma belirler.",
-        terms: ["Görüldü", "En fazla 10 MB", "Mesaj saklama süresi"],
+          "Ekip listesinde kişinin rolü ve okunmamış mesaj sayısı görünür. Sohbette 10 MB'a kadar dosya ve görsel paylaşılır, mikrofonla 5 dakikaya kadar sesli mesaj gönderilir. Mesajların ne kadar saklanacağını firma belirler.",
+        terms: ["Görüldü", "Sesli mesaj", "En fazla 10 MB", "Mesaj saklama süresi"],
       },
       {
         title: "Hazır ve özel roller",
@@ -1201,8 +1216,8 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
       {
         title: "Bildirimler",
         body:
-          "17 bildirim türü vardır. Her kullanıcı bildirimleri modül bazında açıp kapatır; firma bazılarını zorunlu kılabilir. Tarayıcı izin verirse masaüstü bildirimi de gösterilir.",
-        terms: ["Masaüstü bildirimleri", "Tümünü okundu işaretle"],
+          "17 bildirim türü vardır. Her kullanıcı bildirimleri modül bazında açıp kapatır; firma bazılarını zorunlu kılabilir. Onayınızı bekleyen hakediş, izin ve belgeler ile süresi dolmuş belgeler menüde de sayıyla görünür.",
+        terms: ["Masaüstü bildirimleri", "Menüde onay bekleyenler"],
       },
       {
         title: "Tek oturum",
@@ -1221,6 +1236,7 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
           summary: "Solda ekip listesi, sağda konuşma; PDF rapor ve fotoğraf paylaşımı.",
           points: [
             "Okunmamış mesajlar menüde ve bildirimle görünür.",
+            "Sesli mesaj sohbette dinlenir; dosya paylaşımı kapalıysa sesli mesaj da kapanır.",
             "Mesaj ya da sohbetin tamamı iki taraf için de silinebilir.",
             "Ekip sohbeti firma ayarlarından kapatılabilir.",
           ],
@@ -1299,7 +1315,7 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
     hero: {
       title: "Firma verinize soru sorun, önerdiği kaydı siz onaylayın.",
       lede:
-        "Koordine Asistan sahalar, açılış takvimi, iş planları ve finans kayıtlarınız üzerinden cevap verir. Saha, tadilat talebi, iş planı ya da keşif kalemi eklemesini isteyebilirsiniz; siz onaylamadan kayıt oluşmaz.",
+        "Koordine'ye Sor asistanı sahalar, açılış takvimi, iş planları ve finans kayıtlarınız üzerinden cevap verir. Saha, tadilat talebi, iş planı ya da keşif kalemi eklemesini isteyebilirsiniz; siz onaylamadan kayıt oluşmaz.",
       secondary: { label: "Neler ekleyebildiğini görün", href: "#eylemler" },
     },
     visual: {
@@ -1309,7 +1325,7 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
     sheet: [
       { label: "Okuduğu veri", value: "Sahalar, açılışlar, iş planı, keşif, sözleşme, hakediş, fatura, talepler" },
       { label: "Ekleyebildiği", value: "Saha, tadilat talebi, iş planı ve keşif kalemi" },
-      { label: "Ayar", value: "Firma genelinde açılıp kapatılır" },
+      { label: "Onay", value: "Firma adına yönetici, ayrıca her kullanıcı veri işleme onayı verir" },
     ],
     capabilities: [
       {
@@ -1335,6 +1351,18 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
         body:
           "Asistan sizin yetkinizle kayıt ekler. Saha ekleme yetkiniz yoksa asistanla da saha ekleyemezsiniz; kapalı bir modülde kayıt açılmaz.",
         terms: ["Saha ekleme yetkiniz yok."],
+      },
+      {
+        title: "Veri işleme onayı",
+        body:
+          "Asistan, yapay zekâ hizmet sağlayıcısına veri gönderdiği için önce firma yöneticisi, ardından her kullanıcı ne gönderildiğini ve verinin yurt dışında işlendiğini okuyup onay verir. Onay Ayarlar sayfasından geri çekilebilir.",
+        terms: ["Firma onayı", "Kişisel onay", "Onayı geri çek"],
+      },
+      {
+        title: "Sesle yazma",
+        body:
+          "Mikrofona basıp konuştuğunuzda söyledikleriniz mesaj kutusuna yazılır, gönderilmeden önce düzeltebilirsiniz. Chrome, Edge ve Safari'de çalışır.",
+        terms: ["Sesle yaz", "Türkçe ve İngilizce"],
       },
       {
         title: "Toplu kalem",
@@ -1412,7 +1440,7 @@ export const featureDetails: Record<FeatureSlug, FeatureDetail> = {
       {
         question: "Asistanı yalnızca soru sormak için açık tutabilir miyiz?",
         answer:
-          "Evet. Firma ayarlarında “Asistanı etkinleştir” ve “Asistanla kayıt ekleme” ayrı seçeneklerdir. İkincisini kapatırsanız asistan yalnızca soruları cevaplar.",
+          "Evet. Ayarlar altındaki Asistan sayfasında “Asistanı etkinleştir” ve “Asistanla kayıt ekleme” ayrı seçeneklerdir. İkincisini kapatırsanız asistan yalnızca soruları cevaplar.",
       },
     ],
     cta: {

@@ -4,8 +4,9 @@ import { Badge, Progress, td, th, type Tone } from "./primitives";
 
 /**
  * ProgressPaymentMockup — Hakediş / sözleşme / fatura tablosu.
- * Sözleşme kodları (SZ-0012), saha, dönem, tutar (₺ ve € birlikte; kur çevrimi yapılmadığı için
- * toplamlar para birimi başına ayrı), durum rozetleri ve altta toplam satırı.
+ * Sözleşme kodları (SZ-0012), saha, dönem, KDV dahil tutar ve net ödenecek (₺ ve € birlikte; kur
+ * çevrimi yapılmadığı için toplamlar para birimi başına ayrı), durum rozetleri ve altta toplam satırı.
+ * Örnek rakamlar uygulamanın hesabıyla tutarlıdır: KDV %20, tevkifat 4/10, teminat %5, damga ‰9,48.
  *
  * Proplar:
  * - `view`: "payments" (hakedişler, varsayılan) | "contracts" (sözleşmeler) | "invoices" (faturalar).
@@ -32,7 +33,10 @@ export function ProgressPaymentMockup({
   const meta = VIEWS[view];
   const visible = meta.rows.slice(0, rows ?? meta.rows.length);
   // Toplamlar görünen satırlardan, para birimi başına ayrı hesaplanır (kur çevrimi yok)
-  const totals = rows === undefined ? meta.totals : sumByCurrency(visible.map((r) => r.amount));
+  const totals =
+    rows === undefined
+      ? meta.totals
+      : sumByCurrency(visible.map((r) => r.amount), view === "contracts" ? "Toplam" : "Net ödenecek");
   return (
     <AppFrame
       label={label ?? meta.label}
@@ -65,10 +69,10 @@ export function ProgressPaymentMockup({
           <div>
             <div className="mb-1 flex items-baseline justify-between text-[10.5px]">
               <span className="text-ink-500">Sözleşme ilerlemesi</span>
-              <span className="font-mono tabular-nums text-ink-900">%67</span>
+              <span className="font-mono tabular-nums text-ink-900">%20</span>
             </div>
-            <Progress value={67} />
-            <div className="mt-1 font-mono text-[9.5px] tabular-nums text-ink-500">Toplam hakediş ₺3.272.200,00 · Ödenen ₺986.400,00</div>
+            <Progress value={20} />
+            <div className="mt-1 font-mono text-[9.5px] tabular-nums text-ink-500">Toplam hakediş ₺3.272.040,00 · Ödenen ₺986.400,00</div>
           </div>
         </div>
       )}
@@ -112,13 +116,13 @@ export function ProgressPaymentMockup({
 
 const STATUS_TONE: Record<string, Tone> = {
   Taslak: "muted",
-  Gönderildi: "warn",
+  "Onay bekliyor": "warn",
+  "Ödeme bekliyor": "brand",
   Onaylandı: "brand",
   Ödendi: "ok",
   Aktif: "ok",
   Tamamlandı: "neutral",
   "Süresi doldu": "risk",
-  Kesildi: "brand",
   İptal: "risk",
 };
 
@@ -142,28 +146,28 @@ const VIEWS: Record<
 > = {
   payments: {
     title: "Hakedişler",
-    description: "Sözleşmeye bağlı hakediş dönemleri.",
+    description: "Sözleşmeye bağlı hakedişler: metraj, kesintiler, onay ve ödeme.",
     search: "Hakediş, sözleşme…",
-    label: "Koordine hakediş tablosu örneği: sözleşme kodu, saha, dönem, tutar ve durum sütunları.",
+    label: "Koordine hakediş tablosu örneği: hakediş, sözleşme kodu, dönem, KDV dahil tutar, net ödenecek ve durum sütunları.",
     highlight: 1,
     columns: [
       { key: "title", label: "Hakediş" },
       { key: "contract", label: "Sözleşme", hide: hideSm, code: true },
-      { key: "site", label: "Saha", hide: hideMd },
       { key: "period", label: "Dönem", hide: hideMd },
-      { key: "amount", label: "Tutar", right: true, mono: true },
+      { key: "total", label: "Tutar (KDV dahil)", hide: hideMd, right: true, mono: true },
+      { key: "amount", label: "Net ödenecek", right: true, mono: true },
       { key: "status", label: "Durum" },
     ],
     rows: [
-      { title: "4. Hakediş", contract: "SZ-0012", site: "Kadıköy Bahariye Mağaza", period: "Kasım 2026", amount: "₺1.040.000,00", status: "Taslak" },
-      { title: "3. Hakediş", contract: "SZ-0012", site: "Kadıköy Bahariye Mağaza", period: "Ekim 2026", amount: "₺1.245.800,00", status: "Gönderildi" },
-      { title: "2. Hakediş", contract: "SZ-0012", site: "Kadıköy Bahariye Mağaza", period: "Eylül 2026", amount: "₺986.400,00", status: "Ödendi" },
-      { title: "1. Hakediş", contract: "SZ-0015", site: "Levent Ofis Katı", period: "Ekim 2026", amount: "€84.250,00", status: "Ödendi" },
-      { title: "2. Hakediş", contract: "SZ-0009", site: "Üsküdar Sahil Kafe", period: "Eylül 2026", amount: "₺642.300,00", status: "Onaylandı" },
+      { title: "4. Hakediş", contract: "SZ-0012", period: "Kasım 2026", total: "₺1.039.800,00", amount: "₺918.940,58", status: "Taslak" },
+      { title: "3. Hakediş", contract: "SZ-0012", period: "Ekim 2026", total: "₺1.245.840,00", amount: "₺1.101.031,86", status: "Onay bekliyor" },
+      { title: "2. Hakediş", contract: "SZ-0012", period: "Eylül 2026", total: "₺986.400,00", amount: "₺871.747,44", status: "Ödendi" },
+      { title: "1. Hakediş", contract: "SZ-0015", period: "Ekim 2026", total: "€84.240,00", amount: "€74.448,50", status: "Ödendi" },
+      { title: "2. Hakediş", contract: "SZ-0009", period: "Eylül 2026", total: "₺642.300,00", amount: "₺567.643,33", status: "Onaylandı" },
     ],
     totals: [
-      { label: "Toplam (TRY)", value: "₺3.914.500,00" },
-      { label: "Toplam (EUR)", value: "€84.250,00" },
+      { label: "Net ödenecek (TRY)", value: "₺3.459.363,21" },
+      { label: "Net ödenecek (EUR)", value: "€74.448,50" },
     ],
   },
   contracts: {
@@ -194,32 +198,33 @@ const VIEWS: Record<
   },
   invoices: {
     title: "Faturalar",
-    description: "Hakedişe bağlı faturalar.",
-    search: "Fatura no, saha…",
-    label: "Koordine fatura listesi örneği: fatura no, saha, KDV hariç tutar, KDV ve durum.",
+    description: "Gelen ve giden faturaların kaydı, belgesi ve ödeme takibi.",
+    search: "Fatura no, firma, VKN…",
+    label: "Koordine fatura listesi örneği: fatura no, firma, vade, KDV dahil toplam, tevkifat sonrası net ödenecek ve durum.",
     columns: [
       { key: "no", label: "Fatura No", code: true },
-      { key: "site", label: "Saha", hide: hideSm },
-      { key: "vat", label: "KDV", hide: hideMd, right: true, mono: true },
-      { key: "amount", label: "Tutar (KDV hariç)", right: true, mono: true },
+      { key: "party", label: "Firma", hide: hideSm },
+      { key: "due", label: "Vade", hide: hideMd, mono: true },
+      { key: "total", label: "Toplam", hide: hideMd, right: true, mono: true },
+      { key: "amount", label: "Net ödenecek", right: true, mono: true },
       { key: "status", label: "Durum" },
     ],
     rows: [
-      { no: "KDA2026000000418", site: "Kadıköy Bahariye Mağaza", vat: "₺197.280,00", amount: "₺986.400,00", status: "Kesildi" },
-      { no: "KDA2026000000402", site: "Üsküdar Sahil Kafe", vat: "₺128.460,00", amount: "₺642.300,00", status: "Ödendi" },
-      { no: "KDA2026000000397", site: "Levent Ofis Katı", vat: "€16.850,00", amount: "€84.250,00", status: "Ödendi" },
-      { no: "KDA2026000000421", site: "Ümraniye Lojistik Depo", vat: "₺84.000,00", amount: "₺420.000,00", status: "Taslak" },
+      { no: "KDA2026000000418", party: "Yalın Yapı İnşaat Taahhüt", due: "10.12.2026", total: "₺986.400,00", amount: "₺920.640,00", status: "Ödeme bekliyor" },
+      { no: "KDA2026000000402", party: "Ege Dekorasyon", due: "15.10.2026", total: "₺642.300,00", amount: "₺599.480,00", status: "Ödendi" },
+      { no: "KDA2026000000397", party: "Kuzey Yapı Ltd.", due: "20.11.2026", total: "€84.240,00", amount: "€78.624,00", status: "Ödendi" },
+      { no: "KDA2026000000421", party: "Marmara Elektrik", due: "05.12.2026", total: "₺420.000,00", amount: "₺392.000,00", status: "Taslak" },
     ],
     totals: [
-      { label: "Toplam (TRY)", value: "₺2.048.700,00" },
-      { label: "Toplam (EUR)", value: "€84.250,00" },
+      { label: "Net ödenecek (TRY)", value: "₺1.912.120,00" },
+      { label: "Net ödenecek (EUR)", value: "€78.624,00" },
     ],
   },
 };
 
 const CURRENCY: Record<string, string> = { "₺": "TRY", "€": "EUR", $: "USD", "£": "GBP" };
 
-function sumByCurrency(amounts: string[]) {
+function sumByCurrency(amounts: string[], prefix: string) {
   const sums = new Map<string, number>();
   for (const a of amounts) {
     const sym = a[0];
@@ -227,7 +232,7 @@ function sumByCurrency(amounts: string[]) {
     sums.set(sym, (sums.get(sym) ?? 0) + n);
   }
   return [...sums].map(([sym, n]) => ({
-    label: `Toplam (${CURRENCY[sym] ?? sym})`,
+    label: `${prefix} (${CURRENCY[sym] ?? sym})`,
     value: `${sym}${n.toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
   }));
 }

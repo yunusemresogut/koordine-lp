@@ -112,7 +112,7 @@ export default function KvkkPage() {
                 </tr>
                 <tr>
                   <td>Kullanıcı içeriği</td>
-                  <td>Oluşturulan kayıtlar, raporlar, fotoğraflar, dosyalar, sohbet mesajları, yapay zekâ asistanına yazılan sorular</td>
+                  <td>Oluşturulan kayıtlar, raporlar, fotoğraflar, dosyalar, sohbet mesajları ve sesli mesajlar, yapay zekâ asistanına yazılan sorular</td>
                 </tr>
               </tbody>
             </table>
@@ -147,7 +147,7 @@ export default function KvkkPage() {
             <li>Rol ve yetkilere göre erişimin sağlanması, platform hizmetlerinin sunulması,</li>
             <li>Bildirimlerin iletilmesi, destek taleplerinin yanıtlanması,</li>
             <li>Bilgi güvenliğinin sağlanması, işlem kayıtlarının tutulması, hataların tespiti ve giderilmesi,</li>
-            <li>Yapay zekâ asistanı müşteri firma tarafından etkinleştirildiyse, kullanıcının sorusuna yanıt üretilmesi,</li>
+            <li>Yapay zekâ asistanı müşteri firma tarafından etkinleştirildiyse ve kullanıcı açık rıza verdiyse, kullanıcının sorusuna yanıt üretilmesi,</li>
             <li>Sözleşmeden ve mevzuattan doğan yükümlülüklerin yerine getirilmesi.</li>
           </ul>
         </>
@@ -175,6 +175,12 @@ export default function KvkkPage() {
             <li>
               <strong>(f) Meşru menfaat:</strong> Site ve platform güvenliğinin sağlanması, kötüye kullanımın önlenmesi,
               sitenin toplu ve anonim olarak ölçülmesi, hizmetin iyileştirilmesi.
+            </li>
+            <li>
+              <strong>Açık rıza (KVKK md. 5/1 ve 9):</strong> Yapay zekâ asistanının kullanılması. Asistan, önce müşteri
+              firma adına yetkili yönetici, ardından her kullanıcı verinin yapay zekâ hizmet sağlayıcısında işlenmesine ve
+              yurt dışına aktarılmasına açık rıza vermeden çalışmaz. Rıza, platformdaki Ayarlar sayfasından her zaman geri
+              alınabilir.
             </li>
           </ul>
           <p>
@@ -210,6 +216,10 @@ export default function KvkkPage() {
             verileriniz, KVKK&apos;nın 9. maddesinde öngörülen şartlara uygun olarak; yeterlilik kararı bulunan hâllerde bu
             karara dayanılarak, bulunmayan hâllerde Kurul tarafından ilan edilen standart sözleşme gibi uygun güvencelerden
             biri sağlanarak ya da Kanun&apos;da sayılan istisnai hâllerden birine dayanılarak yurt dışına aktarılır.
+          </p>
+          <p>
+            Yapay zekâ asistanı için yapılan aktarımda, asistana yazılan sorular ve yanıt için gereken kayıt bilgileri yapay
+            zekâ hizmet sağlayıcısının yurt dışındaki sunucularında işlenir. Bu aktarım kullanıcının açık rızasına dayanır.
           </p>
         </>
       ),
